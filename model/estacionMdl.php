@@ -24,19 +24,7 @@ class estacionModel
         INNER JOIN estado as d
         ON a.idEstado = d.idEstado");
         return ($stament->execute()) ? $stament->fetchAll() : false;
-    }
-
-    public function ConsultaLinea(){
-        $linea=array();
-        $stament= $this->PDO->prepare("SELECT idLinea, nombreLinea FROM linea");
-        $stament->execute();
-
-        while($registro= $stament->fetch(PDO::FETCH_ASSOC)){
-            $this->$linea[]=$registro;
-        }
-        // return $this->$linea;
-    }
-    
+    }    
     public function insertar($nombreEstacion,$idLinea,$idLateralidad,$idEstado)
     {
         $stament = $this->PDO->prepare("INSERT INTO estacion VALUES(NULL, :nombreEstacion , :idLinea , :idLateralidad, :idEstado , CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");

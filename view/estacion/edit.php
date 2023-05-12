@@ -5,10 +5,6 @@ require_once("../../controller/estacionCtrl.php");
 $obj = new estacionController();
 $user = $obj->show($_GET['id']);
 
- $obj1 = new estacionController();
- $user1 = $obj1->ConsultaLinea();
-
-
 ?>
 <br>
 <h2 class="text-center">MODIFICANDO UNA ESTACION</h2>
@@ -27,11 +23,7 @@ $user = $obj->show($_GET['id']);
         <div class="mb-3 row">
             <label class="col-sm-2 col-form-label text-center">Linea</label>
             <div class="col-sm-3">
-                <select name="linea" class="form-control text-center" id="inputPassword">
-                    <option><?= $user[1] ?></option>
-
-                </select>
-                <!-- <input type="text" name="linea" class="form-control text-center" id="inputPassword" value="<?= $user[1] ?>"> -->
+                <input type="text" name="linea" class="form-control text-center" id="inputPassword" value="<?= $user[1] ?>">
             </div>
         </div>
 

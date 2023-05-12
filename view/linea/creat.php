@@ -28,5 +28,3 @@ $rows = $obj->showEstado();
 <?php
 require_once("../head/footer.php");
 ?>
-
-<select name="" id=""></select>

@@ -32,7 +32,4 @@ class estacionController
         header("Location:index.php") : 
         header("Location:show.php?id=".$idLateralidad);
     }
-    public function ConsultaLinea(){
-        return ($this->model->ConsultaLinea()) ? $this->model->ConsultaLinea() : false;
-     }
 }

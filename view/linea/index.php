@@ -5,7 +5,7 @@ $obj =  new lineaController();
 $rows = $obj->index();
 ?>
 <br>
-<h1 class="text-center"></h1>
+<h1 class="text-center">LINEAS</h1>
 <br>
 
 <div class="container">
