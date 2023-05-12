@@ -4,6 +4,8 @@ require_once("../../controller/lineaCtrl.php");
 
 $obj =  new lineaController();
 $rows = $obj->showEstado();
+$estado = $obj->getEstado();
+
 ?>
 <br>
 <h2 class="text-center">AGREGAR UNA LINEA</h2>
@@ -18,7 +20,11 @@ $rows = $obj->showEstado();
 
     <div class="mb-3 col-sm-4">
       <label class="form-label">Estado</label>
-    <input type="text" name="idEstado" required class="form-control" id="example">
+      <select name="idEstado" class="form-control text-center" id="inputPassword">
+         <?php foreach ($estado as $estados) : ?>
+           <option value="<?= $estados['idEstado'] ?>"><?= $estados['nombreEstado'] ?></option>
+         <?php endforeach; ?>
+      </select>
     </div>
 
     <button type="submit" class="btn btn-primary">Crear</button>

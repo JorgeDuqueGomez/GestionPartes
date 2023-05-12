@@ -34,4 +34,7 @@ class lineaController
      public function showEstado(){
         return ($this->model->showEstado()) ? $this->model->showEstado() : false;
      }
+     public function getEstado(){
+        return ($this->model->getEstado()) ? $this->model->getEstado() : false;
+     }
 }

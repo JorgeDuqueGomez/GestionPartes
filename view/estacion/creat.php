@@ -1,6 +1,6 @@
 <?php
 require_once("../head/head.php");
-?>
+?>ss
 <br>
 <h2 class="text-center">AGREGAR UNA ESTACION</h2>
 <br>

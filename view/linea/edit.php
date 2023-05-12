@@ -1,15 +1,10 @@
 <?php
 require_once("../head/head.php");
 require_once("../../controller/lineaCtrl.php");
-require_once("c:/wamp64/www/HINO/config/conexion.php");
 
 $obj = new lineaController();
 $user = $obj->show($_GET['id']);
-
-
-$PDO = (new db())->conexion();
-
-$consulta = $PDO->query("SELECT idEstado , nombreEstado FROM estado");
+$estado = $obj->getEstado();
 
 ?>
 <br>
@@ -18,7 +13,7 @@ $consulta = $PDO->query("SELECT idEstado , nombreEstado FROM estado");
 <div class="container">
     <form action="update.php" method="POST" autocomplete="off">
         <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label text-center">ID Linea</label>
+            <label class="col-sm-2 col-form-label text-end">ID Linea</label>
             <div class="col-sm-3">
                 <input type="text" name="idLinea" class="form-control-plaintext text-center" id="inputPassword" value="<?= $user[0] ?>">
             </div>
@@ -32,15 +27,12 @@ $consulta = $PDO->query("SELECT idEstado , nombreEstado FROM estado");
         </div>
 
         <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label text-center">Estado
-            </label>
+            <label class="col-sm-2 col-form-label text-center">Estado</label>
             <div class="col-sm-3">
                 <select name="estado" class="form-control text-center" id="inputPassword">
-                    <?php
-                    while ($estado = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                        echo '<option value ="' . $estado['idEstado'] . '">' . $estado['nombreEstado'] . '</option>';
-                    }
-                    ?>
+                    <?php foreach ($estado as $estados) : ?>
+                        <option value="<?= $estados['idEstado'] ?>"><?= $estados['nombreEstado'] ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
         </div>

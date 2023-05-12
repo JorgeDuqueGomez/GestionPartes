@@ -53,4 +53,8 @@ class lineaModel
         $stament = $this->PDO->prepare("SELECT idEstado, nombreEstado FROM estado");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
+    public function getEstado() {
+        $stament = $this->PDO->query("SELECT idEstado, nombreEstado FROM estado");
+        return $stament->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

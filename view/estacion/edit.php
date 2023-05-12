@@ -14,36 +14,36 @@ $user = $obj->show($_GET['id']);
     <form action="update.php" method="POST" autocomplete="off">
 
     <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label text-center">ID Estacion</label>
-            <div class="col-sm-3">
+            <label class="col-sm-2 col-form-label text-end">ID Estacion</label>
+            <div class="col-sm-2">
                 <input type="text" name="id" class="form-control-plaintext text-center" id="inputPassword" value="<?= $user[0] ?>">
             </div>
         </div>
 
         <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label text-center">Linea</label>
-            <div class="col-sm-3">
+            <label class="col-sm-2 col-form-label text-end">Linea</label>
+            <div class="col-sm-2">
                 <input type="text" name="linea" class="form-control text-center" id="inputPassword" value="<?= $user[1] ?>">
             </div>
         </div>
 
         <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label text-center">Nombre de la estacion</label>
-            <div class="col-sm-3">
+            <label class="col-sm-2 col-form-label text-end">Nombre de la estacion</label>
+            <div class="col-sm-2">
                 <input type="text" name="nombre" class="form-control text-center" id="inputPassword" value="<?= $user[2] ?>">
             </div>
         </div>
 
         <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label text-center">Lateralidad</label>
-            <div class="col-sm-3">
+            <label class="col-sm-2 col-form-label text-end">Lateralidad</label>
+            <div class="col-sm-2">
                 <input type="text" name="lateralidad" class="form-control text-center" id="inputPassword" value="<?= $user[3] ?>">
             </div>
         </div>
         
         <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label text-center">Estado</label>
-            <div class="col-sm-3">
+            <label class="col-sm-2 col-form-label text-end">Estado</label>
+            <div class="col-sm-2">
                 <input type="text" name="estado" class="form-control text-center" id="inputPassword" value="<?= $user[4] ?>">
             </div>
         </div>
