@@ -36,15 +36,20 @@ class lineaModel
         $stament->bindParam(":idEstado", $idEstado);
         return ($stament->execute()) ? $idLinea : false;
     }
-    public function delete($idLateralidad)
+    public function delete($idLinea)
     {
-        $stament = $this->PDO->prepare("DELETE FROM lateralidad WHERE idLateralidad = :idLateralidad");
-        $stament->bindParam(":idLateralidad", $idLateralidad);
+        $stament = $this->PDO->prepare("DELETE FROM linea WHERE idLinea = :idLinea");
+        $stament->bindParam(":idLinea", $idLinea);
         return ($stament->execute()) ? true : false;
     }
     public function show($idLinea)
     {
-        $stament = $this->PDO->prepare("SELECT * FROM linea WHERE idLinea = :idLinea");
+        $stament = $this->PDO->prepare(
+        "SELECT a.idlinea , a.nombreLinea , b.nombreEstado , a.idEstado
+        FROM linea as a
+        INNER JOIN estado as b
+        ON a.idEstado = b.idEstado
+        WHERE idLinea = :idLinea");
         $stament->bindParam(":idLinea", $idLinea);
         return ($stament->execute()) ? $stament->fetch() : false;
     }
@@ -54,7 +59,7 @@ class lineaModel
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
     public function getEstado() {
-        $stament = $this->PDO->query("SELECT idEstado, nombreEstado FROM estado");
+        $stament = $this->PDO->query("SELECT idEstado, nombreEstado, accion FROM estado");
         return $stament->fetchAll(PDO::FETCH_ASSOC);
     }
 }

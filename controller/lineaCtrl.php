@@ -22,10 +22,10 @@ class lineaController
         header("Location:index.php") : 
         header("Location:index.php");
      }
-    public function delete($idLateralidad){
-        return ($this->model->delete($idLateralidad)) ? 
+    public function delete($idLinea){
+        return ($this->model->delete($idLinea)) ? 
         header("Location:index.php") : 
-        header("Location:show.php?id=".$idLateralidad);
+        header("Location:index.php");
     }
     public function show($idLinea){
         return ($this->model->show($idLinea) != false) ? $this->model->show($idLinea) : 

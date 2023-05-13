@@ -5,16 +5,18 @@ $obj =  new lineaController();
 $rows = $obj->index();
 ?>
 <br>
-<h1 class="text-center">LINEAS</h1>
+<h1 class="text-center"><strong>GESTIÓN DE LINEAS</strong></h1>
 <br>
 
 <div class="container">
-  <a href="./creat.php">
-    <button type="button" class="btn btn-outline-primary">Agregar nueva linea</button>
-  </a>
+
+  <div>
+    <a href="./creat.php">
+      <button type="button" class="btn btn-primary" type="button">Agregar nueva linea</button>
+    </a>
+  </div>
   <br>
-  <br>
-  <table class="table table-bordered">
+  <table class="table table-bordered mx-auto" style="max-width: 80%;">
     <thead class="table-light">
       <tr>
         <th class="text-center" scope="col">Nombre</th>
@@ -30,9 +32,10 @@ $rows = $obj->index();
             <th class="text-center align-middle"><?= $row[1] ?></th>
             <th class="text-center align-middle"><?= $row[2] ?></th>
             <th class="text-center">
-              <a href="edit.php?id=<?= $row[0] ?>" class="btn btn-success">Modificar</a>
-              <a class="btn btn-danger glyphicon glyphicon-trash" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</a>
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <a href="edit.php?id=<?= $row[0] ?>" class="btn btn-outline-success">Modificar</a>
+              <a href="delete.php?id=<?= $row[0] ?>" class="btn btn-outline-danger" >Eliminar</a>
+              
+              <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -40,15 +43,18 @@ $rows = $obj->index();
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      Una vez eliminado no podra recuperar el registro.
+                      Una vez eliminado no podrá recuperar el registro.
                     </div>
                     <div class="modal-footer">
-                      <a href="delete.php?id=<?= $row[0] ?>" class="btn btn-danger">Eliminar</a>
-                      <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+                      <form method="POST" action="delete.php">
+                        <input type="hidden" name="id" value="<?= $row[0] ?>">
+                        <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+                      </form>
+                      <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
             </th>
           </tr>
