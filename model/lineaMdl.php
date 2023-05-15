@@ -7,14 +7,12 @@ class lineaModel
     {
 
         require_once("c:/wamp64/www/HINO/config/conexion.php");
-
         $con = new db();
         $this->PDO = $con->conexion();
     }
-
     public function index()
     {
-        $stament = $this->PDO->prepare("SELECT A.idLinea, a.nombreLinea, b.nombreEstado
+        $stament = $this->PDO->prepare("SELECT a.idLinea, a.nombreLinea, b.nombreEstado
         FROM linea as a
         JOIN estado as b
         ON a.idEstado = b.valorEstado

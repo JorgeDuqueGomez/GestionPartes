@@ -1,6 +1,5 @@
 <?php
 require_once("../HINO/view/head/head.php");
-require_once("c:/wamp64/www/HINO/controller/lateralidadCtrl.php");
 ?>
 
 <div class="grid text-center">

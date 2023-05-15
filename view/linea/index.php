@@ -7,15 +7,15 @@ $rows = $obj->index();
 <br>
 <h1 class="text-center"><strong>GESTIÓN DE LINEAS</strong></h1>
 <br>
-
 <div class="container">
 
-  <div>
+  <div class="d-flex justify-content-center">
     <a href="./creat.php">
       <button type="button" class="btn btn-primary" type="button">Agregar nueva linea</button>
     </a>
   </div>
   <br>
+
   <table class="table table-bordered mx-auto" style="max-width: 80%;">
     <thead class="table-light">
       <tr>
@@ -33,9 +33,10 @@ $rows = $obj->index();
             <th class="text-center align-middle"><?= $row[2] ?></th>
             <th class="text-center">
               <a href="edit.php?id=<?= $row[0] ?>" class="btn btn-outline-success">Modificar</a>
-              <a href="delete.php?id=<?= $row[0] ?>" class="btn btn-outline-danger" >Eliminar</a>
               
-              <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setDeleteId('<?= $row[0] ?>')">Eliminar</button>
+
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -46,15 +47,15 @@ $rows = $obj->index();
                       Una vez eliminado no podrá recuperar el registro.
                     </div>
                     <div class="modal-footer">
-                      <form method="POST" action="delete.php">
-                        <input type="hidden" name="id" value="<?= $row[0] ?>">
+                      <form id="delete-form" method="POST" action="delete.php">
+                        <input type="hidden" name="id" id="delete-id">
                         <button type="submit" class="btn btn-outline-danger">Eliminar</button>
                       </form>
                       <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                   </div>
                 </div>
-              </div> -->
+              </div>
 
             </th>
           </tr>
@@ -68,7 +69,7 @@ $rows = $obj->index();
     </tbody>
   </table>
 </div>
-
+<script src="/HINO/JavaScript/linea.js"></script>
 <?php
 require_once("../head/footer.php");
 ?>
