@@ -5,7 +5,7 @@ $obj =  new grupoController();
 $rows = $obj->index();
 ?>
 <br>
-<h1 class="text-center">GRUPOS</h1>
+<h1 class="text-center"><strong>LISTA DE GRUPOS</strong></h1>
 <br>
 
 <script>

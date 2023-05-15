@@ -27,10 +27,10 @@ class grupoController
         return ($this->model->show($idGrupo) != false) ? $this->model->show($idGrupo) : 
         header("Location:index.php");
      }
-    public function delete($idLateralidad){
-        return ($this->model->delete($idLateralidad)) ? 
+    public function delete($idGrupo){
+        return ($this->model->delete($idGrupo)) ? 
         header("Location:index.php") : 
-        header("Location:show.php?id=".$idLateralidad);
+        header("Location:show.php?id=".$idGrupo);
     }
 
 }

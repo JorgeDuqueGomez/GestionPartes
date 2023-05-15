@@ -1,25 +1,28 @@
 <?php
 require_once("../head/head.php");
-require_once("../../controller/grupoCtrl.php");
-$obj =  new grupoController();
+require_once("../../controller/estacionCtrl.php");
+$obj =  new estacionController();
 $rows = $obj->index();
 ?>
 <br>
-<h1 class="text-center"><strong>GESTION DE GRUPOS</strong></h1>
+<h1 class="text-center"><strong>GESTIÓN DE ESTACIONES</strong></h1>
 <br>
 
 <div class="container">
-<div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center">
     <a href="./creat.php">
-      <button type="button" class="btn btn-primary" type="button">Agregar nuevo grupo</button>
+      <button type="button" class="btn btn-primary" type="button">Agregar nueva estacion</button>
     </a>
-  </div>  <br>
+  </div>
   <br>
+
   <table class="table table-bordered mx-auto" style="max-width: 80%;">
     <thead class="table-light">
       <tr>
-        <th class="text-center" scope="col">Grupo</th>
-        <th class="text-center" scope="col">Nombre</th>
+        <th class="text-center" scope="col">Linea</th>
+        <th class="text-center" scope="col">Nombre estación</th>
+        <th class="text-center" scope="col">Lateralidad</th>
+        <th class="text-center" scope="col">Estado</th>
         <th class="text-center" scope="col">Acciones</th>
       </tr>
     </thead>
@@ -29,10 +32,12 @@ $rows = $obj->index();
         <?php foreach ($rows as $row) : ?>
           <tr>
             <th class="text-center align-middle"><?= $row[1] ?></th>
-            <th class="text-break align-middle"><?= $row[2] ?></th>
+            <th class="text-center align-middle"><?= $row[2] ?></th>
+            <th class="text-center align-middle"><?= $row[3] ?></th>
+            <th class="text-center align-middle"><?= $row[4] ?></th>
             <th class="text-center">
               <a href="edit.php?id=<?= $row[0] ?>" class="btn btn-outline-success">Modificar</a>
-
+              
               <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setDeleteId('<?= $row[0] ?>')">Eliminar</button>
 
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,6 +60,7 @@ $rows = $obj->index();
                   </div>
                 </div>
               </div>
+
             </th>
           </tr>
         <?php endforeach; ?>

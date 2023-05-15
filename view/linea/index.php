@@ -7,8 +7,8 @@ $rows = $obj->index();
 <br>
 <h1 class="text-center"><strong>GESTIÓN DE LINEAS</strong></h1>
 <br>
-<div class="container">
 
+<div class="container">
   <div class="d-flex justify-content-center">
     <a href="./creat.php">
       <button type="button" class="btn btn-primary" type="button">Agregar nueva linea</button>
@@ -69,7 +69,7 @@ $rows = $obj->index();
     </tbody>
   </table>
 </div>
-<script src="/HINO/JavaScript/linea.js"></script>
+<script src="/HINO/JavaScript/formulario.js"></script>
 <?php
 require_once("../head/footer.php");
 ?>

@@ -8,7 +8,7 @@ $estado = $obj->getEstado();
 
 ?>
 <br>
-<h2 class="text-center"><strong>AGREGAR UNA LINEA</strong></h2>
+<h2 class="text-center"><strong>AGREGAR LINEA</strong></h2>
 <br>
 <div class="container">
   <form action="store.php" method="POST" autocomplete="off" class="row justify-content-center mx-auto col-xxl-4 col-xl-6 col-md-8 col-sm-10" style="max-width: 80%;">

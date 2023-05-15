@@ -42,10 +42,10 @@ class grupoModel
         return ($stament->execute()) ? $idGrupo : false;
     }
 
-    public function delete($idLateralidad)
+    public function delete($idGrupo)
     {
-        $stament = $this->PDO->prepare("DELETE FROM lateralidad WHERE idLateralidad = :idLateralidad");
-        $stament->bindParam(":idLateralidad", $idLateralidad);
+        $stament = $this->PDO->prepare("DELETE FROM Grupo WHERE idGrupo = :idGrupo");
+        $stament->bindParam(":idGrupo", $idGrupo);
         return ($stament->execute()) ? true : false;
     }
 
