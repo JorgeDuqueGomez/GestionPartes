@@ -56,11 +56,10 @@ $lat = $obj->getLateralidad();
             </select>
         </div>
 
-        <div class="col-md-12 d-flex justify-content-center gap-3">
+        <div class="mb-5 col-md-12 d-flex justify-content-center gap-3">
             <button class="btn btn-outline-success" type="submit">Actualizar</button>
             <a href="./index.php" class="btn btn-outline-danger">Cancelar</a>
         </div>
-
     </form>
 </div>
 

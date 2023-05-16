@@ -19,11 +19,10 @@ class lineaModel
         ORDER BY b.nombreEstado, a.idLinea ASC");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
-    public function insertar($nombreLinea, $idEstado)
+    public function insertar($nombreLinea)
     {
-        $stament = $this->PDO->prepare("INSERT INTO linea VALUES(NULL, :nombreLinea, :idEstado, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+        $stament = $this->PDO->prepare("INSERT INTO linea VALUES(NULL, :nombreLinea, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
         $stament->bindParam(":nombreLinea", $nombreLinea);
-        $stament->bindParam(":idEstado", $idEstado);
         return ($stament->execute()) ? $this->PDO->lastInsertId() : false;
     }
     public function update($idLinea, $nombreLinea, $idEstado)

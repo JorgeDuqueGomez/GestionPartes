@@ -20,7 +20,7 @@ $rows = $obj->index();
 
 <div class="container">
 
-    <table class="table table-bordered" id="grupoTable">
+    <table class="table table-bordered" id="grupoTable" style="max-width: 60%;">
         <thead class="table-light">
             <tr>
                 <th class="text-center">Grupo</th>

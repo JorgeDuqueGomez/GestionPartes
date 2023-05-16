@@ -13,18 +13,9 @@ $estado = $obj->getEstado();
 <div class="container">
   <form action="store.php" method="POST" autocomplete="off" class="row justify-content-center mx-auto col-xxl-4 col-xl-6 col-md-8 col-sm-10" style="max-width: 80%;">
 
-    <div class="mb-3 col-md-12">
+    <div class="mb-4 col-md-12">
       <label class="form-label">Nombre de la linea</label>
       <input type="text" name="nombreLinea" required id="example" class="form-control">
-    </div>
-
-    <div class="mb-4 col-md-12">
-      <label class="form-label">Seleccione un estado</label>
-      <select name="idEstado" id="inputPassword" class="form-select" required>
-        <?php foreach ($estado as $estados) : ?>
-          <option value="<?= $estados['idEstado'] ?>"><?= $estados['nombreEstado'] ?></option>
-        <?php endforeach; ?>
-      </select>
     </div>
 
     <div class="col-md-12 d-flex justify-content-center gap-3">

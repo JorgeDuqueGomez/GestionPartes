@@ -12,6 +12,7 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 </head>
+
 <body>
 
     <nav class="navbar navbar-dark bg-danger">
@@ -40,7 +41,11 @@
                                     <li><a class="dropdown-item" href="/HINO/view/linea/index.php">Lineas</a></li>
                                     <li><a class="dropdown-item" href="/HINO/view/estacion/index.php">Estaciones</a></li>
                                     <li><a class="dropdown-item" href="/HINO/view/lateralidad/index.php">Lateralidades</a></li>
-
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="/HINO/view/modelo/index.php">Modelos</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/sufix/index.php">Sufix</a></li>
                                 </ul>
                             </li>
 
@@ -48,6 +53,10 @@
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Consulta</a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" href="/HINO/view/grupo/show.php">Grupos</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="/HINO/view/sufix/show.php">Modelos</a></li>
                                 </ul>
                             </li>
 

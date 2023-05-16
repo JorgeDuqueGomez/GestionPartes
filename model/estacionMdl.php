@@ -49,10 +49,10 @@ class estacionModel
         $stament->bindParam(":idEstado", $idEstado);
         return ($stament->execute()) ? $idEstacion : false;
     }
-    public function delete($idLinea)
+    public function delete($idEstacion)
     {
-        $stament = $this->PDO->prepare("DELETE FROM linea WHERE idLinea = :idLinea");
-        $stament->bindParam(":idLinea", $idLinea);
+        $stament = $this->PDO->prepare("DELETE FROM estacion WHERE idEstacion = :idEstacion");
+        $stament->bindParam(":idEstacion", $idEstacion);
         return ($stament->execute()) ? true : false;
     }
     public function show($idEstacion)

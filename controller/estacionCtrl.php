@@ -22,8 +22,8 @@ class estacionController
         header("Location:index.php") : 
         header("Location:index.php");
      }
-    public function delete($idLinea){
-        return ($this->model->delete($idLinea)) ? 
+    public function delete($idEstacion){
+        return ($this->model->delete($idEstacion)) ? 
         header("Location:index.php") : 
         header("Location:index.php");
     }

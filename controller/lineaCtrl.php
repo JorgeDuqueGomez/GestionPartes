@@ -11,8 +11,8 @@ class lineaController
     public function index(){
         return ($this->model->index()) ? $this->model->index() : false;
      }
-    public function save($nombreLinea, $idEstado){
-        $idLinea = $this->model->insertar($nombreLinea, $idEstado);
+    public function save($nombreLinea){
+        $idLinea = $this->model->insertar($nombreLinea);
         return ($idLinea != false) ? 
         header("Location:index.php") : 
         header("Location:creat.php");

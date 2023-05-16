@@ -14,17 +14,17 @@ $grupo = $obj->show($_GET['id']);
 
     <div class="row">
             <label class="col-form-label text-center">ID Grupo</label>
-            <input type="text" name="idLinea" class="form-control-plaintext text-center" id="inputPassword" value="<?= $grupo[0] ?>">
+            <input type="text" name="idGrupo" class="form-control-plaintext text-center" id="inputPassword" value="<?= $grupo[0] ?>">
         </div>
 
         <div class="mb-3 row">
             <label class="col-form-label text-start">Codigo del grupo</label>
-            <input type="text" name="nombreLinea" class="form-control text-start" id="inputPassword" value="<?= $grupo[1] ?>">
+            <input type="text" name="codigo" class="form-control text-start" id="inputPassword" value="<?= $grupo[1] ?>">
         </div>
 
         <div class="mb-3 row">
             <label class="col-form-label text-start">Nombre del grupo</label>
-            <input type="text" name="nombreLinea" class="form-control text-start" id="inputPassword" value="<?= $grupo[2] ?>">
+            <input type="text" name="nombreGrupo" class="form-control text-start" id="inputPassword" value="<?= $grupo[2] ?>">
         </div>
 
         <div>
