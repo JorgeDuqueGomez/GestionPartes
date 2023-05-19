@@ -20,13 +20,13 @@ $rows = $obj->index();
 
   <script>
     $(document).ready(function() {
-      $('#estacionTable').DataTable({
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
-        }
-      });
+        $('#estacionTable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+            }
+        });
     });
-  </script>
+</script>
 
   <table class="table table-bordered mx-auto" style="max-width: 60%;" id="estacionTable">
     <thead class="table-light">

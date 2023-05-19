@@ -7,7 +7,19 @@ $rows = $obj->index();
 <br>
 <h1 class="text-center"><strong>GESTIÓN DE SUFIX</strong></h1>
 <br>
-
+<script>
+  $(document).ready(function() {
+    $('#sufixTable').DataTable({
+      responsive: true,
+      scrollY: '450px',
+      scrollCollapse: false,
+      paging: false,
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+      }
+    });
+  });
+</script>
 <div class="container">
   <div class="d-flex justify-content-center">
     <a href="./creat.php">
@@ -17,10 +29,10 @@ $rows = $obj->index();
     </a>
   </div>
   <br>
-
-  <table class="table table-bordered mx-auto" style="max-width: 80%;" id="estacionTable">
+  <table class="table table-bordered mx-auto display responsive nowrap" style="max-width: 100%;" id="sufixTable">
     <thead class="table-light">
       <tr>
+        <th class="text-center align-middle" scope="col">Serie</th>
         <th class="text-center align-middle" scope="col">Familia</th>
         <th class="text-center align-middle" scope="col">Modelo</th>
         <th class="text-center align-middle" scope="col">Proyecto</th>
@@ -43,6 +55,7 @@ $rows = $obj->index();
             <th class="text-center align-middle"><?= $row[5] ?></th>
             <th class="text-center align-middle"><?= $row[6] ?></th>
             <th class="text-center align-middle"><?= $row[7] ?></th>
+            <th class="text-center align-middle"><?= $row[8] ?></th>
             <th class="text-center">
               <a href="edit.php?id=<?= $row[0] ?>" class="btn btn-outline-success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                   <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />

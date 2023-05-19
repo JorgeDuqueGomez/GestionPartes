@@ -16,7 +16,7 @@ class modeloModel
         FROM modelo as a
         JOIN serie as b
         ON a.idSerie = b.idSerie
-        ORDER BY a.idModelo ASC");
+        ORDER BY b.nombreSerie ASC");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
     public function insertar($nombreModelo, $idSerie)

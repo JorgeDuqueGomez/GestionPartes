@@ -11,36 +11,45 @@ class sufixController
     public function index(){
         return ($this->model->index()) ? $this->model->index() : false;
      }
-    public function save($nombreModelo ,$idSerie){
-        $idModelo = $this->model->insertar($nombreModelo ,$idSerie);
-        return ($idModelo != false) ? 
+    public function save($idFamilia, $idModelo, $proyecto, $nombreSufix, $codigoModelo, $idDestino){
+        $idSufix = $this->model->insertar($idFamilia, $idModelo, $proyecto, $nombreSufix, $codigoModelo, $idDestino);
+        return ($idSufix != false) ? 
         header("Location:index.php") : 
         header("Location:creat.php");
     } 
-     public function update($idModelo,$nombreModelo, $idSerie){
-        return ($this->model->update($idModelo,$nombreModelo, $idSerie) != false) ? 
+     public function update($idSufix, $idFamilia, $idModelo, $proyecto, $nombreSufix, $codigoModelo ,$idDestino, $idEstado){
+        return ($this->model->update($idSufix, $idFamilia, $idModelo, $proyecto, $nombreSufix, $codigoModelo ,$idDestino, $idEstado) != false) ? 
         header("Location:index.php") : 
         header("Location:index.php");
      }
-    public function delete($idModelo){
-        return ($this->model->delete($idModelo)) ? 
+    public function delete($idSufix){
+        return ($this->model->delete($idSufix)) ? 
         header("Location:index.php") : 
         header("Location:index.php");
     }
-    public function show($idModelo){
-        return ($this->model->show($idModelo) != false) ? $this->model->show($idModelo) : 
+    public function showGrupos(){
+      return ($this->model->showGrupos()) ? $this->model->showGrupos() : false;
+   }
+    public function show($idSufix){
+        return ($this->model->show($idSufix) != false) ? $this->model->show($idSufix) : 
         header("Location:index.php");
      }
      public function showEstado(){
         return ($this->model->showEstado()) ? $this->model->showEstado() : false;
      }
+     public function getSerie(){
+      return ($this->model->getSerie()) ? $this->model->getSerie() : false;
+   }
      public function getEstado(){
         return ($this->model->getEstado()) ? $this->model->getEstado() : false;
      }
-     public function getLinea(){
-        return ($this->model->getLinea()) ? $this->model->getLinea() : false;
+     public function getFamilia(){
+        return ($this->model->getFamilia()) ? $this->model->getFamilia() : false;
      }
-     public function getSerie(){
-        return ($this->model->getSerie()) ? $this->model->getSerie() : false;
+     public function getModelo(){
+        return ($this->model->getModelo()) ? $this->model->getModelo() : false;
      }
+     public function getDestino(){
+      return ($this->model->getDestino()) ? $this->model->getDestino() : false;
+   }
 }
