@@ -11,7 +11,7 @@ $sufix = $obj->showGrupos();
 
 <script>
   $(document).ready(function() {
-    $('#sufixTable').DataTable({
+    $('#showSufixTable').DataTable({
       responsive: true,
       scrollY: '450px',
       scrollCollapse: false,
@@ -27,7 +27,7 @@ $sufix = $obj->showGrupos();
   <div class="d-flex justify-content-center">
   </div>
   <br>
-  <table class="table table-bordered mx-auto display responsive nowrap" style="max-width: 100%;" id="sufixTable">
+  <table class="table table-bordered mx-auto display responsive nowrap" style="max-width: 100%;" id="showSufixTable">
     <thead class="table-light">
       <tr>
         <th class="text-center align-middle" scope="col">Serie</th>

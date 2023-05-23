@@ -1,6 +1,6 @@
 <?php
 
-class grupoModel
+class estanteriaModel
 {
     private $PDO;
     public function __construct()
@@ -14,15 +14,22 @@ class grupoModel
 
     public function index()
     {
-        $stament = $this->PDO->prepare("SELECT * FROM grupo ORDER BY codigo ASC");
+        $stament = $this->PDO->prepare("SELECT b.nombreParte, b.numeroParte, a.modulo, a.posicion, a.orden
+        FROM estanteria as a
+        JOIN parte as b
+        ON a.idParte = b.idParte 
+        WHERE b.idMaterial = '1'
+        ");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
-    
-    public function insertar($codigo,$nombreGrupo)
-    {
-        $stament = $this->PDO->prepare("INSERT INTO grupo VALUES(NULL, :codigo, :nombreGrupo, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
-        $stament->bindParam(":codigo", $codigo);
-        $stament->bindParam(":nombreGrupo", $nombreGrupo);
+
+    public function insertar($idParte, $modulo, $posicion, $orden)
+    { 
+        $stament = $this->PDO->prepare("INSERT INTO estanteria VALUES(NULL ,:idParte ,:modulo ,:posicion ,:orden ,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+        $stament->bindParam(":idParte", $idParte);
+        $stament->bindParam(":modulo", $modulo);
+        $stament->bindParam(":posicion", $posicion);
+        $stament->bindParam(":orden", $orden);
         return ($stament->execute()) ? $this->PDO->lastInsertId() : false;
     }
 
@@ -48,5 +55,11 @@ class grupoModel
         $stament->bindParam(":idGrupo", $idGrupo);
         return ($stament->execute()) ? true : false;
     }
-
+    public function showParte()
+    {
+        $stament = $this->PDO->prepare("SELECT idParte, numeroParte, nombreParte 
+        FROM parte
+        ORDER BY numeroParte ASC");
+        return ($stament->execute()) ? $stament->fetchAll() : false;
+    }
 }

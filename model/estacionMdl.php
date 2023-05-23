@@ -20,7 +20,7 @@ class estacionModel
         ON a.idLateralidad = c.idLateralidad
         JOIN estado as d
         ON a.idEstado = d.idEstado
-        ORDER BY b.nombreLinea ASC");
+        ORDER BY a.idEstado ASC, a.idEstacion ASC");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
     public function insertar($idLinea , $nombreEstacion, $idLateralidad)

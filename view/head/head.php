@@ -36,6 +36,7 @@
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" href="/HINO/view/grupo/index.php">Grupos</a></li>
                                     <li><a class="dropdown-item" href="/HINO/view/parte/index.php">Partes</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/estanteria/index.php">Estanteria</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>

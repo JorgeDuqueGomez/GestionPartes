@@ -3,6 +3,7 @@ require_once("../head/head.php");
 require_once("../../controller/parteCtrl.php");
 
 $obj =  new parteController();
+$materia = $obj->showMaterial();
 ?>
 <br>
 <h2 class="text-center"><strong>AGREGAR PARTES</strong></h2>
@@ -21,12 +22,23 @@ $obj =  new parteController();
           <input type="text" name="nombreParte" required id="example" class="form-control">
         </div>
 
-        <div class="mb-3">
+        <div class="mb-4">
           <label class="form-label">Numero de parte</label>
           <input type="text" name="numeroParte" required id="example" class="form-control">
         </div>
 
-        <div class="mb-5 d-flex justify-content-center gap-3">
+        <div class="mb-4 col-md-12">
+          <label class="form-label">Tipo de material</label>
+          <select name="idMaterial" id="inputPassword" class="form-select" required>
+            <option selected="true" disabled="disabled">Seleccione un material</option>
+            <?php foreach ($materia as $materiales) : ?>
+              <option value="<?= $materiales['idMaterial'] ?>"><?= $materiales['nombreMaterial'] ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+
+
+        <div class="mb-4 d-flex justify-content-center gap-3">
           <button class="btn btn-outline-success" type="submit">Agregar</button>
           <a href="./index.php" class="btn btn-outline-danger">Cancelar</a>
         </div>

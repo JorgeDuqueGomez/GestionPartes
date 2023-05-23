@@ -9,7 +9,7 @@ $rows = $obj->index();
 <br>
 <script>
   $(document).ready(function() {
-    $('#sufixTable').DataTable({
+    $('#modeloTable').DataTable({
       responsive: true,
       scrollY: '450px',
       scrollCollapse: false,

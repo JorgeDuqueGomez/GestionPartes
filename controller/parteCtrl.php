@@ -11,14 +11,14 @@ class parteController
     public function index(){
         return ($this->model->index()) ? $this->model->index() : false;
      }
-    public function save($nombreParte, $numeroParte){
-        $idParte = $this->model->insertar($nombreParte, $numeroParte);
+    public function save($nombreParte, $numeroParte ,$idMaterial){
+        $idParte = $this->model->insertar($nombreParte, $numeroParte ,$idMaterial);
         return ($idParte != false) ? 
         header("Location:index.php") : 
         header("Location:creat.php");
     } 
-     public function update($idParte, $nombreParte, $numeroParte){
-        return ($this->model->update($idParte, $nombreParte, $numeroParte) != false) ? 
+     public function update($idParte, $nombreParte, $numeroParte, $idMaterial){
+        return ($this->model->update($idParte, $nombreParte, $numeroParte, $idMaterial) != false) ? 
         header("Location:index.php") : 
         header("Location:index.php");
      }
@@ -30,5 +30,8 @@ class parteController
     public function show($idParte){
         return ($this->model->show($idParte) != false) ? $this->model->show($idParte) : 
         header("Location:index.php");
+     }
+     public function showMaterial(){
+        return ($this->model->showMaterial()) ? $this->model->showMaterial() : false;
      }
 }

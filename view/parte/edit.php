@@ -4,6 +4,7 @@ require_once("../../controller/parteCtrl.php");
 
 $obj = new parteController();
 $general = $obj->show($_GET['id']);
+$materia = $obj->showMaterial();
 ?>
 <br>
 <h2 class="text-center"><strong>MODIFICAR PARTE</strong></h2>
@@ -25,6 +26,17 @@ $general = $obj->show($_GET['id']);
         <div class="mb-4 col-md-12">
             <label class="form-label">Numero de parte</label>
             <input type="text" name="numeroParte" required id="example" class="form-control" value="<?= $general[2] ?>">
+        </div>
+
+
+        <div class="mb-4 col-md-12">
+            <label class="form-label">Tipo de material</label>
+            <select name="idMaterial" id="inputPassword" class="form-select" required>
+                <option selected="true" value="<?= $general[3] ?>">Material actual <?= $general[4] ?></option>
+                <?php foreach ($materia as $materiales) : ?>
+                    <option value="<?= $materiales['idMaterial'] ?>"><?= $materiales['nombreMaterial'] ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
 
         <div class="mb-5 col-md-12 d-flex justify-content-center gap-3">
