@@ -17,8 +17,8 @@ $lat = $obj->getLateralidad();
 
     <div class="mb-4 col-md-12">
       <label class="form-label">Linea</label>
-      <select name="idLinea" id="inputPassword" class="form-select" required>
-        <option selected="true" disabled="disabled">Seleccione una linea</option>
+      <select name="idLinea" id="idLinea" class="form-select" required onclick="alertseleASDAct()">
+        <option  selected="true" disabled="disabled"  >Seleccione una linea</option>
         <?php foreach ($linea as $lineas) : ?>
           <option value="<?= $lineas['idLinea'] ?>"><?= $lineas['nombreLinea'] ?></option>
         <?php endforeach; ?>
@@ -27,12 +27,12 @@ $lat = $obj->getLateralidad();
 
     <div class="mb-3 col-md-12">
       <label class="form-label">Nombre de la estación</label>
-      <input type="text" name="nombreEstacion" required id="example" class="form-control">
+      <input type="text" name="nombreEstacion" required id="nombreEstacion" class="form-control" placeholder="Ingrese una estación" onchange="alertseleASDAct()">
     </div>
 
     <div class="mb-4 col-md-12">
       <label class="form-label">Lateralidad</label>
-      <select name="idLateralidad" id="inputPassword" class="form-select" required>
+      <select name="idLateralidad" id="idLateralidad" class="form-select" required onclick="alertseleASDAct()">
         <option selected="true" disabled="disabled">Seleccione una lateralidad</option>
         <?php foreach ($lat as $lateralidades) : ?>
           <option value="<?= $lateralidades['idLateralidad'] ?>"><?= $lateralidades['nombreLateralidad'] ?></option>
@@ -41,7 +41,7 @@ $lat = $obj->getLateralidad();
     </div>
 
     <div class="col-md-12 d-flex justify-content-center gap-3">
-      <button class="btn btn-outline-success" type="submit">Agregar</button>
+      <button class="btn btn-outline-success" disabled id="agregar" type="submit">Agregar</button>
       <a href="./index.php" class="btn btn-outline-danger">Cancelar</a>
     </div>
 
@@ -51,3 +51,4 @@ $lat = $obj->getLateralidad();
 <?php
 require_once("../head/footer.php");
 ?>
+

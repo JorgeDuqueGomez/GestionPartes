@@ -17,8 +17,7 @@ $lat = $obj->getLateralidad();
     <form action="update.php" method="POST" autocomplete="off" class="row justify-content-center mx-auto col-xxl-4 col-xl-6 col-md-8 col-sm-10" style="max-width: 80%;">
 
         <div class="row">
-            <label class="col-form-label text-center">ID Estación</label>
-            <input type="text" name="idEstacion" class="form-control-plaintext text-center" id="inputPassword" value="<?= $estacion[0] ?>">
+            <input type="hidden" name="idEstacion" class="form-control-plaintext text-center" id="inputPassword" value="<?= $estacion[0] ?>">
         </div>
 
         <div class="mb-3 col-md-12">
