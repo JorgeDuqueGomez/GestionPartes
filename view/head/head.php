@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
     <script src="/HINO/JavaScript/formulario.js"></script>
 </head>
-
 <body>
 
     <nav class="navbar navbar-dark bg-danger">
@@ -47,6 +46,8 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
+                                    <li><a class="dropdown-item" href="/HINO/view/serie/index.php">Serie</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/familia/index.php">Familia</a></li>
                                     <li><a class="dropdown-item" href="/HINO/view/modelo/index.php">Modelos</a></li>
                                     <li><a class="dropdown-item" href="/HINO/view/sufix/index.php">Sufix</a></li>
                                 </ul>
