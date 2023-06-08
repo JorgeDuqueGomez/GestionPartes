@@ -1,8 +1,16 @@
 <?php
 
-    require_once("../../controller/estacionCtrl.php");    
+    require_once("../../controller/sufixCtrl.php");    
     
-    $obj = new estacionController(); 
-    $obj->update($_POST['idEstacion'],$_POST['idLinea'],$_POST['nombreEstacion'],$_POST['idLateralidad'],$_POST['idEstado']);
+    $obj = new sufixController(); 
+    $obj->update(
+        $_POST['idSufix'],
+        $_POST['idSerie'],
+        $_POST['idFamilia'],
+        $_POST['idModelo'],
+        $_POST['proyecto'],
+        $_POST['nombreSufix'],
+        $_POST['codigoModelo'],
+        $_POST['idDestino'],
+        $_POST['idEstado']);
 ?>
-<h1>MODIFICAR UNA LATERALIDAD</h1>

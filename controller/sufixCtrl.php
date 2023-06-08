@@ -1,55 +1,59 @@
 <?php
 
-class estacionController
+class sufixController
 {
    private $model;
    public function __construct()
    {
-      require_once("c:/wamp64/www/HINO/model/estacionMdl.php");
-      $this->model = new estacionModel();
+      require_once("c:/wamp64/www/HINO/model/sufixMdl.php");
+      $this->model = new sufixModel();
    }
    public function index()
    {
       return ($this->model->index()) ? $this->model->index() : false;
    }
-   public function save($idLinea, $nombreEstacion, $idLateralidad)
+   public function save($idSerie, $idFamilia, $idModelo, $proyecto ,$nombreSufix, $codigoModelo, $idDestino)
    {
-      $idEstacion = $this->model->insertar($idLinea, $nombreEstacion, $idLateralidad);
-      return ($idEstacion != false) ?
+      $idSufix = $this->model->insertar($idSerie, $idFamilia, $idModelo, $proyecto ,$nombreSufix, $codigoModelo, $idDestino);
+      return ($idSufix != false) ?
          header("Location:index.php") :
          header("Location:creat.php");
    }
-   public function update($idEstacion, $idLinea, $nombreEstacion, $idLateralidad, $idEstado)
+   public function show($idSufix)
    {
-      return ($this->model->update($idEstacion, $idLinea, $nombreEstacion, $idLateralidad, $idEstado) != false) ?
+      return ($this->model->show($idSufix) != false) ? $this->model->show($idSufix) :
+         header("Location:index.php");
+   }
+   public function update($idSufix, $idSerie, $idFamilia, $idModelo, $proyecto ,$nombreSufix, $codigoModelo, $idDestino, $idEstado)
+   {
+      return ($this->model->update($idSufix, $idSerie, $idFamilia, $idModelo, $proyecto ,$nombreSufix, $codigoModelo, $idDestino, $idEstado) != false) ?
          header("Location:index.php") :
          header("Location:index.php");
    }
-   public function delete($idEstacion)
+   public function delete($idSufix)
    {
-      return ($this->model->delete($idEstacion)) ?
+      return ($this->model->delete($idSufix)) ?
          header("Location:index.php") :
          header("Location:index.php");
    }
-   public function show($idEstacion)
+   public function getSerie()
    {
-      return ($this->model->show($idEstacion) != false) ? $this->model->show($idEstacion) :
-         header("Location:index.php");
+      return ($this->model->getSerie()) ? $this->model->getSerie() : false;
    }
-   public function showEstado()
+   public function getFamilia()
    {
-      return ($this->model->showEstado()) ? $this->model->showEstado() : false;
+      return ($this->model->getFamilia()) ? $this->model->getFamilia() : false;
+   }
+   public function getModelo()
+   {
+      return ($this->model->getModelo()) ? $this->model->getModelo() : false;
+   }
+   public function getDestino()
+   {
+      return ($this->model->getDestino()) ? $this->model->getDestino() : false;
    }
    public function getEstado()
    {
       return ($this->model->getEstado()) ? $this->model->getEstado() : false;
-   }
-   public function getLinea()
-   {
-      return ($this->model->getLinea()) ? $this->model->getLinea() : false;
-   }
-   public function getLateralidad()
-   {
-      return ($this->model->getLateralidad()) ? $this->model->getLateralidad() : false;
    }
 }

@@ -1,6 +1,6 @@
 <?php
-require_once("../../controller/estacionCtrl.php");
-$obj = new estacionController();
+require_once("../../controller/sufixCtrl.php");
+$obj = new sufixController();
 $obj->delete($_POST['id']);
 ?>
 

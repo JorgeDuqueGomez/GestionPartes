@@ -1,97 +1,123 @@
 <?php
 
-class estacionModel
+class sufixModel
 {
     private $PDO;
     public function __construct()
     {
-
         require_once("c:/wamp64/www/HINO/config/conexion.php");
         $con = new db();
         $this->PDO = $con->conexion();
     }
     public function index()
     {
-        $stament = $this->PDO->prepare("SELECT a.idEstacion, a.nombreEstacion, b.idLinea ,b.nombreLinea, c.NombreLateralidad , d.nombreEstado
-        FROM estacion as a
-        JOIN linea as b
-        ON a.idLinea = b.idLinea
-        JOIN lateralidad as c
-        ON a.idLateralidad = c.idLateralidad
-        JOIN estado as d
-        ON a.idEstado = d.idEstado
-        ORDER BY b.idLinea ASC");
+        $stament = $this->PDO->prepare("SELECT a.idSufix, a.proyecto, a.nombreSufix, a.codigoModelo ,b.nombreSerie, c.nombreFamilia, d.nombreModelo, e.nombreDestino, f.nombreEstado
+        FROM sufix as a
+        JOIN serie as b
+        ON a.idSerie = b.idSerie
+        JOIN familia as c
+        ON a.idFamilia = c.idFamilia
+        JOIN modelo as d
+        ON a.idModelo = d.idModelo
+        JOIN destino as e
+        ON a.idDestino = e.idDestino
+        JOIN estado as f
+        ON a.idEstado = f.idEstado
+        WHERE a.idEstado = '1'");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
-    public function insertar($idLinea, $nombreEstacion, $idLateralidad)
+    public function insertar($idSerie, $idFamilia, $idModelo, $proyecto ,$nombreSufix, $codigoModelo, $idDestino)
     {
-        $stament = $this->PDO->prepare("INSERT INTO estacion VALUES(NULL, :idLinea, :nombreEstacion, :idLateralidad, '1' , CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
-        $stament->bindParam(":idLinea", $idLinea);
-        $stament->bindParam(":nombreEstacion", $nombreEstacion);
-        $stament->bindParam(":idLateralidad", $idLateralidad);
+        $stament = $this->PDO->prepare("INSERT INTO sufix 
+        VALUES(NULL, :idSerie, :idFamilia, :idModelo, :proyecto , :nombreSufix , :codigoModelo, :idDestino, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+        $stament->bindParam(":idSerie", $idSerie);
+        $stament->bindParam(":idFamilia", $idFamilia);
+        $stament->bindParam(":idModelo", $idModelo);
+        $stament->bindParam(":proyecto", $proyecto);
+        $stament->bindParam(":nombreSufix", $nombreSufix);
+        $stament->bindParam(":codigoModelo", $codigoModelo);
+        $stament->bindParam(":idDestino", $idDestino);
+
         return ($stament->execute()) ? $this->PDO->lastInsertId() : false;
     }
-    public function update($idEstacion, $idLinea, $nombreEstacion, $idLateralidad, $idEstado)
+    public function update($idSufix, $idSerie, $idFamilia, $idModelo, $proyecto ,$nombreSufix, $codigoModelo, $idDestino, $idEstado)
     {
         $stament = $this->PDO->prepare(
-            "UPDATE estacion SET 
-        idEstacion = :idEstacion , 
-        idLinea = :idLinea , 
-        nombreEstacion = :nombreEstacion , 
-        idLateralidad = :idLateralidad , 
-        idEstado= :idEstado , 
+            "UPDATE sufix SET 
+        idSufix = :idSufix , 
+        idSerie = :idSerie , 
+        idFamilia = :idFamilia , 
+        idModelo = :idModelo , 
+        proyecto = :proyecto , 
+        nombreSufix = :nombreSufix , 
+        codigoModelo = :codigoModelo , 
+        idDestino = :idDestino , 
+        idEstado = :idEstado , 
         updateAt = CURRENT_TIMESTAMP 
-        WHERE idEstacion =:idEstacion"
-        );
-        $stament->bindParam(":idEstacion", $idEstacion);
-        $stament->bindParam(":idLinea", $idLinea);
-        $stament->bindParam(":nombreEstacion", $nombreEstacion);
-        $stament->bindParam(":idLateralidad", $idLateralidad);
+        WHERE idSufix = :idSufix");
+        $stament->bindParam(":idSufix", $idSufix);
+        $stament->bindParam(":idSerie", $idSerie);
+        $stament->bindParam(":idFamilia", $idFamilia);
+        $stament->bindParam(":idModelo", $idModelo);
+        $stament->bindParam(":proyecto", $proyecto);
+        $stament->bindParam(":nombreSufix", $nombreSufix);
+        $stament->bindParam(":codigoModelo", $codigoModelo);
+        $stament->bindParam(":idDestino", $idDestino);
         $stament->bindParam(":idEstado", $idEstado);
-        return ($stament->execute()) ? $idEstacion : false;
+
+        return ($stament->execute()) ? $idSufix : false;
+
     }
-    public function delete($idEstacion)
+    public function delete($idSufix)
     {
-        $stament = $this->PDO->prepare("DELETE FROM estacion WHERE idEstacion = :idEstacion");
-        $stament->bindParam(":idEstacion", $idEstacion);
+        $stament = $this->PDO->prepare("DELETE FROM sufix WHERE idSufix = :idSufix");
+        $stament->bindParam(":idSufix", $idSufix);
         return ($stament->execute()) ? true : false;
     }
-    public function show($idEstacion)
+    public function show($idSufix)
     {
         $stament = $this->PDO->prepare(
-            "SELECT a.idEstacion ,a.idLinea ,b.nombreLinea ,
-        a.idEstacion ,a.nombreEstacion ,a.idLateralidad ,c.nombreLateralidad ,
-        a.idEstado, d.nombreEstado
-        FROM estacion as a
-        JOIN linea as b
-        ON a.idLinea = b.idLinea
-        JOIN lateralidad as c
-        ON a.idLateralidad = c.idLateralidad
-        JOIN estado as d
-        ON a.idEstado = d.idEstado
-        WHERE idEstacion = :idEstacion"
+        "SELECT a.idSufix, a.idSerie, b.nombreSerie, a.idFamilia, c.nombreFamilia, a.idModelo, d.nombreModelo, a.proyecto, a.nombreSufix, a.codigoModelo, a.idDestino, e.nombreDestino, a.idEstado, f.nombreEstado
+        FROM sufix as a
+        JOIN serie as b
+        ON a.idSerie = b.idSerie
+        JOIN familia as c
+        ON a.idFamilia = c.idFamilia
+        JOIN modelo as d
+        ON a.idModelo = d.idModelo
+        JOIN destino as e
+        ON a.idDestino = e.idDestino
+        JOIN estado as f
+        ON a.idEstado = f.idEstado
+
+        WHERE idSufix = :idSufix"
         );
-        $stament->bindParam(":idEstacion", $idEstacion);
+        $stament->bindParam(":idSufix", $idSufix);
         return ($stament->execute()) ? $stament->fetch() : false;
     }
-    public function showEstado()
+    public function getSerie()
     {
-        $stament = $this->PDO->prepare("SELECT idEstado, nombreEstado FROM estado");
-        return ($stament->execute()) ? $stament->fetchAll() : false;
+        $stament = $this->PDO->query("SELECT * FROM serie");
+        return $stament->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getFamilia()
+    {
+        $stament = $this->PDO->query("SELECT * FROM familia");
+        return $stament->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getModelo()
+    {
+        $stament = $this->PDO->query("SELECT * FROM modelo");
+        return $stament->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getDestino()
+    {
+        $stament = $this->PDO->query("SELECT * FROM destino");
+        return $stament->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getEstado()
     {
-        $stament = $this->PDO->query("SELECT idEstado, nombreEstado, accion FROM estado");
-        return $stament->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function getLinea()
-    {
-        $stament = $this->PDO->query("SELECT idLinea, nombreLinea FROM linea");
-        return $stament->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function getLateralidad()
-    {
-        $stament = $this->PDO->query("SELECT idLateralidad, nombreLateralidad FROM lateralidad");
+        $stament = $this->PDO->query("SELECT * FROM estado");
         return $stament->fetchAll(PDO::FETCH_ASSOC);
     }
 }

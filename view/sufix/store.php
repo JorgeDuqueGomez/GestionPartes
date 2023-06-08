@@ -1,8 +1,15 @@
 <?php
 
-require_once ("../../controller/estacionCtrl.php");
+require_once ("../../controller/sufixCtrl.php");
 
-$obj = new estacionController();
-$obj->save($_POST['idLinea'],$_POST['nombreEstacion'],$_POST['idLateralidad']);
+$obj = new sufixController();
+$obj->save(
+    $_POST['idSerie'],
+    $_POST['nombreFamilia'],
+    $_POST['nombreModelo'],
+    $_POST['nombreProyecto'],
+    $_POST['nombreSufix'],
+    $_POST['codigoModelo'],
+    $_POST['idDestino']);
 
 ?>          
