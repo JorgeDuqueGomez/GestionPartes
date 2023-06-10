@@ -1,9 +1,9 @@
 <?php
 require_once("../head/head.php");
-require_once("../../controller/sufixCtrl.php");
+require_once("../../controller/parteCtrl.php");
 
-$obj = new sufixController();
-$sufix = $obj->showGrupos();
+$obj = new parteController();
+
 
 ?>
 <br>

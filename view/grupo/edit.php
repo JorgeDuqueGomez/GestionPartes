@@ -13,23 +13,22 @@ $grupo = $obj->show($_GET['id']);
     <form action="update.php" method="POST" autocomplete="off" class="row justify-content-center mx-auto col-xxl-4 col-xl-6 col-md-8 col-sm-10" style="max-width: 80%;">
 
     <div class="row">
-            <label class="col-form-label text-center">ID Grupo</label>
-            <input type="text" name="idGrupo" class="form-control-plaintext text-center" id="inputPassword" value="<?= $grupo[0] ?>">
+            <input type="hidden" name="idGrupo" class="form-control-plaintext text-center" id="inputPassword" value="<?= $grupo['idGrupo'] ?>">
         </div>
 
         <div class="mb-3 row">
             <label class="col-form-label text-start">Codigo del grupo</label>
-            <input type="text" name="codigo" class="form-control text-start" id="inputPassword" value="<?= $grupo[1] ?>">
+            <input type="text" name="codigo" class="form-control text-start" id="inputPassword" value="<?= $grupo['codigo'] ?>">
         </div>
 
-        <div class="mb-3 row">
+        <div class="mb-4 row">
             <label class="col-form-label text-start">Nombre del grupo</label>
-            <input type="text" name="nombreGrupo" class="form-control text-start" id="inputPassword" value="<?= $grupo[2] ?>">
+            <input type="text" name="nombreGrupo" class="form-control text-start" id="inputPassword" value="<?= $grupo['nombreGrupo'] ?>">
         </div>
 
-        <div>
-            <input type="submit" class="btn btn-success" value="Actualizar">
-            <a class="btn btn-danger" href="./index.php">Cancelar</a>
+        <div class="mb-5 col-md-12 d-flex justify-content-center gap-3">
+            <button class="btn btn-outline-success" type="submit">Actualizar</button>
+            <a href="./index.php" class="btn btn-outline-danger">Cancelar</a>
         </div>
 
     </form>

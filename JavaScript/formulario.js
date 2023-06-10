@@ -301,6 +301,34 @@ $(document).ready(function() {
 $(document).ready(function() {
   $('#grupoTable').DataTable({
     responsive: true,
+    scrollY: '50vh',
+    scrollCollapse: true,
+    paging: false,
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+    },
+    initComplete: function() {
+      var table = this.api();
+      // Obtener el campo de búsqueda
+      var searchInput = $(table.table().container()).find('.dataTables_filter input');
+      // Establecer el marcador de posición
+      searchInput.attr('placeholder', 'BUSCAR');
+            // Ocultar la etiqueta de búsqueda
+            var searchLabel = $(table.table().container()).find('.dataTables_filter label');
+            searchLabel.contents().filter(function() {
+              return this.nodeType === 3; // Filtrar nodos de texto
+            }).remove(); // Eliminar el nodo de texto
+            // Centrar el campo de búsqueda
+            searchInput.css('text-align', 'center');
+            searchInput.css('margin', '0 auto');
+            searchInput.parent().css('text-align', 'center');
+    }
+  });
+});
+
+$(document).ready(function() {
+  $('#grupoTableConsulta').DataTable({
+    responsive: true,
     scrollY: '45vh',
     scrollCollapse: true,
     paging: false,
@@ -324,4 +352,90 @@ $(document).ready(function() {
             searchInput.parent().css('text-align', 'center');
     }
   });
+});
+
+// ESTANTERIA______________________
+
+
+$(document).ready(function() {
+  $('#gestionEstanteriaTable').DataTable({
+    responsive: true,
+    scrollY: '45vh',
+    scrollCollapse: true,
+    paging: false,
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+    },
+    initComplete: function() {
+      var table = this.api();
+      // Obtener el campo de búsqueda
+      var searchInput = $(table.table().container()).find('.dataTables_filter input');
+      // Establecer el marcador de posición
+      searchInput.attr('placeholder', 'BUSCAR');
+            // Ocultar la etiqueta de búsqueda
+            var searchLabel = $(table.table().container()).find('.dataTables_filter label');
+            searchLabel.contents().filter(function() {
+              return this.nodeType === 3; // Filtrar nodos de texto
+            }).remove(); // Eliminar el nodo de texto
+            // Centrar el campo de búsqueda
+            searchInput.css('text-align', 'center');
+            searchInput.css('margin', '0 auto');
+            searchInput.parent().css('text-align', 'center');
+    }
+  });
+});
+
+// PARTES________________________________
+
+$(document).ready(function() {
+  $('#gestionPartesTable').DataTable({
+    responsive: true,
+    scrollY: '45vh',
+    scrollCollapse: true,
+    paging: false,
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+    },
+    initComplete: function() {
+      var table = this.api();
+      // Obtener el campo de búsqueda
+      var searchInput = $(table.table().container()).find('.dataTables_filter input');
+      // Establecer el marcador de posición
+      searchInput.attr('placeholder', 'BUSCAR');
+            // Ocultar la etiqueta de búsqueda
+            var searchLabel = $(table.table().container()).find('.dataTables_filter label');
+            searchLabel.contents().filter(function() {
+              return this.nodeType === 3; // Filtrar nodos de texto
+            }).remove(); // Eliminar el nodo de texto
+            // Centrar el campo de búsqueda
+            searchInput.css('text-align', 'center');
+            searchInput.css('margin', '0 auto');
+            searchInput.parent().css('text-align', 'center');
+    }
+  });
+});
+
+
+// LISTADOS__________________________________
+
+$(document).ready(function() {
+  var table = $('#gestionListadoTable').DataTable({
+    responsive: true,
+    paging: true,
+    ordering: false,
+    pageLength: 25,
+  });
+
+  // Agregar filtros y placeholders a cada columna
+  $('#gestionListadoTable thead th').each(function() {
+    var title = $(this).text();
+    $(this).html('<input type="text" class="form-control form-control-sm" placeholder="' + title + '" style="width:;" />');
+  });
+
+  // Aplicar los filtros al escribir en los inputs
+  $('#gestionListadoTable thead input').on('keyup change', function() {
+    var columnIndex = $(this).closest('th').index();
+    table.column(columnIndex).search(this.value).draw();
+  });
+
 });

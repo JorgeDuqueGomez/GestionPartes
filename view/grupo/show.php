@@ -9,7 +9,7 @@ $rows = $obj->index();
 <br>
 <div class="container">
 
-    <table class="table table-bordered" id="grupoTable">
+    <table class="table table-bordered table-hover" id="grupoTable">
         <thead class="table-light">
             <tr>
                 <th class="text-center">Grupo</th>
@@ -21,8 +21,8 @@ $rows = $obj->index();
             <?php if ($rows) : ?>
                 <?php foreach ($rows as $row) : ?>
                     <tr>
-                        <th class="text-center align-middle"><?= $row[1] ?></th>
-                        <th class="text-break align-middle"><?= $row[2] ?></th>
+                        <th class="text-center align-middle"><?= $row['codigo'] ?></th>
+                        <th class="text-break align-middle"><?= $row['nombreGrupo'] ?></th>
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>

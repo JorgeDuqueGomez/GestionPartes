@@ -17,12 +17,12 @@ $materia = $obj->showMaterial();
       <h4 class="align-self-center">Agregar una parte</h4><br>
 
       <form class="col-8" action="store.php" method="POST" autocomplete="off">
-        <div class="mb-3">
+        <div class="mb-2">
           <label class="form-label">Nombre de la parte</label>
           <input type="text" name="nombreParte" required id="example" class="form-control">
         </div>
 
-        <div class="mb-4">
+        <div class="mb-2">
           <label class="form-label">Numero de parte</label>
           <input type="text" name="numeroParte" required id="example" class="form-control">
         </div>
@@ -51,8 +51,13 @@ $materia = $obj->showMaterial();
       <div class="mb-3 col-10 ">
         <label for="formFile" class="form-label">Inserte el archivo que contiene las partes</label>
         <input class="mb-3 form-control" type="file" id="formFile">
+
         <div class="mb-5 d-flex justify-content-center gap-3">
           <button class="btn btn-outline-success" type="submit">Subir archivo</button>
+        </div>
+
+        <div class="mb-5 d-flex justify-content-center gap-3">
+          <a href="../../formatos/Insertar partes.xlsx" class="btn btn-outline-warning" type="submit">Descargar formato</a>
         </div>
       </div>
 

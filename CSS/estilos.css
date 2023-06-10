@@ -3,6 +3,46 @@
 body {
   font-family: 'Quicksand', sans-serif;
 }
-/* .dataTables_wrapper .dataTables_filter {
+
+
+.tooltip-container {
+  position: relative;
+}
+
+.tooltip-content {
   display: none;
-} */
+  position: absolute;
+  bottom: -25px;
+  left: -155px;
+  padding: 15px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  z-index: 9999;
+  width: 150px;
+  height: 100px;
+  line-height: 0.7;
+  
+}
+@media (max-width: 620px) {
+  .tooltip-content {
+    left: 5px;
+    right: 5px;
+  }
+}
+
+.tooltip-container:hover .tooltip-content {
+  display: block;
+}
+
+.line {
+  color: rgb(255, 196, 0); /* Cambia el color del renglón según tus preferencias */
+}
+
+.line:nth-child(2) {
+  color: green; /* Cambia el color del segundo renglón según tus preferencias */
+}
+
+.line:nth-child(3) {
+  color: rgb(70, 75, 70); /* Cambia el color del tercer renglón según tus preferencias */
+}

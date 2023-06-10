@@ -62,7 +62,7 @@ require_once("../HINO/view/head/head.php");
                 <img src="./images/imagen15.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h4 class="card-title text-center">Modelos</h4>
-                    <p class="card-text text-center">Consulte todos los modelos que se ensamblan en HMMC</p>
+                    <p class="card-text text-center">Consulte todos los modelos que se ensamblan en HMMC actualmente</p>
                 </div>
             </div>
         </div>

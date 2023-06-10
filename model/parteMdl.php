@@ -19,7 +19,7 @@ class parteModel
         ORDER BY a.numeroParte ASC");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
-    public function insertar($nombreParte, $numeroParte ,$idMaterial)
+    public function insertar($nombreParte, $numeroParte, $idMaterial)
     {
         $stament = $this->PDO->prepare("INSERT INTO parte VALUES(NULL, :nombreParte, :numeroParte, :idMaterial, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
         $stament->bindParam(":nombreParte", $nombreParte);
@@ -30,14 +30,15 @@ class parteModel
     public function update($idParte, $nombreParte, $numeroParte, $idMaterial)
     {
         $stament = $this->PDO->prepare(
-        "UPDATE parte SET 
+            "UPDATE parte SET 
         idParte = :idParte ,
         nombreParte = :nombreParte , 
         numeroParte = :numeroParte ,  
         idMaterial = :idMaterial ,  
     
         updateAt = CURRENT_TIMESTAMP 
-        WHERE idParte =:idParte");
+        WHERE idParte =:idParte"
+        );
         $stament->bindParam(":idParte", $idParte);
         $stament->bindParam(":nombreParte", $nombreParte);
         $stament->bindParam(":numeroParte", $numeroParte);
@@ -62,9 +63,9 @@ class parteModel
         $stament->bindParam(":idParte", $idParte);
         return ($stament->execute()) ? $stament->fetch() : false;
     }
-    public function showMaterial() {
+    public function showMaterial()
+    {
         $stament = $this->PDO->query("SELECT idMaterial, nombreMaterial FROM material");
         return $stament->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }
