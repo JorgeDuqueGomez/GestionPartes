@@ -23,7 +23,8 @@ class sufixModel
         ON a.idDestino = e.idDestino
         JOIN estado as f
         ON a.idEstado = f.idEstado
-        WHERE a.idEstado = '1'");
+        -- WHERE a.idEstado = '1'
+        ");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
     public function insertar($idSerie, $idFamilia, $idModelo, $proyecto ,$nombreSufix, $codigoModelo, $idDestino)

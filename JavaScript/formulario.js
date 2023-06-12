@@ -422,20 +422,47 @@ $(document).ready(function() {
   var table = $('#gestionListadoTable').DataTable({
     responsive: true,
     paging: true,
-    ordering: false,
-    pageLength: 25,
+    ordering: true,
+    pageLength: 10,
   });
 
   // Agregar filtros y placeholders a cada columna
   $('#gestionListadoTable thead th').each(function() {
     var title = $(this).text();
-    $(this).html('<input type="text" class="form-control form-control-sm" placeholder="' + title + '" style="width:;" />');
+    $(this).html('<div class="filter-container"><input type="text" class="form-control form-control-sm filter-input" placeholder="' +  title  + '" /><span class="sort-arrow"></span></div>');
   });
 
   // Aplicar los filtros al escribir en los inputs
-  $('#gestionListadoTable thead input').on('keyup change', function() {
+  $('#gestionListadoTable thead .filter-input').on('click', function(e) {
+    e.stopPropagation();
+  }).on('keyup change', function() {
     var columnIndex = $(this).closest('th').index();
     table.column(columnIndex).search(this.value).draw();
   });
 
-});
+  // Ordenar la tabla al hacer clic en la flecha
+  $('#gestionListadoTable thead .sort-arrow').on('click', function() {
+    var columnIndex = $(this).closest('th').index();
+    var column = table.column(columnIndex);
+    var currentOrder = column.order()[0];
+
+    // Cambiar la dirección del ordenamiento solo si se hizo clic en la flecha
+    if ($(this).hasClass('asc') || $(this).hasClass('desc')) {
+      var newDirection = currentOrder === 'asc' ? 'desc' : 'asc';
+      column.order(newDirection).draw();
+    }
+  });
+  });
+
+function cantidad(){
+  let valor = document.getElementById('posicion').value;
+  if(valor > 30 || valor < 1){
+    // alert('el valor no es admitido');
+    document.getElementById('posicion').value='';
+   
+  }
+}
+
+// ------------------
+
+

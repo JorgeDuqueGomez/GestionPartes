@@ -18,7 +18,8 @@ $parte = $obj->showParte();
 
     <div class="mb-4 col-sm-12">
       <label class="form-label">Posición</label>
-      <input type="text" name="posicion" required class="form-control" placeholder="Las posiciones son del 1-30">
+      <input id="posicion" type="number" max="30" min="1" name="posicion" required class="form-control" placeholder="Las posiciones son del 1-30" onchange="cantidad()">
+      <small class="d-none">*Error</small>
     </div>
 
     <div class="col-md-12 d-flex justify-content-center gap-3">

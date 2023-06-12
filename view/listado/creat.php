@@ -1,12 +1,12 @@
 <?php
 require_once("../head/head.php");
-require_once("../../controller/estanteriaCtrl.php");
+require_once("../../controller/listadoCtrl.php");
 
-$obj =  new estanteriaController();
+$obj =  new listadoController();
 $parte = $obj->showParte();
 ?>
 <br>
-<h2 class="text-center"><strong>AGREGAR NUEVA UBICACIÓN</strong></h2>
+<h2 class="text-center"><strong>AGREGAR UN NUEVO LISTADO</strong></h2>
 <br>
 <div class="container">
   <form action="store.php" method="POST" autocomplete="off" class="row justify-content-center mx-auto col-xxl-4 col-xl-6 col-md-8 col-sm-10" style="max-width: 80%;">

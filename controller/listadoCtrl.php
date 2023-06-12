@@ -23,17 +23,29 @@ class listadoController
         header("Location:index.php");
      }
 
-     public function show($idEstanteria){
-        return ($this->model->show($idEstanteria) != false) ? $this->model->show($idEstanteria) : 
+     public function getId($idListado){
+      return ($this->model->getId($idListado) != false) ? $this->model->getId($idListado) : 
+      header("Location:index.php");
+   }
+
+     public function show($idListado){
+        return ($this->model->show($idListado) != false) ? $this->model->show($idListado) : 
         header("Location:index.php");
      }
-    public function delete($idEstanteria){
-        return ($this->model->delete($idEstanteria)) ? 
+    public function delete($idListado){
+        return ($this->model->delete($idListado)) ? 
         header("Location:index.php") : 
-        header("Location:show.php?id=".$idEstanteria);
+        header("Location:show.php?id=".$idListado);
     }
     public function showParte(){
         return ($this->model->showParte()) ? $this->model->showParte() : false;
      }
-
+     public function getLateralidad()
+     {
+        return ($this->model->getLateralidad()) ? $this->model->getLateralidad() : false;
+     }
+     public function getSufix()
+     {
+        return ($this->model->getSufix()) ? $this->model->getSufix() : false;
+     }
 }
