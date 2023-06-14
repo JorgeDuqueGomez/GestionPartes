@@ -6,7 +6,6 @@ $obj = new estacionController();
 $estacion = $obj->show($_GET['id']);
 $estado = $obj->getEstado();
 $linea = $obj->getLinea();
-$lat = $obj->getLateralidad();
 
 ?>
 <br>
@@ -17,13 +16,13 @@ $lat = $obj->getLateralidad();
     <form action="update.php" method="POST" autocomplete="off" class="row justify-content-center mx-auto col-xxl-4 col-xl-6 col-md-8 col-sm-10" style="max-width: 80%;">
 
         <div class="row">
-            <input type="hidden" name="idEstacion" class="form-control-plaintext text-center" id="inputPassword" value="<?= $estacion[0] ?>">
+            <input type="hidden" name="idEstacion" class="form-control-plaintext text-center" id="inputPassword" value="<?= $estacion['idEstacion'] ?>">
         </div>
 
         <div class="mb-3 col-md-12">
             <label class="form-label">Linea actual</label>
             <select name="idLinea" id="inputPassword" class="form-select">
-                <option selected="true" value="<?= $estacion[1] ?>"><?= $estacion[2] ?></option>
+                <option selected="true" value="<?= $estacion['idLinea'] ?>"><?= $estacion['nombreLinea'] ?></option>
                 <?php foreach ($linea as $lineas) : ?>
                     <option value="<?= $lineas['idLinea'] ?>"><?= $lineas['nombreLinea'] ?></option>
                 <?php endforeach; ?>
@@ -32,23 +31,13 @@ $lat = $obj->getLateralidad();
 
         <div class="mb-2 col-md-12">
             <label class="form-label">Nombre de la estación</label>
-            <input type="text" name="nombreEstacion" required id="example" class="form-control" value="<?= $estacion[4] ?>">
-        </div>
-
-        <div class="mb-2 col-md-12">
-            <label class="form-label">Lateralidad</label>
-            <select name="idLateralidad" id="inputPassword" class="form-select" required>
-            <option selected="true" value="<?= $estacion[5] ?>"><?= $estacion[6] ?></option>
-                <?php foreach ($lat as $lateralidades) : ?>
-                    <option value="<?= $lateralidades['idLateralidad'] ?>"><?= $lateralidades['nombreLateralidad'] ?></option>
-                <?php endforeach; ?>
-            </select>
+            <input type="text" name="nombreEstacion" required id="example" class="form-control" value="<?= $estacion['nombreEstacion'] ?>">
         </div>
 
         <div class="mb-4 col-md-12">
             <label class="col-form-label text-start">Estado</label>
             <select name="idEstado" id="inputPassword" class="form-select" required>
-            <option selected="true" value="<?= $estacion[7] ?>">Estado actual <?= $estacion[8] ?></option>
+            <option selected="true" value="<?= $estacion['idEstado'] ?>">Estado actual <?= $estacion['nombreEstado'] ?></option>
                 <?php foreach ($estado as $estados) : ?>
                     <option value="<?= $estados['idEstado'] ?>"><?= $estados['accion'] ?></option>
                 <?php endforeach; ?>

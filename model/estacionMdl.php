@@ -12,33 +12,29 @@ class estacionModel
     }
     public function index()
     {
-        $stament = $this->PDO->prepare("SELECT a.idEstacion, a.nombreEstacion, b.idLinea ,b.nombreLinea, c.NombreLateralidad , d.nombreEstado
+        $stament = $this->PDO->prepare("SELECT a.idEstacion, a.nombreEstacion, b.idLinea ,b.nombreLinea, c.nombreEstado
         FROM estacion as a
         JOIN linea as b
         ON a.idLinea = b.idLinea
-        JOIN lateralidad as c
-        ON a.idLateralidad = c.idLateralidad
-        JOIN estado as d
-        ON a.idEstado = d.idEstado
+        JOIN estado as c
+        ON a.idEstado = c.idEstado
         ORDER BY b.idLinea ASC");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
-    public function insertar($idLinea, $nombreEstacion, $idLateralidad)
+    public function insertar($idLinea, $nombreEstacion)
     {
-        $stament = $this->PDO->prepare("INSERT INTO estacion VALUES(NULL, :idLinea, :nombreEstacion, :idLateralidad, '1' , CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+        $stament = $this->PDO->prepare("INSERT INTO estacion VALUES(NULL, :idLinea, :nombreEstacion, '1' , CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
         $stament->bindParam(":idLinea", $idLinea);
         $stament->bindParam(":nombreEstacion", $nombreEstacion);
-        $stament->bindParam(":idLateralidad", $idLateralidad);
         return ($stament->execute()) ? $this->PDO->lastInsertId() : false;
     }
-    public function update($idEstacion, $idLinea, $nombreEstacion, $idLateralidad, $idEstado)
+    public function update($idEstacion, $idLinea, $nombreEstacion, $idEstado)
     {
         $stament = $this->PDO->prepare(
             "UPDATE estacion SET 
         idEstacion = :idEstacion , 
         idLinea = :idLinea , 
         nombreEstacion = :nombreEstacion , 
-        idLateralidad = :idLateralidad , 
         idEstado= :idEstado , 
         updateAt = CURRENT_TIMESTAMP 
         WHERE idEstacion =:idEstacion"
@@ -46,7 +42,6 @@ class estacionModel
         $stament->bindParam(":idEstacion", $idEstacion);
         $stament->bindParam(":idLinea", $idLinea);
         $stament->bindParam(":nombreEstacion", $nombreEstacion);
-        $stament->bindParam(":idLateralidad", $idLateralidad);
         $stament->bindParam(":idEstado", $idEstado);
         return ($stament->execute()) ? $idEstacion : false;
     }
@@ -59,14 +54,11 @@ class estacionModel
     public function show($idEstacion)
     {
         $stament = $this->PDO->prepare(
-            "SELECT a.idEstacion ,a.idLinea ,b.nombreLinea ,
-        a.idEstacion ,a.nombreEstacion ,a.idLateralidad ,c.nombreLateralidad ,
-        a.idEstado, d.nombreEstado
+        "SELECT a.idEstacion ,a.idLinea ,b.nombreLinea ,
+        a.idEstacion ,a.nombreEstacion ,a.idEstado, d.nombreEstado
         FROM estacion as a
         JOIN linea as b
         ON a.idLinea = b.idLinea
-        JOIN lateralidad as c
-        ON a.idLateralidad = c.idLateralidad
         JOIN estado as d
         ON a.idEstado = d.idEstado
         WHERE idEstacion = :idEstacion"

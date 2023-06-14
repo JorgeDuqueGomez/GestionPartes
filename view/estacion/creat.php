@@ -5,7 +5,6 @@ require_once("../../controller/estacionCtrl.php");
 $obj =  new estacionController();
 $rows = $obj->showEstado();
 $linea = $obj->getLinea();
-$lat = $obj->getLateralidad();
 
 ?>
 <br>
@@ -24,19 +23,9 @@ $lat = $obj->getLateralidad();
       </select>
     </div>
 
-    <div class="mb-3 col-md-12">
+    <div class="mb-4 col-md-12">
       <label class="form-label">Nombre de la estación</label>
       <input type="text" name="nombreEstacion" required id="nombreEstacion" class="form-control" placeholder="Ingrese una estación" onchange="alertselectEstacion()">
-    </div>
-
-    <div class="mb-4 col-md-12">
-      <label class="form-label">Lateralidad</label>
-      <select name="idLateralidad" id="idLateralidad" class="form-select" required onclick="alertselectEstacion()">
-        <option selected="true" disabled="disabled">Seleccione una lateralidad</option>
-        <?php foreach ($lat as $lateralidades) : ?>
-          <option value="<?= $lateralidades['idLateralidad'] ?>"><?= $lateralidades['nombreLateralidad'] ?></option>
-        <?php endforeach; ?>
-      </select>
     </div>
 
     <div class="col-md-12 d-flex justify-content-center gap-3">

@@ -21,6 +21,11 @@ $lateralidad = $obj->show($_GET['id']);
             <input type="text" name="nombreLateralidad" required id="example" class="form-control" value="<?= $lateralidad['nombreLateralidad'] ?>">
         </div>
 
+        <div class="mb-4 col-md-12">
+            <label class="form-label">Nombre corto</label>
+            <input type="text" name="nombreCorto" required id="example" class="form-control" value="<?= $lateralidad['nombreCorto'] ?>">
+        </div>
+
         <div class="mb-5 col-md-12 d-flex justify-content-center gap-3">
             <button class="btn btn-outline-success" type="submit">Actualizar</button>
             <a href="./index.php" class="btn btn-outline-danger">Cancelar</a>

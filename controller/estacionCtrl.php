@@ -12,16 +12,16 @@ class estacionController
    {
       return ($this->model->index()) ? $this->model->index() : false;
    }
-   public function save($idLinea, $nombreEstacion, $idLateralidad)
+   public function save($idLinea, $nombreEstacion)
    {
-      $idEstacion = $this->model->insertar($idLinea, $nombreEstacion, $idLateralidad);
+      $idEstacion = $this->model->insertar($idLinea, $nombreEstacion);
       return ($idEstacion != false) ?
          header("Location:index.php") :
          header("Location:creat.php");
    }
-   public function update($idEstacion, $idLinea, $nombreEstacion, $idLateralidad, $idEstado)
+   public function update($idEstacion, $idLinea, $nombreEstacion, $idEstado)
    {
-      return ($this->model->update($idEstacion, $idLinea, $nombreEstacion, $idLateralidad, $idEstado) != false) ?
+      return ($this->model->update($idEstacion, $idLinea, $nombreEstacion, $idEstado) != false) ?
          header("Location:index.php") :
          header("Location:index.php");
    }

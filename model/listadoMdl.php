@@ -15,8 +15,12 @@ class listadoModel
     {
         $stament = $this->PDO->prepare("SELECT 
         a.idListado, 
-        f.nombreMaterial,
+        a.idEstacion,
+        a.idLateralidad,
+        a.idGrupo,
+        a.idCaja,
         b.nombreSufix, 
+        f.nombreMaterial,
         i.nombreModelo, 
         c.nombreParte, 
         c.numeroParte, 
@@ -26,7 +30,8 @@ class listadoModel
         g.nombreEstacion, 
         h.nombreCorto, 
         j.nombreCaja,
-        k.nombrePosicion
+        a.numeroCaja
+
         
 
         FROM listado AS a
@@ -41,24 +46,26 @@ class listadoModel
         JOIN estacion AS g
         ON a.idEstacion = g.idEstacion
         JOIN lateralidad AS h
-        ON g.idLateralidad = h.idLateralidad
+        ON a.idLateralidad = h.idLateralidad
         JOIN modelo AS i
         ON b.idModelo = i.idModelo
         LEFT JOIN caja AS j
         ON a.idCaja = j.idCaja
-        LEFT JOIN posicioncaja AS k
-        ON j.idPosicionCaja = k.idPosicionCaja
         ");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
     public function getSelectedRows($selectedIds)
-{
-    $ids = implode(",", $selectedIds);
+    {
+        $ids = implode(",", $selectedIds);
 
-    $statement = $this->PDO->prepare("SELECT 
+        $statement = $this->PDO->prepare("SELECT 
         a.idListado, 
-        f.nombreMaterial,
+        a.idEstacion,
+        a.idLateralidad,
+        a.idGrupo,
+        a.idCaja,
         b.nombreSufix, 
+        f.nombreMaterial,
         i.nombreModelo, 
         c.nombreParte, 
         c.numeroParte, 
@@ -68,27 +75,37 @@ class listadoModel
         g.nombreEstacion, 
         h.nombreCorto, 
         j.nombreCaja,
-        k.nombrePosicion,
-        l.nombreLinea,
+        a.numeroCaja,
+        k.nombreLinea,
         h.nombreLateralidad
 
+        
+
         FROM listado AS a
-        JOIN sufix AS b ON a.idSufix = b.idSufix
-        JOIN parte AS c ON a.idParte = c.idParte
-        LEFT JOIN grupo AS d ON a.idGrupo = d.idGrupo
-        JOIN material AS f ON c.idMaterial = f.idMaterial
-        JOIN estacion AS g ON a.idEstacion = g.idEstacion
-        JOIN lateralidad AS h ON g.idLateralidad = h.idLateralidad
-        JOIN modelo AS i ON b.idModelo = i.idModelo
-        LEFT JOIN caja AS j ON a.idCaja = j.idCaja
-        LEFT JOIN posicioncaja AS k ON j.idPosicionCaja = k.idPosicionCaja
-        JOIN linea AS l ON g.idLinea = l.idLinea
+        JOIN sufix AS b
+        ON a.idSufix = b.idSufix
+        JOIN parte AS c
+        ON a.idParte = c.idParte
+        LEFT JOIN grupo AS d
+        ON a.idGrupo = d.idGrupo
+        JOIN material AS f
+        ON c.idMaterial = f.idMaterial
+        JOIN estacion AS g
+        ON a.idEstacion = g.idEstacion
+        JOIN lateralidad AS h
+        ON a.idLateralidad = h.idLateralidad
+        JOIN modelo AS i
+        ON b.idModelo = i.idModelo
+        LEFT JOIN caja AS j
+        ON a.idCaja = j.idCaja
+        JOIN linea AS k
+        ON g.idLinea = k.idLinea
 
 
         WHERE a.idListado IN ($ids)");
 
-    return ($statement->execute()) ? $statement->fetchAll() : false;
-}
+        return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
     public function insertar($modulo, $posicion)
     {
         $maxOrdenQuery = $this->PDO->prepare("SELECT MAX(orden) FROM estanteria");
@@ -145,27 +162,32 @@ class listadoModel
         $stament->bindParam(":idListado", $idListado);
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
-    public function update($idListado, $idEstacion, $idParte, $idCaja, $idGrupo, $componentCode, $cantidad)
+    public function update($idListado, $idEstacion, $idLateralidad, $numeroCaja, $idCaja, $idGrupo, $componentCode, $cantidad)
     {
-        $stament = $this->PDO->prepare("UPDATE listado SET 
-        idListado = :idListado , 
-        idEstacion = :idEstacion , 
-        idParte = :idParte , 
-        idCaja = :idCaja , 
-        idGrupo = :idGrupo , 
-        componentCode = :componentCode , 
-        cantidad = :cantidad , 
-        updateAt = CURRENT_TIMESTAMP 
-        WHERE idListado =:idListado
-        
+        $stament = $this->PDO->prepare(
+
+            "UPDATE listado SET 
+                idEstacion = :idEstacion,
+                idLateralidad = :idLateralidad,
+                numeroCaja = :numeroCaja,
+                idCaja = :idCaja,
+                idGrupo = :idGrupo,
+                componentCode = :componentCode,
+                cantidad = :cantidad,
+
+                updateAt = CURRENT_TIMESTAMP
+                WHERE idListado = :idListado
         ");
         $stament->bindParam(":idListado", $idListado);
         $stament->bindParam(":idEstacion", $idEstacion);
-        $stament->bindParam(":idParte", $idParte);
+        $stament->bindParam(":idLateralidad", $idLateralidad);
+        $stament->bindParam(":numeroCaja", $numeroCaja);
         $stament->bindParam(":idCaja", $idCaja);
         $stament->bindParam(":idGrupo", $idGrupo);
         $stament->bindParam(":componentCode", $componentCode);
         $stament->bindParam(":cantidad", $cantidad);
+
+
         return ($stament->execute()) ? $idListado : false;
     }
     public function delete($idListado)
@@ -193,7 +215,7 @@ class listadoModel
     }
     public function getEstacion()
     {
-        $stament = $this->PDO->query("SELECT idEstacion, nombreEstacion FROM estacion");
+        $stament = $this->PDO->query("SELECT idEstacion, nombreEstacion FROM estacion ORDER BY nombreEstacion ASC");
         return $stament->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getGrupo()
@@ -203,8 +225,8 @@ class listadoModel
     }
     public function getCaja()
     {
-        $stament = $this->PDO->query("SELECT idPosicionCaja ,nombrePosicion 
-        FROM posicioncaja 
+        $stament = $this->PDO->query("SELECT idCaja, nombreCaja
+        FROM caja 
         
         
         ");

@@ -46,7 +46,7 @@ $rows = $obj->index();
               <th class="text-center align-middle"><?= $row['codigo'] ?></th>
               <th class="text-center align-middle"><?= $row['componentCode'] ?></th>
               <th class="text-center align-middle"><?= $row['cantidad'] ?></th>
-              <th class="text-center align-middle"><?= $row['nombreCaja'] ?>-<?= $row['nombrePosicion'] ?></th>
+              <th class="text-center align-middle"><?= $row['numeroCaja'] ?>- <?= $row['nombreCaja'] ?></th>
 
               <th class="text-center align-middle">
               <input type="checkbox" class="checkbox" name="selectedRows[]" value="<?= $row['idListado'] ?>">

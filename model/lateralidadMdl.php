@@ -13,26 +13,31 @@ class lateralidadModel
     public function index()
     {
         $stament = $this->PDO->prepare("SELECT *
-        FROM lateralidad");
+        FROM lateralidad
+        ORDER BY idLateralidad ASC
+        ");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
-    public function insertar($nombreLateralidad)
+    public function insertar($nombreLateralidad, $nombreCorto)
     {
-        $stament = $this->PDO->prepare("INSERT INTO lateralidad VALUES(NULL,:nombreLateralidad, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+        $stament = $this->PDO->prepare("INSERT INTO lateralidad VALUES(NULL,:nombreLateralidad, :nombreCorto, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+        $stament->bindParam(":nombreCorto", $nombreCorto);
         $stament->bindParam(":nombreLateralidad", $nombreLateralidad);
         return ($stament->execute()) ? $this->PDO->lastInsertId() : false;
     }
-    public function update($idLateralidad, $nombreLateralidad)
+    public function update($idLateralidad, $nombreLateralidad, $nombreCorto)
     {
         $stament = $this->PDO->prepare(
             "UPDATE lateralidad SET 
         idLateralidad = :idLateralidad , 
         nombreLateralidad = :nombreLateralidad , 
+        nombreCorto = :nombreCorto , 
         updateAt = CURRENT_TIMESTAMP 
         WHERE idLateralidad =:idLateralidad"
         );
         $stament->bindParam(":idLateralidad", $idLateralidad);
         $stament->bindParam(":nombreLateralidad", $nombreLateralidad);
+        $stament->bindParam(":nombreCorto", $nombreCorto);
         return ($stament->execute()) ? $idLateralidad : false;
     }
     public function delete($idLateralidad)
@@ -44,12 +49,11 @@ class lateralidadModel
     public function show($idLateralidad)
     {
         $stament = $this->PDO->prepare(
-        "SELECT *
+            "SELECT *
         FROM lateralidad
         WHERE idLateralidad = :idLateralidad"
         );
         $stament->bindParam(":idLateralidad", $idLateralidad);
         return ($stament->execute()) ? $stament->fetch() : false;
     }
-
 }

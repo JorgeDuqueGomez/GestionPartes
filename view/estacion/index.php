@@ -20,9 +20,7 @@ $rows = $obj->index();
     <table class="table table-bordered table-hover" id="estacionTable">
       <thead class="table-light">
         <tr>
-          <th class="text-center align-middle" scope="col">Linea</th>
           <th class="text-center align-middle" scope="col">Nombre estación</th>
-          <th class="text-center align-middle" scope="col">Lateralidad</th>
           <th class="text-center align-middle" scope="col">Estado</th>
           <th class="text-center align-middle" scope="col">Acciones</th>
         </tr>
@@ -32,9 +30,8 @@ $rows = $obj->index();
         <?php if ($rows) : ?>
           <?php foreach ($rows as $row) : ?>
             <tr>
-              <th class="text-center align-middle"><?= $row['nombreLinea'] ?></th>
+              <input name="idEstacion" type="hidden" value="<?= $row['nombreLinea'] ?>">
               <th class="text-center align-middle"><?= $row['nombreEstacion'] ?></th>
-              <th class="text-center align-middle"><?= $row['NombreLateralidad'] ?></th>
               <th class="text-center align-middle"><?= $row['nombreEstado'] ?></th>
               <th class="text-center">
                 <a href="edit.php?id=<?= $row['idEstacion'] ?>" class="btn btn-outline-success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -75,7 +72,7 @@ $rows = $obj->index();
           <?php endforeach; ?>
         <?php else : ?>
           <tr>
-            <td colspan="5" class="text-center">No hay registros</td>
+            <td colspan="4" class="text-center">No hay registros</td>
           </tr>
         <?php endif; ?>
 

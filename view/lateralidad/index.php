@@ -21,6 +21,7 @@ $rows = $obj->index();
       <thead class="table-light">
         <tr>
           <th class="text-center align-middle" scope="col">Nombre lateralidad</th>
+          <th class="text-center align-middle" scope="col">Nombre corto</th>
           <th class="text-center align-middle" scope="col">Acciones</th>
         </tr>
       </thead>
@@ -29,7 +30,9 @@ $rows = $obj->index();
         <?php if ($rows) : ?>
           <?php foreach ($rows as $row) : ?>
             <tr>
+              <input name="idEstacion" type="hidden" value="<?= $row['idLateralidad'] ?>">
               <th class="text-center align-middle"><?= $row['nombreLateralidad'] ?></th>
+              <th class="text-center align-middle"><?= $row['nombreCorto'] ?></th>
               <th class="text-center">
                 <a href="edit.php?id=<?= $row['idLateralidad'] ?>" class="btn btn-outline-success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />

@@ -15,6 +15,12 @@ $obj =  new lateralidadController();
       <input type="text" name="nombreLateralidad" required id="nombreLateralidad" class="form-control" placeholder="Ingrese una lateralidad">
     </div>
 
+    <div class="mb-3 col-md-12">
+      <label class="form-label">Nombre corto</label>
+      <input type="text" name="nombreCorto" required  class="form-control" placeholder="Ingrese la abreviatura">
+    </div>
+
+
     <div class="col-md-12 d-flex justify-content-center gap-3">
       <button class="btn btn-outline-success" id="agregar" type="submit">Agregar</button>
       <a href="./index.php" class="btn btn-outline-danger">Cancelar</a>

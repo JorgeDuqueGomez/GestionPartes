@@ -19,9 +19,9 @@ class listadoController
          header("Location:index.php") :
          header("Location:creat.php");
    }
-   public function update($idListado, $idEstacion, $idParte, $idCaja, $idGrupo, $componentCode, $cantidad)
+   public function update($idListado, $idEstacion, $idLateralidad, $numeroCaja, $idCaja, $idGrupo, $componentCode, $cantidad)
    {
-      return ($this->model->update($idListado, $idEstacion, $idParte, $idCaja, $idGrupo, $componentCode, $cantidad) != false) ?
+      return ($this->model->update($idListado, $idEstacion, $idLateralidad, $numeroCaja, $idCaja, $idGrupo, $componentCode, $cantidad) != false) ?
          header("Location:index.php") :
          header("Location:index.php");
    }

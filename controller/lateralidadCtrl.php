@@ -12,16 +12,16 @@ class lateralidadController
    {
       return ($this->model->index()) ? $this->model->index() : false;
    }
-   public function save($nombreLateralidad)
+   public function save($nombreLateralidad, $nombreCorto)
    {
-      $idLateralidad = $this->model->insertar($nombreLateralidad);
+      $idLateralidad = $this->model->insertar($nombreLateralidad, $nombreCorto);
       return ($idLateralidad != false) ?
          header("Location:index.php") :
          header("Location:creat.php");
    }
-   public function update($idLateralidad, $nombreLateralidad)
+   public function update($idLateralidad, $nombreLateralidad, $nombreCorto)
    {
-      return ($this->model->update($idLateralidad, $nombreLateralidad) != false) ?
+      return ($this->model->update($idLateralidad, $nombreLateralidad, $nombreCorto) != false) ?
          header("Location:index.php") :
          header("Location:index.php");
    }

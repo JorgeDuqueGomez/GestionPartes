@@ -7,8 +7,7 @@ function setDeleteId(id) {
   function alertselectEstacion(){
     let linea = document.getElementById('idLinea').value;  
     let nombreEstacion = document.getElementById('nombreEstacion').value;  
-    let lateralidad = document.getElementById('idLateralidad').value;  
-    if(linea !='Seleccione una linea' && nombreEstacion !='' && lateralidad != 'Seleccione una lateralidad' ){
+    if(linea !='Seleccione una linea' && nombreEstacion !='' ){
      let boton = document.getElementById('agregar');
      boton.removeAttribute('disabled');
     }
