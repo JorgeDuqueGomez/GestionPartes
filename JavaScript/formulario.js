@@ -462,4 +462,34 @@ function cantidad(){
   }
 }
 
+window.addEventListener('DOMContentLoaded', function() {
+  var checkboxes = document.querySelectorAll('.checkbox');
+  var botonCambios = document.getElementById('realizarCambios');
+
+  checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('change', actualizarBoton);
+  });
+
+  function actualizarBoton() {
+    var algunCheckboxSeleccionado = Array.from(checkboxes).some(function(checkbox) {
+      return checkbox.checked;
+    });
+
+    if (algunCheckboxSeleccionado) {
+      botonCambios.disabled = false;
+    } else {
+      botonCambios.disabled = true;
+    }
+  }
+});
+
+function restrictInput(input) {
+  input.value = input.value.toUpperCase(); // Convertir el valor ingresado a mayúsculas
+  input.value = input.value.substring(0, 2); // Limitar la longitud a dos dígitos
+}
+
+function setRestoreId(id) {
+  document.getElementById('restore-id').value = id;
+}
+
 // ------------------

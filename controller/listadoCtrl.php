@@ -12,6 +12,10 @@ class listadoController
    {
       return ($this->model->index()) ? $this->model->index() : false;
    }
+   public function historic()
+   {
+      return ($this->model->historic()) ? $this->model->historic() : false;
+   }
    public function save($modulo, $posicion)
    {
       $idEstanteria = $this->model->insertar($modulo, $posicion);
@@ -25,7 +29,6 @@ class listadoController
          header("Location:index.php") :
          header("Location:index.php");
    }
-
    public function getSelectedRows($selectedIds)
    {
       return ($this->model->getSelectedRows($selectedIds) != false) ? $this->model->getSelectedRows($selectedIds) :
@@ -40,6 +43,12 @@ class listadoController
    {
       return ($this->model->delete($idListado)) ?
          header("Location:index.php") :
+         header("Location:show.php?id=" . $idListado);
+   }
+   public function restore($idListado)
+   {
+      return ($this->model->restore($idListado)) ?
+         header("Location:historic.php") :
          header("Location:show.php?id=" . $idListado);
    }
    public function showParte()

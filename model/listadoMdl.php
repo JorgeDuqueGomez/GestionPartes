@@ -30,7 +30,8 @@ class listadoModel
         g.nombreEstacion, 
         h.nombreCorto, 
         j.nombreCaja,
-        a.numeroCaja
+        a.numeroCaja,
+        a.idEstado
 
         
 
@@ -51,6 +52,58 @@ class listadoModel
         ON b.idModelo = i.idModelo
         LEFT JOIN caja AS j
         ON a.idCaja = j.idCaja
+        JOIN estado AS k
+        ON a.idEstado = k.idEstado
+
+        WHERE a.idEstado = '1'
+        ");
+        return ($stament->execute()) ? $stament->fetchAll() : false;
+    }
+    public function historic()
+    {
+        $stament = $this->PDO->prepare("SELECT 
+        a.idListado, 
+        a.idEstacion,
+        a.idLateralidad,
+        a.idGrupo,
+        a.idCaja,
+        b.nombreSufix, 
+        f.nombreMaterial,
+        i.nombreModelo, 
+        c.nombreParte, 
+        c.numeroParte, 
+        d.codigo, 
+        a.componentCode, 
+        a.cantidad, 
+        g.nombreEstacion, 
+        h.nombreCorto, 
+        j.nombreCaja,
+        a.numeroCaja,
+        a.idEstado
+
+        
+
+        FROM listado AS a
+        JOIN sufix AS b
+        ON a.idSufix = b.idSufix
+        JOIN parte AS c
+        ON a.idParte = c.idParte
+        LEFT JOIN grupo AS d
+        ON a.idGrupo = d.idGrupo
+        JOIN material AS f
+        ON c.idMaterial = f.idMaterial
+        JOIN estacion AS g
+        ON a.idEstacion = g.idEstacion
+        JOIN lateralidad AS h
+        ON a.idLateralidad = h.idLateralidad
+        JOIN modelo AS i
+        ON b.idModelo = i.idModelo
+        LEFT JOIN caja AS j
+        ON a.idCaja = j.idCaja
+        JOIN estado AS k
+        ON a.idEstado = k.idEstado
+
+        WHERE a.idEstado = '2'
         ");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
@@ -165,7 +218,6 @@ class listadoModel
     public function update($idListado, $idEstacion, $idLateralidad, $numeroCaja, $idCaja, $idGrupo, $componentCode, $cantidad)
     {
         $stament = $this->PDO->prepare(
-
             "UPDATE listado SET 
                 idEstacion = :idEstacion,
                 idLateralidad = :idLateralidad,
@@ -177,7 +229,8 @@ class listadoModel
 
                 updateAt = CURRENT_TIMESTAMP
                 WHERE idListado = :idListado
-        ");
+        "
+        );
         $stament->bindParam(":idListado", $idListado);
         $stament->bindParam(":idEstacion", $idEstacion);
         $stament->bindParam(":idLateralidad", $idLateralidad);
@@ -192,7 +245,13 @@ class listadoModel
     }
     public function delete($idListado)
     {
-        $stament = $this->PDO->prepare("DELETE FROM listado WHERE idListado = :idListado");
+        $stament = $this->PDO->prepare("UPDATE listado SET idEstado = '2' , updateAt = CURRENT_TIMESTAMP WHERE idListado = :idListado");
+        $stament->bindParam(":idListado", $idListado);
+        return ($stament->execute()) ? true : false;
+    }
+    public function restore($idListado)
+    {
+        $stament = $this->PDO->prepare("UPDATE listado SET idEstado = '1' , updateAt = CURRENT_TIMESTAMP WHERE idListado = :idListado");
         $stament->bindParam(":idListado", $idListado);
         return ($stament->execute()) ? true : false;
     }

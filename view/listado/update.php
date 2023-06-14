@@ -34,8 +34,6 @@ $obj = new listadoController();
                 $idCaja[$i] = null;
                 $numeroCaja[$i] = null;
             }
-
-
             $obj->update(
                 $idListado[$i],
                 $idEstacion[$i],

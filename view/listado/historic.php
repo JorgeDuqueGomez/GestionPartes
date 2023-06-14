@@ -2,27 +2,20 @@
 require_once("../head/head.php");
 require_once("../../controller/listadoCtrl.php");
 $obj =  new listadoController();
-$rows = $obj->index();
+$rows = $obj->historic();
 ?>
 <br>
-<h1 class="text-center"><strong>GESTION DE LISTADOS</strong></h1>
+<h1 class="text-center"><strong>HISTORIAL DE LISTADOS</strong></h1>
 <div class="container">
   <br>
   <div class="d-flex justify-content-center">
   </div>
   <form action="edit.php" method="POST">
     <div class="d-flex justify-content-center">
-      <a href="historic.php" class="btn btn-outline-danger">
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-        </svg>
-        Historial</a>
-      &nbsp;&nbsp;
-      <button type="submit" class="btn btn-primary" id="realizarCambios" disabled>
-        Realizar cambios en modelos seleccionados</button>
-      &nbsp;
-      <lord-icon src="https://cdn.lordicon.com/egiwmiit.json" trigger="hover" colors="primary:#0033ff" style="width:40px;height:40px">
-      </lord-icon>
+      <a href="index.php" class="btn btn-danger d-flex align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+          <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+        </svg> &nbsp;Atras</a>
+      <br>
     </div>
     <table class="table table-bordered table-hover" id="gestionListadoTable">
       <thead class="table-light">
@@ -56,11 +49,9 @@ $rows = $obj->index();
 
               <th class="text-center align-middle">
 
-                <input type="checkbox" class="checkbox" name="selectedRows[]" value="<?= $row['idListado'] ?>">
-                &nbsp;
-
-                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setDeleteId('<?= $row['idListado'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setRestoreId('<?= $row['idListado'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
                   </svg></button>
 
               </th>
@@ -68,7 +59,7 @@ $rows = $obj->index();
           <?php endforeach; ?>
         <?php else : ?>
           <tr>
-            <td colspan="10" class="text-center">No hay registros</td>
+            <td colspan="10" class="text-center">El historial se encuentra vació</td>
           </tr>
         <?php endif; ?>
 
@@ -80,18 +71,18 @@ $rows = $obj->index();
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">¿Desea eliminar el registro?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">¿Desea restaurar el registro?</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          El registro no estara disponible en el listado oficial.
+          El registro estará disponible en el listado oficial.
         </div>
         
         <div class="modal-footer">
-          <form id="delete-form" method="POST" action="delete.php">
-            <input type="hidden" name="id" id="delete-id">
-            <button type="submit" class="btn btn-outline-danger">Eliminar</button>
-            <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cancelar</button>
+          <form id="restore-form" method="POST" action="restore.php">
+            <input type="hidden" name="id" id="restore-id">
+            <button type="submit" class="btn btn-outline-success">Restaurar</button>
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
           </form>
         </div>
       </div>

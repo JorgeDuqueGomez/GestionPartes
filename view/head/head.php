@@ -41,6 +41,7 @@
                                 <ul class="dropdown-menu dropdown-menu-dark">
 
                                     <li><a class="dropdown-item" href="/HINO/view/listado/index.php">Listado</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/lote/index.php">Lotes de efectividad</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -66,19 +67,19 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Consulta</a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li><a class="dropdown-item" href="/HINO/view/listado/show.php">Listados</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/listado/show.php" target="_blank">Listados</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="/HINO/view/estanteria/show.php">Estanteria</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/estanteria/show.php" target="_blank">Estanteria</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="/HINO/view/grupo/show.php">Grupos</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/grupo/show.php" target="_blank">Grupos</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="/HINO/view/sufix/show.php">Modelos</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/sufix/show.php" target="_blank">Modelos</a></li>
                                 </ul>
                             </li>
 

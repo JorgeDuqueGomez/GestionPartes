@@ -28,7 +28,7 @@ $caja = $obj->getCaja();
                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                 </svg> &nbsp;Atras</a>
             &nbsp;&nbsp;
-
+            <button type="submit" class="btn btn-success">Realizar cambios</button>
         </div>
         <br>
 
@@ -98,23 +98,24 @@ $caja = $obj->getCaja();
                             </th>
 
                             <th class="text-center align-middle">
-                                <div class="mb-2 col-md-12">
-                                    <input type="text" name="componentCode[]" class="form-control  text-center" value="<?= $row['componentCode'] ?>">
+                                <div class="col-md-12">
+                                    <input type="text" name="componentCode[]" class="form-control text-center"  value="<?= $row['componentCode'] ?>" oninput="restrictInput(this)" maxlength="2">
                                 </div>
 
                             <th class="text-center align-middle">
-                                <div class="mb-2 col-md-12">
+                                <div class="col-md-12">
                                     <input type="text" name="cantidad[]" class="form-control  text-center" value="<?= $row['cantidad'] ?>">
                                 </div>
                             </th>
                             <th class="text-center align-middle">
-                                <label>Numero</label>
+                                <label <?= ($row['nombreMaterial'] != 'PC') ? '' : 'class="d-none"' ?>>No aplica</label>
+                                <label <?= ($row['nombreMaterial'] != 'PC') ? 'class="d-none"' : '' ?>>Numero</label>
                                 <div class="col-md-12">
-                                    <input type="text" name="numeroCaja[]" class="form-control text-center" value="<?= $row['numeroCaja'] ?>" <?= ($row['nombreMaterial'] != 'PC') ? 'disabled' : '' ?>>
+                                    <input type="text" name="numeroCaja[]" class="form-control text-center" value="<?= $row['numeroCaja'] ?>" <?= ($row['nombreMaterial'] != 'PC') ? 'hidden' : '' ?>>
                                 </div>
-                                <label>Posición</label>
+                                <label <?= ($row['nombreMaterial'] != 'PC') ? 'class="d-none"' : '' ?>>Posición</label>
                                 <div>
-                                    <select name="idCaja[]" class="form-select text-center" <?= ($row['nombreMaterial'] != 'PC') ? 'disabled' : '' ?>>
+                                    <select name="idCaja[]" class="form-select text-center" <?= ($row['nombreMaterial'] != 'PC') ? 'hidden' : '' ?>>
                                         <option selected="true" value="<?= $row['idCaja'] ?>"><?= $row['nombreCaja'] ?></option>
                                         <?php foreach ($caja as $cajas) : ?>
                                             <option value="<?= $cajas['idCaja'] ?>"><?= $cajas['nombreCaja'] ?></option>
@@ -133,7 +134,6 @@ $caja = $obj->getCaja();
 
             </tbody>
         </table>
-        <button type="submit" class="btn btn-success">Realizar cambios</button>
     </form>
 </div>
 <?php
