@@ -1,8 +1,11 @@
 <?php
 
-    require_once("../../controller/grupoCtrl.php");    
-    
-    $obj = new grupoController();
-    $obj->update($_POST['idGrupo'],$_POST['codigo'],$_POST['nombreGrupo']);
-?>
-<h1>MODIFICAR UNA LATERALIDAD</h1>
+require_once("../../controller/grupoCtrl.php");
+
+$obj = new grupoController();
+$idGrupo = $_POST['idGrupo'];
+$codigo = $_POST['codigo'];
+$nombreGrupo = $_POST['nombreGrupo'];
+
+$obj->update($idGrupo, $codigo, $nombreGrupo);
+

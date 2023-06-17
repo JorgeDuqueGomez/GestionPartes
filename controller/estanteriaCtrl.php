@@ -5,7 +5,7 @@ class estanteriaController
     private $model;
     public function __construct()
     {
-        require_once("c:/wamp64/www/HINO/model/estanteriaMdl.php");
+        require_once(__DIR__ ."/../model/estanteriaMdl.php");
         $this->model = new estanteriaModel();
     }
     public function index(){

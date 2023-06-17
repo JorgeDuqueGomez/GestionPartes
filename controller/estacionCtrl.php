@@ -5,7 +5,7 @@ class estacionController
    private $model;
    public function __construct()
    {
-      require_once("c:/wamp64/www/HINO/model/estacionMdl.php");
+      require_once(__DIR__ . "/../model/estacionMdl.php");
       $this->model = new estacionModel();
    }
    public function index()

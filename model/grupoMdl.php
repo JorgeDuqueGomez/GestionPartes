@@ -6,7 +6,7 @@ class grupoModel
     public function __construct()
     {
 
-        require_once("c:/wamp64/www/HINO/config/conexion.php");
+        require_once(__DIR__ ."/../config/conexion.php");
 
         $con = new db();
         $this->PDO = $con->conexion();
@@ -18,11 +18,26 @@ class grupoModel
     }
     public function insertar($codigo, $nombreGrupo)
     {
-        $stament = $this->PDO->prepare("INSERT INTO grupo VALUES(NULL, :codigo, :nombreGrupo, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
-        $stament->bindParam(":codigo", $codigo);
-        $stament->bindParam(":nombreGrupo", $nombreGrupo);
-        return ($stament->execute()) ? $this->PDO->lastInsertId() : false;
+        $sql = "SELECT COUNT(idGrupo) FROM grupo WHERE codigo = :codigo OR nombreGrupo = :nombreGrupo";
+        $statement = $this->PDO->prepare($sql);
+        $statement->bindParam(":codigo", $codigo);
+        $statement->bindParam(':nombreGrupo', $nombreGrupo);
+        $statement->execute();
+        $resultado = $statement->fetchColumn();
+        
+        if ($resultado > 0) {
+            // El grupo ya existe en la base de datos, retornar false
+            return false;
+        } else {
+            // El grupo no existe, realizar la inserción
+            $statement = $this->PDO->prepare("INSERT INTO grupo VALUES(NULL, :codigo, :nombreGrupo, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+            $statement->bindParam(":codigo", $codigo);
+            $statement->bindParam(":nombreGrupo", $nombreGrupo);
+            return $statement->execute();
+        }
     }
+    
+
     public function show($idGrupo)
     {
         $stament = $this->PDO->prepare("SELECT * FROM grupo WHERE idGrupo = :idGrupo");

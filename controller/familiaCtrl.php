@@ -5,7 +5,7 @@ class familiaController
    private $model;
    public function __construct()
    {
-      require_once("c:/wamp64/www/HINO/model/familiaMdl.php");
+      require_once(__DIR__ ."/../model/familiaMdl.php");
       $this->model = new familiaModel();
    }
    public function index()

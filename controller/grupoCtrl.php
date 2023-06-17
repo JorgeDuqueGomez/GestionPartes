@@ -5,7 +5,7 @@ class grupoController
     private $model;
     public function __construct()
     {
-        require_once("c:/wamp64/www/HINO/model/grupoMdl.php");
+        require_once(__DIR__ ."/../model/grupoMdl.php");
         $this->model = new grupoModel();
     }
     public function index()

@@ -35,7 +35,7 @@ $caja = $obj->getCaja();
         <table class="table table-bordered table-hover">
             <thead class="table-light">
                 <tr>
-                    <th class="text-center align-middle" style="width: 8%;" scope="col">Modelo</th>
+                    <th class="text-center align-middle" style="width: 10%;" scope="col">Modelo</th>
                     <th class="text-center align-middle" style="width: 16%;" scope="col">Estacion</th>
                     <th class="text-center align-middle" style="width: 5%;" scope="col">Material</th>
                     <th class="text-center align-middle" style="width: 20%;" scope="col">Nombre de parte</th>
@@ -53,7 +53,11 @@ $caja = $obj->getCaja();
                         <tr>
                             <input name="idListado[]" type="hidden" value="<?= $row['idListado'] ?>">
 
-                            <th class="text-center align-middle"><?= $row['nombreModelo'] ?> - <?= $row['nombreSufix'] ?></th>
+                            <th class="text-center align-middle"><?= $row['nombreModelo'] ?> - <?= $row['nombreSufix'] ?><br><br>
+                                <label>Lote Actual</label><br>
+                            <input type="number" value="<?= $row['lote'] ?>" style="width: 50px;" class="text-center">
+
+                            </th>
 
                             <th>
                                 <div class="mb-1">
@@ -99,7 +103,7 @@ $caja = $obj->getCaja();
 
                             <th class="text-center align-middle">
                                 <div class="col-md-12">
-                                    <input type="text" name="componentCode[]" class="form-control text-center"  value="<?= $row['componentCode'] ?>" oninput="restrictInput(this)" maxlength="2">
+                                    <input type="text" name="componentCode[]" class="form-control text-center" value="<?= $row['componentCode'] ?>" oninput="restrictInput(this)" maxlength="2">
                                 </div>
 
                             <th class="text-center align-middle">

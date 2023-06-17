@@ -4,14 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HMMC</title>
+    <link rel="icon" type="image/x-icon" href="http://example.com/favicon.ico" />
+    
+    <title>
+        HMMC
+    </title>
 
     <link href="/HINO/JS/cdn.jsdelivr.net_npm_bootstrap@5.2.3_dist_css_bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+    <script src="/HINO/JS/cdn.lordicon.com_bhenfmcm.js"></script>
     <link rel="stylesheet" type="text/css" href="/HINO/CSS/estilos.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/HINO/JS/cdn.datatables.net_1.13.4_css_jquery.dataTables.css" />
+    <link rel="stylesheet" href="/HINO/JS/cdn.datatables.net_responsive_2.4.1_css_responsive.dataTables.min.css">
+    <script src="/HINO/JS/code.jquery.com_jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <script src="/HINO/JS/cdn.datatables.net_1.13.4_js_jquery.dataTables.js"></script>
     <script src="/HINO/JavaScript/formulario.js"></script>
 
@@ -40,8 +44,8 @@
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Gestión</a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
 
-                                    <li><a class="dropdown-item" href="/HINO/view/listado/index.php">Listado</a></li>
-                                    <li><a class="dropdown-item" href="/HINO/view/lote/index.php">Lotes de efectividad</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/listado/index.php" target="_blank">Listado</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/lote/index.php" target="_blank">Lotes de efectividad</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -82,33 +86,6 @@
                                     <li><a class="dropdown-item" href="/HINO/view/sufix/show.php" target="_blank">Modelos</a></li>
                                 </ul>
                             </li>
-
-                            <!-- <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Modelo
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li><a class="dropdown-item" href="/HINO/view/modelo/index.php">Consultar modelos actuales</a></li>
-                                    <li><a class="dropdown-item" href="#">Agregar nuevo Sufix</a></li>
-                                    <li><a class="dropdown-item" href="#">Modificar Sufix</a></li>
-                                    <li><a class="dropdown-item" href="#">Desactivar Sufix</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Area
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-dark">
-
-                                    <li><a class="dropdown-item" href="/HINO/view/estacion/index.php">Estación</a></li>
-
-                                    <li><a class="dropdown-item" href="#">Consultar listados</a></li>
-                                    <li><a class="dropdown-item" href="#">Consultar CPL</a></li>
-                                    <li><a class="dropdown-item" href="#">Consultar planos</a></li>
-                                    <li><a class="dropdown-item" href="#">Consultar modelos</a></li>
-                                </ul>
-                            </li> -->
-
                         </ul>
                     </div>
                 </div>

@@ -6,18 +6,19 @@ class loteModel
     public function __construct()
     {
 
-        require_once("c:/wamp64/www/HINO/config/conexion.php");
+        require_once(__DIR__ ."/../config/conexion.php");
         $con = new db();
         $this->PDO = $con->conexion();
     }
     public function index()
     {
-        $stament = $this->PDO->prepare("SELECT b.idLote, b.lote, a.nombreSufix
+        $stament = $this->PDO->prepare("SELECT b.idLote, b.lote, a.nombreSufix, c.nombreModelo, a.proyecto
         
             FROM sufix AS a
             JOIN lote AS b
             ON a.idSufix = b.idSufix 
-
+            JOIN modelo AS c
+            ON a.idModelo = c.idModelo
 
         
         ");

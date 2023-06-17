@@ -5,7 +5,7 @@ class parteController
     private $model;
     public function __construct()
     {
-        require_once("c:/wamp64/www/HINO/model/parteMdl.php");
+        require_once(__DIR__ ."/../model/parteMdl.php");
         $this->model = new parteModel();
     }
     public function index()

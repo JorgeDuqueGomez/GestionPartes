@@ -5,7 +5,7 @@ class sufixController
    private $model;
    public function __construct()
    {
-      require_once("c:/wamp64/www/HINO/model/sufixMdl.php");
+      require_once(__DIR__ ."/../model/sufixMdl.php");
       $this->model = new sufixModel();
    }
    public function index()

@@ -46,27 +46,6 @@ $rows = $obj->index();
                     </svg>
                   </div>
                 </button>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">¿Desea eliminar el registro?</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        Una vez eliminado no podrá recuperar el registro.
-                      </div>
-                      <div class="modal-footer">
-                        <form id="delete-form" method="POST" action="delete.php">
-                          <input type="hidden" name="id" id="delete-id">
-                          <button type="submit" class="btn btn-outline-danger">Eliminar</button>
-                        </form>
-                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cancelar</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
               </th>
             </tr>
           <?php endforeach; ?>
@@ -78,6 +57,26 @@ $rows = $obj->index();
 
       </tbody>
     </table>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">¿Desea eliminar el registro?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Una vez eliminado no podrá recuperar el registro.
+          </div>
+          <div class="modal-footer">
+            <form id="delete-form" method="POST" action="delete.php">
+              <input type="hidden" name="id" id="delete-id">
+              <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+            </form>
+            <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <?php

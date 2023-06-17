@@ -4,6 +4,8 @@ require_once("../../controller/grupoCtrl.php");
 
 $obj = new grupoController();
 $grupo = $obj->show($_GET['id']);
+
+
 ?>
 <br>
 <h2 class="text-center"><strong>MODIFICAR GRUPO</strong></h2>
@@ -12,7 +14,7 @@ $grupo = $obj->show($_GET['id']);
 <div class="container">
     <form action="update.php" method="POST" autocomplete="off" class="row justify-content-center mx-auto col-xxl-4 col-xl-6 col-md-8 col-sm-10" style="max-width: 80%;">
 
-    <div class="row">
+        <div class="row">
             <input type="hidden" name="idGrupo" class="form-control-plaintext text-center" id="inputPassword" value="<?= $grupo['idGrupo'] ?>">
         </div>
 
@@ -32,15 +34,8 @@ $grupo = $obj->show($_GET['id']);
         </div>
 
     </form>
+
 </div>
-
-
-
-
-
-
-
-
 
 <?php
 require_once("../head/footer.php");

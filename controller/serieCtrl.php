@@ -5,7 +5,7 @@ class serieController
    private $model;
    public function __construct()
    {
-      require_once("c:/wamp64/www/HINO/model/serieMdl.php");
+      require_once(__DIR__ ."/../model/serieMdl.php");
       $this->model = new serieModel();
    }
    public function index()

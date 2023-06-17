@@ -5,7 +5,7 @@ class lateralidadController
    private $model;
    public function __construct()
    {
-      require_once("c:/wamp64/www/HINO/model/lateralidadMdl.php");
+      require_once(__DIR__ ."/../model/lateralidadMdl.php");
       $this->model = new lateralidadModel();
    }
    public function index()

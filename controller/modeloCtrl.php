@@ -5,7 +5,7 @@ class modeloController
    private $model;
    public function __construct()
    {
-      require_once("c:/wamp64/www/HINO/model/modeloMdl.php");
+      require_once(__DIR__ ."/../model/modeloMdl.php");
       $this->model = new modeloModel();
    }
    public function index()

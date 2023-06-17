@@ -5,7 +5,7 @@ class lineaController
    private $model;
    public function __construct()
    {
-      require_once("c:/wamp64/www/HINO/model/lineaMdl.php");
+      require_once(__DIR__ ."/../model/lineaMdl.php");
       $this->model = new lineaModel();
    }
    public function index()

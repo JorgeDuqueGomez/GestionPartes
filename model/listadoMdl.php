@@ -6,7 +6,7 @@ class listadoModel
     public function __construct()
     {
 
-        require_once("c:/wamp64/www/HINO/config/conexion.php");
+        require_once(__DIR__ ."/../config/conexion.php");
 
         $con = new db();
         $this->PDO = $con->conexion();
@@ -59,7 +59,7 @@ class listadoModel
         ");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
-    public function historic()
+    public function trash()
     {
         $stament = $this->PDO->prepare("SELECT 
         a.idListado, 
@@ -130,7 +130,8 @@ class listadoModel
         j.nombreCaja,
         a.numeroCaja,
         k.nombreLinea,
-        h.nombreLateralidad
+        h.nombreLateralidad,
+        l.lote
 
         
 
@@ -153,6 +154,8 @@ class listadoModel
         ON a.idCaja = j.idCaja
         JOIN linea AS k
         ON g.idLinea = k.idLinea
+        LEFT JOIN lote AS l
+        ON b.idSufix = l.idSufix
 
 
         WHERE a.idListado IN ($ids)");

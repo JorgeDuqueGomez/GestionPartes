@@ -5,7 +5,7 @@ class loteController
    private $model;
    public function __construct()
    {
-      require_once("c:/wamp64/www/HINO/model/loteMdl.php");
+      require_once(__DIR__ ."/../model/loteMdl.php");
       $this->model = new loteModel();
    }
    public function index()

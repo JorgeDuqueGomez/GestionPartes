@@ -2,7 +2,7 @@
 require_once("../head/head.php");
 require_once("../../controller/listadoCtrl.php");
 $obj =  new listadoController();
-$rows = $obj->historic();
+$rows = $obj->trash();
 ?>
 <br>
 <h1 class="text-center"><strong>HISTORIAL DE LISTADOS</strong></h1>

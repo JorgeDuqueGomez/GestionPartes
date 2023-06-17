@@ -5,16 +5,16 @@ class listadoController
    private $model;
    public function __construct()
    {
-      require_once("c:/wamp64/www/HINO/model/listadoMdl.php");
+      require_once(__DIR__ ."/../model/listadoMdl.php");
       $this->model = new listadoModel();
    }
    public function index()
    {
       return ($this->model->index()) ? $this->model->index() : false;
    }
-   public function historic()
+   public function trash()
    {
-      return ($this->model->historic()) ? $this->model->historic() : false;
+      return ($this->model->trash()) ? $this->model->trash() : false;
    }
    public function save($modulo, $posicion)
    {
@@ -48,7 +48,7 @@ class listadoController
    public function restore($idListado)
    {
       return ($this->model->restore($idListado)) ?
-         header("Location:historic.php") :
+         header("Location:trash.php") :
          header("Location:show.php?id=" . $idListado);
    }
    public function showParte()

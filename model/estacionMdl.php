@@ -5,8 +5,7 @@ class estacionModel
     private $PDO;
     public function __construct()
     {
-
-        require_once("c:/wamp64/www/HINO/config/conexion.php");
+        require_once(__DIR__ ."/../config/conexion.php");
         $con = new db();
         $this->PDO = $con->conexion();
     }

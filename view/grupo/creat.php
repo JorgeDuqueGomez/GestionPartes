@@ -5,7 +5,7 @@ require_once("../head/head.php");
 <h2 class="text-center"><strong>AGREGAR GRUPO</strong></h2>
 <br>
 <div class="container">
-<form action="store.php" method="POST" autocomplete="off" class="row justify-content-center mx-auto col-xxl-4 col-xl-6 col-md-8 col-sm-10" style="max-width: 80%;">
+  <form action="store.php" method="POST" autocomplete="off" class="row justify-content-center mx-auto col-xxl-4 col-xl-6 col-md-8 col-sm-10" style="max-width: 80%;">
 
     <div class="mb-3 col-sm-12">
       <label class="form-label">Codigo del grupo</label>
@@ -22,7 +22,7 @@ require_once("../head/head.php");
       <a href="./index.php" class="btn btn-outline-danger">Cancelar</a>
     </div>
   </form>
-</div>
+
 <?php
 require_once("../head/footer.php");
 ?>
