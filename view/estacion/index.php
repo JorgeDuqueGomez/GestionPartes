@@ -20,6 +20,7 @@ $rows = $obj->index();
     <table class="table table-bordered table-hover" id="estacionTable">
       <thead class="table-light">
         <tr>
+          <th class="text-center align-middle" scope="col">Nombre linea</th>
           <th class="text-center align-middle" scope="col">Nombre estación</th>
           <th class="text-center align-middle" scope="col">Estado</th>
           <th class="text-center align-middle" scope="col">Acciones</th>
@@ -30,7 +31,7 @@ $rows = $obj->index();
         <?php if ($rows) : ?>
           <?php foreach ($rows as $row) : ?>
             <tr>
-              <input name="idEstacion" type="hidden" value="<?= $row['nombreLinea'] ?>">
+              <th class="text-center align-middle"><?= $row['nombreLinea'] ?></th>
               <th class="text-center align-middle"><?= $row['nombreEstacion'] ?></th>
               <th class="text-center align-middle"><?= $row['nombreEstado'] ?></th>
               <th class="text-center">

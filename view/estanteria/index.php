@@ -3,6 +3,7 @@ require_once("../head/head.php");
 require_once("../../controller/estanteriaCtrl.php");
 $obj =  new estanteriaController();
 $rows = $obj->index();
+
 $ocupados = 0;
 $disponibles = 0;
 foreach ($rows as $row) {
@@ -42,9 +43,9 @@ $contenido = $ocupados;
     <thead class="table-light">
       <tr>
         <th class="text-center align-middle" scope="col">Orden</th>
+        <th class="text-center align-middle" scope="col">Linea</th>
         <th class="text-center align-middle" scope="col">Ubicación</th>
         <th class="text-center align-middle" scope="col">Estado</th>
-
         <th class="text-center align-middle" scope="col">Descripcion</th>
         <th class="text-center align-middle" scope="col">Numero de parte</th>
         <th class="text-center align-middle" scope="col">Acciones</th>
@@ -57,6 +58,7 @@ $contenido = $ocupados;
           <tr>
 
             <th class="text-center align-middle"><?= $row['orden'] ?></th>
+            <th class="text-center align-middle"><?= $row['nombreLinea'] ?></th>
             <th class="text-center align-middle"><?= $row['modulo'] ?>-<?= $row['posicion'] ?></th>
             <th class="text-center align-middle">
               <?php if ($row['nombreEstado2'] === 'Disponible') : ?>

@@ -86,6 +86,23 @@
                                     <li><a class="dropdown-item" href="/HINO/view/sufix/show.php" target="_blank">Modelos</a></li>
                                 </ul>
                             </li>
+
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Alistamiento</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+
+                                    <li><a class="dropdown-item" href="/HINO/view/tornilleria/index.php">Alistamiento PC</a></li>
+
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="/HINO/view/sufix/show.php">Alistamiento CKD</a></li>
+
+                                </ul>
+                            </li>
+
                         </ul>
                     </div>
                 </div>

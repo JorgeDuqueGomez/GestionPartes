@@ -11,14 +11,14 @@ class estanteriaController
     public function index(){
         return ($this->model->index()) ? $this->model->index() : false;
      }
-    public function save($modulo, $posicion){
-        $idEstanteria = $this->model->insertar($modulo, $posicion);
+    public function save($modulo, $posicion, $idLinea){
+        $idEstanteria = $this->model->insertar($modulo, $posicion, $idLinea);
         return ($idEstanteria != false) ? 
         header("Location:index.php") : 
         header("Location:creat.php");
     } 
-     public function update($idEstanteria, $idParte){
-        return ($this->model->update($idEstanteria, $idParte) != false) ? 
+     public function update($idEstanteria, $idParte, $idLinea){
+        return ($this->model->update($idEstanteria, $idParte, $idLinea) != false) ? 
         header("Location:index.php") : 
         header("Location:index.php");
      }
@@ -35,5 +35,8 @@ class estanteriaController
     public function showParte(){
         return ($this->model->showParte()) ? $this->model->showParte() : false;
      }
-
+     public function getLinea()
+     {
+        return ($this->model->getLinea()) ? $this->model->getLinea() : false;
+     }
 }

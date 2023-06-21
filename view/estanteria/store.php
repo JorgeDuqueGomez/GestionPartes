@@ -6,6 +6,7 @@ $obj = new estanteriaController();
 $obj->save(
     $_POST['modulo'],
     $_POST['posicion'],
+    $_POST['idLinea']
 );
 
 ?>          

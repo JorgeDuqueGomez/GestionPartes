@@ -4,13 +4,16 @@
 function setDeleteId(id) {
     document.getElementById('delete-id').value = id;
 }
-  function alertselectEstacion(){
-    let linea = document.getElementById('idLinea').value;  
-    let nombreEstacion = document.getElementById('nombreEstacion').value;  
-    if(linea !='Seleccione una linea' && nombreEstacion !='' ){
-     let boton = document.getElementById('agregar');
-     boton.removeAttribute('disabled');
-    }
+function alertselectEstacion(){
+  let linea = document.getElementById('idLinea').value;  
+  let nombreEstacion = document.getElementById('nombreEstacion').value;  
+
+  if(linea !='Seleccione una linea' && 
+  nombreEstacion !='' 
+  ){
+   let boton = document.getElementById('agregar');
+   boton.removeAttribute('disabled');
+  }
 } 
 $(document).ready(function() {
   $('#estacionTable').DataTable({
@@ -492,4 +495,35 @@ function setRestoreId(id) {
   document.getElementById('restore-id').value = id;
 }
 
-// ------------------
+// ------------------ ALISTAMIENTO
+
+function alertselectAlistamientoPc(){
+  let modelo = document.getElementById('idModelo').value;  
+  let sufix = document.getElementById('idSufix').value;
+  let lote = document.getElementById('idLote').value;
+  let linea = document.getElementById('idLinea').value;
+  if(
+    modelo !='Modelo' && 
+    sufix !='Sufix' && 
+    lote !='Lote' && 
+    linea !='Linea'
+    ){
+   let boton = document.getElementById('consulta');
+   boton.removeAttribute('disabled');
+  }
+} 
+
+function alertaEstanteria(){
+  let modulo = document.getElementById('modulo').value;  
+  let posicion = document.getElementById('posicion').value;  
+  let idLinea = document.getElementById('idLinea').value;  
+
+  if(idLinea !='Seleccione una linea' && 
+  posicion !='' && 
+  modulo !='' 
+   ){
+   let boton = document.getElementById('agregar');
+   boton.removeAttribute('disabled');
+  }
+} 
+
