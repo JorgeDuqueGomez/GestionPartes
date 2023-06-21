@@ -497,13 +497,11 @@ function setRestoreId(id) {
 
 // ------------------ ALISTAMIENTO
 
-function alertselectAlistamientoPc(){
-  let modelo = document.getElementById('idModelo').value;  
+function alertselectAlistamientoPc(){ 
   let sufix = document.getElementById('idSufix').value;
   let lote = document.getElementById('idLote').value;
   let linea = document.getElementById('idLinea').value;
   if(
-    modelo !='Modelo' && 
     sufix !='Sufix' && 
     lote !='Lote' && 
     linea !='Linea'

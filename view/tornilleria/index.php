@@ -14,15 +14,7 @@ $estacion = $obj->getEstacion();
 <br>
 <form action="consulta.php" method="POST">
   <div class="d-flex justify-content-center">
-    <div>
-      <select name="idModelo" id="idModelo" class="form-select" onclick="alertselectAlistamientoPc()">
-        <option selected="true" disabled="disabled">Modelo</option>
-        <?php foreach ($modelo as $modelos) : ?>
-          <option value="<?= $modelos['idModelo'] ?>"><?= $modelos['nombreModelo'] ?></option>
-        <?php endforeach; ?>
-      </select>
-    </div>
-    &nbsp;&nbsp;
+    
     <div>
       <select name="idSufix" id="idSufix" class="form-select" onclick="alertselectAlistamientoPc()">
         <option selected="true" disabled="disabled">Sufix</option>
@@ -32,6 +24,7 @@ $estacion = $obj->getEstacion();
       </select>
     </div>
     &nbsp;&nbsp;
+
     <div>
       <select name="idLote" id="idLote" class="form-select" onclick="alertselectAlistamientoPc()">
         <option selected="true" disabled="disabled">Lote</option>
@@ -41,6 +34,7 @@ $estacion = $obj->getEstacion();
       </select>
     </div>
     &nbsp;&nbsp;
+
     <div>
       <select name="idLinea" id="idLinea" class="form-select" onclick="alertselectAlistamientoPc()">
         <option selected="true" disabled="disabled">Linea</option>
@@ -53,6 +47,9 @@ $estacion = $obj->getEstacion();
     <button type="submit" id="consulta" disabled class="btn btn-primary">Consultar</button>
   </div>
 </form>
+
+
+
 <?php
 require_once("../head/footer.php");
 ?>

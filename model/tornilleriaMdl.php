@@ -24,6 +24,7 @@ class tornilleriaModel
         d.nombreCaja, 
         e.idEstacion,
         e.nombreEstacion, 
+        e.ordenAlistamiento,
         f.idLinea,
         f.nombreLinea, 
         g.idSufix,
@@ -73,10 +74,6 @@ class tornilleriaModel
         return ($statement->execute()) ? $statement->fetchAll() : false;
     }
     
-
-
-
-
     public function insertar($nombreSerie)
     {
         $stament = $this->PDO->prepare("INSERT INTO serie VALUES( NULL, :nombreSerie, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");

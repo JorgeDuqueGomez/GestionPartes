@@ -25,9 +25,12 @@ $estacion = $obj->getEstacion();
   <div class="table-responsive">
     <table class="table table-bordered table-hover" id="tornilleriaTable">
 
-
       <tbody>
         <?php $uniqueStations = []; // Array para almacenar las estaciones únicas 
+
+        usort($rows, function ($a, $b) {
+          return $a['ordenAlistamiento'] - $b['ordenAlistamiento'];
+        });
         ?>
         <?php foreach ($rows as $row) : ?>
           <?php $station = $row['nombreEstacion'] . "-" . $row['nombreCorto']; ?>
@@ -38,35 +41,75 @@ $estacion = $obj->getEstacion();
                 <strong>
                   <details>
                     <summary><?= $station ?></summary>
-                    <table class="table table-bordered table-hover">
-                      <thead class="table-light">
-                        <tr>
-                          <th class="text-center align-middle" style="width: 3%;">Orden</th>
-                          <th class="text-center align-middle" style="width: 3%;">Ubicación</th>
-                          <th class="text-center align-middle" style="width: 10%;">Numero Parte</th>
-                          <th class="text-center align-middle" style="width: 15%;">Nombre Parte</th>
-                          <th class="text-center align-middle" style="width: 10%;">Cantidad lote</th>
-                          <th class="text-center align-middle" style="width: 10%;">Numero caja</th>
-                          <th class="text-center align-middle" style="width: 3%;">Check</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php foreach ($rows as $innerRow) : ?>
-                          <?php $innerStation = $innerRow['nombreEstacion'] . "-" . $innerRow['nombreCorto']; ?>
-                          <?php if ($innerStation == $station) : ?>
+                    <form>
+                      <table class="table table-bordered table-hover">
+                        <thead class="table-light">
+                          <tr>
+                            <th class="text-center align-middle" style="width: 3%;">Ubicación</th>
+                            <th class="text-center align-middle" style="width: 10%;">Numero Parte</th>
+                            <th class="text-center align-middle" style="width: 15%;">Nombre Parte</th>
+                            <th class="text-center align-middle" style="width: 10%;">Cantidad lote</th>
+                            <th class="text-center align-middle" style="width: 10%;">Numero caja</th>
+                            <th class="text-center align-middle" style="width: 3%;">Check</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php
+                          $unifiedRows = []; // Array para almacenar las filas unificadas por número de parte y número de caja
+                          $maxCaja = 0; // Variable para almacenar el número mayor en la columna "caja"
+
+                          usort($rows, function ($a, $b) {
+                            return $a['orden'] - $b['orden'];
+                          });
+
+                          foreach ($rows as $innerRow) :
+                            $innerStation = $innerRow['nombreEstacion'] . "-" . $innerRow['nombreCorto'];
+                            if ($innerStation == $station) {
+                              $key = $innerRow['numeroParte'] . "-" . $innerRow['numeroCaja'] . "-" . $innerRow['nombreCaja'];
+                              if (isset($unifiedRows[$key])) {
+                                // Si ya existe una fila unificada con el mismo número de parte y número de caja, se suma la cantidad al lote existente
+                                $unifiedRows[$key]['cantidad'] += $innerRow['cantidad'];
+                              } else {
+                                // Si no existe una fila unificada, se agrega una nueva fila al array
+                                $unifiedRows[$key] = $innerRow;
+                              }
+
+                              // Verificar y actualizar el número mayor en la columna "caja"
+                              $caja = (int) $innerRow['numeroCaja'];
+                              if ($caja > $maxCaja) {
+                                $maxCaja = $caja;
+                              }
+                            }
+                          endforeach;
+                          ?>
+
+                          <div style="text-align: end;">
+                            <div class="gap-1" style="display: inline-flex;">
+                              <label>Referencias totales </label>
+                              <input class="form-control" type="text" value="<?= count($unifiedRows) ?>" style="width: 45px; height: 20px;" disabled readonly>
+                            </div>
+                            &nbsp;&nbsp;
+                            <div class="gap-1" style="display: inline-flex;">
+                              <label>Cajas </label>
+                              <input class="form-control" type="text" value="<?= $maxCaja ?>" style="width: 45px; height: 20px;" disabled readonly>
+                            </div>
+                          </div>
+
+                          <?php foreach ($unifiedRows as $unifiedRow) : ?>
                             <tr>
-                              <td class="text-center align-middle"><?= $innerRow['orden'] ?></td>
-                              <td class="text-center align-middle"><?= $innerRow['modulo'] ?> - <?= $innerRow['posicion'] ?></td>
-                              <td class="text-center align-middle"><?= $innerRow['numeroParte'] ?></td>
-                              <td class="text-center align-middle"><?= $innerRow['nombreParte'] ?></td>
-                              <td class="text-center align-middle"><?= $innerRow['cantidad'] ?></td>
-                              <td class="text-center align-middle"><?= $innerRow['numeroCaja'] ?></td>
+                              <td class="text-center align-middle"><?= $unifiedRow['modulo'] ?> - <?= $unifiedRow['posicion'] ?></td>
+                              <td class="text-center align-middle"><?= $unifiedRow['numeroParte'] ?></td>
+                              <td class="text-center align-middle"><?= $unifiedRow['nombreParte'] ?></td>
+                              <td class="text-center align-middle"><?= $unifiedRow['cantidad'] ?></td>
+                              <td class="text-center align-middle"><?= $unifiedRow['numeroCaja'] ?>- <?= $unifiedRow['nombreCaja'] ?></td>
                               <td class="text-center align-middle"><input type="checkbox" class="checkbox"></td>
                             </tr>
-                          <?php endif; ?>
-                        <?php endforeach; ?>
-                      </tbody>
-                    </table>
+                          <?php endforeach; ?>
+                        </tbody>
+
+                      </table>
+                      <input type="submit" class="btn btn-success" value="Guardar estación">
+                    </form>
                   </details>
                 </strong>
               </td>
@@ -74,10 +117,6 @@ $estacion = $obj->getEstacion();
           <?php endif; ?>
         <?php endforeach; ?>
       </tbody>
-
-
-
-
 
     </table>
   </div>
