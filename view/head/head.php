@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="http://example.com/favicon.ico" />
-    
+
     <title>
         HMMC
     </title>
@@ -40,17 +40,10 @@
                 <div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Gestión</a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
-
-                                    <li><a class="dropdown-item" href="/HINO/view/listado/index.php" target="_blank">Listado</a></li>
-                                    <li><a class="dropdown-item" href="/HINO/view/lote/index.php" target="_blank">Lotes de efectividad</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="/HINO/view/estanteria/index.php">Estanteria</a></li>
-                                    <li><a class="dropdown-item" href="/HINO/view/parte/index.php">Partes</a></li>
                                     <li><a class="dropdown-item" href="/HINO/view/grupo/index.php">Grupos</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
@@ -65,6 +58,26 @@
                                     <li><a class="dropdown-item" href="/HINO/view/familia/index.php">Familia</a></li>
                                     <li><a class="dropdown-item" href="/HINO/view/modelo/index.php">Modelos</a></li>
                                     <li><a class="dropdown-item" href="/HINO/view/sufix/index.php">Sufix</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Listados</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="/HINO/view/listado/index.php">Gestión de listados</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/sufix/show.php">Gestión de TPM's</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="/HINO/view/lote/index.php" target="_blank">Lotes de efectividad</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Tornilleria</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="/HINO/view/estanteria/index.php">Gestión de estanteria</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/parte/index.php">Gestión de partes</a></li>
                                 </ul>
                             </li>
 
@@ -87,19 +100,12 @@
                                 </ul>
                             </li>
 
-                            
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Alistamiento</a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
-
                                     <li><a class="dropdown-item" href="/HINO/view/tornilleria/index.php">Alistamiento PC</a></li>
-
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-
                                     <li><a class="dropdown-item" href="/HINO/view/sufix/show.php">Alistamiento CKD</a></li>
-
+                                    <li><a class="dropdown-item" href="/HINO/view/sufix/show.php">Alistamiento LOCAL</a></li>
                                 </ul>
                             </li>
 

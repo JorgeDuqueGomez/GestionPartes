@@ -79,7 +79,8 @@ class listadoModel
         h.nombreCorto, 
         j.nombreCaja,
         a.numeroCaja,
-        a.idEstado
+        a.idEstado,
+        a.updateAt
 
         
 

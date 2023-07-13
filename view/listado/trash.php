@@ -29,6 +29,7 @@ $rows = $obj->trash();
           <th class="text-center align-middle" scope="col">Comp</th>
           <th class="text-center align-middle" scope="col">Cant</th>
           <th class="text-center align-middle" scope="col">Caja</th>
+          <th class="text-center align-middle" scope="col">Fecha</th>
           <th class="text-center align-middle" scope="col">Acciones</th>
         </tr>
       </thead>
@@ -46,6 +47,7 @@ $rows = $obj->trash();
               <th class="text-center align-middle"><?= $row['componentCode'] ?></th>
               <th class="text-center align-middle"><?= $row['cantidad'] ?></th>
               <th class="text-center align-middle"><?= $row['numeroCaja'] ?>- <?= $row['nombreCaja'] ?></th>
+              <th class="text-center align-middle"><?= $row['updateAt'] ?></th>
 
               <th class="text-center align-middle">
 
