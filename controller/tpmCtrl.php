@@ -1,12 +1,12 @@
 <?php
 
-class listadoController
+class tpmController
 {
    private $model;
    public function __construct()
    {
-      require_once(__DIR__ ."/../model/listadoMdl.php");
-      $this->model = new listadoModel();
+      require_once(__DIR__ ."/../model/tpmMdl.php");
+      $this->model = new tpmModel();
    }
    public function index()
    {
@@ -23,49 +23,9 @@ class listadoController
          header("Location:index.php") :
          header("Location:creat.php");
    }
-   public function update( $idListado, 
-   $idEstacion, 
-   $idLateralidad, 
-   $numeroCaja, 
-   $idCaja, 
-   $idGrupo, 
-   $componentCode, 
-   $cantidad,
-   $nombreModeloCopy,
-   $nombreSufixCopy,
-   $loteCopy,
-   $nombreEstacionCopy,
-   $nombreLateralidadCopy,
-   $nombreMaterialCopy,
-   $nombreParteCopy,
-   $numeroParteCopy,
-   $codigoCopy,
-   $componentCodeCopy,
-   $cantidadCopy,
-   $numeroCajaCopy,
-   $nombreCajaCopy)
+   public function update($idListado, $idEstacion, $idLateralidad, $numeroCaja, $idCaja, $idGrupo, $componentCode, $cantidad)
    {
-      return ($this->model->update(        $idListado, 
-      $idEstacion, 
-      $idLateralidad, 
-      $numeroCaja, 
-      $idCaja, 
-      $idGrupo, 
-      $componentCode, 
-      $cantidad,
-      $nombreModeloCopy,
-      $nombreSufixCopy,
-      $loteCopy,
-      $nombreEstacionCopy,
-      $nombreLateralidadCopy,
-      $nombreMaterialCopy,
-      $nombreParteCopy,
-      $numeroParteCopy,
-      $codigoCopy,
-      $componentCodeCopy,
-      $cantidadCopy,
-      $numeroCajaCopy,
-      $nombreCajaCopy) != false) ?
+      return ($this->model->update($idListado, $idEstacion, $idLateralidad, $numeroCaja, $idCaja, $idGrupo, $componentCode, $cantidad) != false) ?
          header("Location:index.php") :
          header("Location:index.php");
    }
@@ -114,9 +74,5 @@ class listadoController
    public function getCaja()
    {
       return ($this->model->getCaja()) ? $this->model->getCaja() : false;
-   }
-   public function listadoLog()
-   {
-      return ($this->model->listadoLog()) ? $this->model->listadoLog() : false;
    }
 }

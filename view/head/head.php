@@ -65,7 +65,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Listados</a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" href="/HINO/view/listado/index.php">Gestión de listados</a></li>
-                                    <li><a class="dropdown-item" href="/HINO/view/sufix/show.php">Gestión de TPM's</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/tpm/index.php">Gestión de TPM's</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>

@@ -51,7 +51,41 @@ $caja = $obj->getCaja();
                 <?php if (!empty($selectedRows)) : ?>
                     <?php foreach ($selectedRows as $row) : ?>
                         <tr>
-                            
+                            <input name="idListado[]" type="hidden" value="<?= $row['idListado'] ?>">
+
+                            <th class="text-center align-middle"><?= $row['nombreModelo'] ?> - <?= $row['nombreSufix'] ?><br><br>
+                                <label>Lote Actual</label><br>
+                            <input type="number" value="<?= $row['lote'] ?>" style="width: 50px;" class="text-center">
+
+                            </th>
+
+                            <th>
+                                <div class="mb-1">
+                                    <select name="nombreLinea" class="form-select">
+                                        <option selected="true"><?= $row['nombreLinea'] ?></option>
+                                        <?php foreach ($linea as $lineas) : ?>
+                                            <option value="<?= $lineas['idLinea'] ?>"><?= $lineas['nombreLinea'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="mb-1">
+                                    <select name="idEstacion[]" class="form-select">
+                                        <option selected="true" value="<?= $row['idEstacion'] ?>"><?= $row['nombreEstacion'] ?></option>
+                                        <?php foreach ($estacion as $estaciones) : ?>
+                                            <option value="<?= $estaciones['idEstacion'] ?>"><?= $estaciones['nombreEstacion'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="mb-1">
+                                    <select name="idLateralidad[]" class="form-select">
+                                        <option selected="true" value="<?= $row['idLateralidad'] ?>"><?= $row['nombreLateralidad'] ?></option>
+                                        <?php foreach ($lat as $lateralidades) : ?>
+                                            <option value="<?= $lateralidades['idLateralidad'] ?>"><?= $lateralidades['nombreLateralidad'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </th>
+
                             <th class="text-center align-middle"><?= $row['nombreMaterial'] ?></th>
                             <th class="align-middle"><?= $row['nombreParte'] ?></th>
                             <th class="text-center align-middle"><?= $row['numeroParte'] ?></th>
@@ -93,19 +127,7 @@ $caja = $obj->getCaja();
                                     </select>
                                 </div>
                             </th>
-                            <input type="hidden" name="nombreModeloCopy[]" value="<?= $row['nombreModelo'] ?>">
-                            <input type="hidden" name="nombreSufixCopy[]" value="<?= $row['nombreSufix'] ?>">
-                            <input type="hidden" name="loteCopy[]" value="<?= $row['lote'] ?>">
-                            <input type="hidden" name="nombreEstacionCopy[]" value="<?= $row['nombreEstacion'] ?>">
-                            <input type="hidden" name="nombreLateralidadCopy[]" value="<?= $row['nombreLateralidad'] ?>">
-                            <input type="hidden" name="nombreMaterialCopy[]" value="<?= $row['nombreMaterial'] ?>">
-                            <input type="hidden" name="nombreParteCopy[]" value="<?= $row['nombreParte'] ?>">
-                            <input type="hidden" name="numeroParteCopy[]" value="<?= $row['numeroParte'] ?>">
-                            <input type="hidden" name="codigoCopy[]" value="<?= $row['codigo'] ?>">
-                            <input type="hidden" name="componentCodeCopy[]" value="<?= $row['componentCode'] ?>">
-                            <input type="hidden" name="cantidadCopy[]" value="<?= $row['cantidad'] ?>">
-                            <input type="hidden" name="numeroCajaCopy[]" value="<?= $row['numeroCaja'] ?>">
-                            <input type="hidden" name="nombreCajaCopy[]" value="<?= $row['nombreCaja'] ?>">
+
                         </tr>
                     <?php endforeach; ?>
                 <?php else : ?>
@@ -115,7 +137,7 @@ $caja = $obj->getCaja();
                 <?php endif; ?>
 
             </tbody>
-
+        </table>
     </form>
 </div>
 <?php

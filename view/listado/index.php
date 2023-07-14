@@ -18,7 +18,7 @@ $rows = $obj->index();
         </svg>
       </a>
       &nbsp;&nbsp;
-        <a href="trash.php" class="btn btn-outline-success">Historial de cambios
+        <a href="listadolog.php" class="btn btn-outline-success">Historial de cambios
       </a>
       &nbsp;&nbsp;
       <button type="submit" class="btn btn-primary" id="realizarCambios" disabled>
@@ -74,6 +74,15 @@ $rows = $obj->index();
         <?php endif; ?>
 
       </tbody>
+
+      <tfoot>
+        <tr>
+          <th colspan="7" style="text-align:right">Total:</th>
+          <th class="text-center"></th>
+          <th colspan="2"></th>
+        </tr>
+      </tfoot>
+      
     </table>
   </form>
 

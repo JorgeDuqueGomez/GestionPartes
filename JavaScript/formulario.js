@@ -426,6 +426,48 @@ $(document).ready(function() {
     paging: true,
     ordering: true,
     pageLength: 10,
+    initComplete: function() {
+      var table = this.api();
+      // Obtener el campo de búsqueda
+      var searchInput = $(table.table().container()).find('.dataTables_filter input');
+      // Establecer el marcador de posición
+      searchInput.attr('placeholder', 'BUSCAR');
+            // Ocultar la etiqueta de búsqueda
+            var searchLabel = $(table.table().container()).find('.dataTables_filter label');
+            searchLabel.contents().filter(function() {
+              return this.nodeType === 3; // Filtrar nodos de texto
+            }).remove(); // Eliminar el nodo de texto
+            // Centrar el campo de búsqueda
+            searchInput.css('text-align', 'center');
+            searchInput.css('margin', '0 auto');
+            searchInput.parent().css('text-align', 'center');
+    },
+    footerCallback: function(row, data, start, end, display) {
+      var api = this.api();
+
+      // Obtener los nodos HTML de la columna 7 visibles después de aplicar los filtros
+      var columnNodes = api.column(7, { search: 'applied' }).nodes().flatten().toArray();
+
+      // Extraer los valores de los nodos HTML
+      var columnData = columnNodes.map(function(node) {
+        return $(node).html();
+      });
+
+      // Calcular la suma solo de los valores visibles
+      var total = columnData.reduce(function(a, b) {
+        var numA = parseFloat(a);
+        var numB = parseFloat(b);
+
+        if (!isNaN(numA)) {
+          return numA + numB;
+        } else {
+          return numB;
+        }
+      }, 0);
+
+      // Mostrar el resultado en la última fila
+      $(api.column(7).footer()).html(total);
+    }
   });
 
   // Agregar filtros y placeholders a cada columna
@@ -454,7 +496,8 @@ $(document).ready(function() {
       column.order(newDirection).draw();
     }
   });
-  });
+});
+
 
 function cantidad(){
   let valor = document.getElementById('posicion').value;
@@ -525,3 +568,82 @@ function alertaEstanteria(){
   }
 } 
 
+// TPM____________________________________________
+
+$(document).ready(function() {
+  var table = $('#gestionTpmTable').DataTable({
+    responsive: true,
+    paging: true,
+    ordering: true,
+    pageLength: 10,
+    initComplete: function() {
+      var table = this.api();
+      // Obtener el campo de búsqueda
+      var searchInput = $(table.table().container()).find('.dataTables_filter input');
+      // Establecer el marcador de posición
+      searchInput.attr('placeholder', 'BUSCAR');
+            // Ocultar la etiqueta de búsqueda
+            var searchLabel = $(table.table().container()).find('.dataTables_filter label');
+            searchLabel.contents().filter(function() {
+              return this.nodeType === 3; // Filtrar nodos de texto
+            }).remove(); // Eliminar el nodo de texto
+            // Centrar el campo de búsqueda
+            searchInput.css('text-align', 'center');
+            searchInput.css('margin', '0 auto');
+            searchInput.parent().css('text-align', 'center');
+    },
+    footerCallback: function(row, data, start, end, display) {
+      var api = this.api();
+
+      // Obtener los nodos HTML de la columna 7 visibles después de aplicar los filtros
+      var columnNodes = api.column(7, { search: 'applied' }).nodes().flatten().toArray();
+
+      // Extraer los valores de los nodos HTML
+      var columnData = columnNodes.map(function(node) {
+        return $(node).html();
+      });
+
+      // Calcular la suma solo de los valores visibles
+      var total = columnData.reduce(function(a, b) {
+        var numA = parseFloat(a);
+        var numB = parseFloat(b);
+
+        if (!isNaN(numA)) {
+          return numA + numB;
+        } else {
+          return numB;
+        }
+      }, 0);
+
+      // Mostrar el resultado en la última fila
+      $(api.column(7).footer()).html(total);
+    }
+  });
+
+  // Agregar filtros y placeholders a cada columna
+  $('#gestionTpmTable thead th').each(function() {
+    var title = $(this).text();
+    $(this).html('<div class="filter-container"><input type="text" class="form-control form-control-sm filter-input" placeholder="' +  title  + '" /><span class="sort-arrow"></span></div>');
+  });
+
+  // Aplicar los filtros al escribir en los inputs
+  $('#gestionTpmTable thead .filter-input').on('click', function(e) {
+    e.stopPropagation();
+  }).on('keyup change', function() {
+    var columnIndex = $(this).closest('th').index();
+    table.column(columnIndex).search(this.value).draw();
+  });
+
+  // Ordenar la tabla al hacer clic en la flecha
+  $('#gestionTpmTable thead .sort-arrow').on('click', function() {
+    var columnIndex = $(this).closest('th').index();
+    var column = table.column(columnIndex);
+    var currentOrder = column.order()[0];
+
+    // Cambiar la dirección del ordenamiento solo si se hizo clic en la flecha
+    if ($(this).hasClass('asc') || $(this).hasClass('desc')) {
+      var newDirection = currentOrder === 'asc' ? 'desc' : 'asc';
+      column.order(newDirection).draw();
+    }
+  });
+});
