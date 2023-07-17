@@ -57,7 +57,7 @@ $rows = $obj->listadoLog();
           <?php endforeach; ?>
         <?php else : ?>
           <tr>
-            <td colspan="10" class="text-center">El historial se encuentra vació</td>
+            <td colspan="12" class="text-center">El historial se encuentra vació</td>
           </tr>
         <?php endif; ?>
 

@@ -213,14 +213,31 @@ class listadoModel
         $stament->bindParam(":idListado", $idListado);
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     public function update(
-        $idListado, 
-        $idEstacion, 
-        $idLateralidad, 
-        $numeroCaja, 
-        $idCaja, 
-        $idGrupo, 
-        $componentCode, 
+        
+        $idListado,
+        $idEstacion,
+        $idLateralidad,
+        $numeroCaja,
+        $idCaja,
+        $idGrupo,
+        $componentCode,
         $cantidad,
         $nombreModeloCopy,
         $nombreSufixCopy,
@@ -237,33 +254,9 @@ class listadoModel
         $nombreCajaCopy
                 
         )
-    {
+    {    
         $stament = $this->PDO->prepare(
-            "UPDATE listado SET 
-                idEstacion = :idEstacion,
-                idLateralidad = :idLateralidad,
-                numeroCaja = :numeroCaja,
-                idCaja = :idCaja,
-                idGrupo = :idGrupo,
-                componentCode = :componentCode,
-                cantidad = :cantidad,
-                updatedAt = CURRENT_TIMESTAMP
-                WHERE idListado = :idListado"
-        );
-    
-        $stament->bindParam(":idListado", $idListado);
-        $stament->bindParam(":idEstacion", $idEstacion);
-        $stament->bindParam(":idLateralidad", $idLateralidad);
-        $stament->bindParam(":numeroCaja", $numeroCaja);
-        $stament->bindParam(":idCaja", $idCaja);
-        $stament->bindParam(":idGrupo", $idGrupo);
-        $stament->bindParam(":componentCode", $componentCode);
-        $stament->bindParam(":cantidad", $cantidad);
-    
-        $stament->execute();
-    
-        $stament = $this->PDO->prepare(
-            "INSERT INTO historialcambios
+            "INSERT INTO listadolog
             VALUES (
                 NULL,
                 :nombreModelo, 
@@ -275,10 +268,10 @@ class listadoModel
                 :nombreParte,
                 :numeroParte,
                 :codigo,
-                :componentCode,
-                :cantidad,
-                :numeroCaja,
-                :nombreCaja,
+                :componentCodeCopy,
+                :cantidadCopy,
+                :numeroCajaCopy,
+                :nombreCajaCopy,
                 CURRENT_TIMESTAMP)"
         );
     
@@ -291,14 +284,56 @@ class listadoModel
         $stament->bindParam(":nombreParte", $nombreParteCopy);
         $stament->bindParam(":numeroParte", $numeroParteCopy);
         $stament->bindParam(":codigo", $codigoCopy);
-        $stament->bindParam(":componentCode", $componentCodeCopy);
-        $stament->bindParam(":cantidad", $cantidadCopy);
-        $stament->bindParam(":numeroCaja", $numeroCajaCopy);
-        $stament->bindParam(":nombreCaja", $nombreCajaCopy);
+        $stament->bindParam(":componentCodeCopy", $componentCodeCopy);
+        $stament->bindParam(":cantidadCopy", $cantidadCopy);
+        $stament->bindParam(":numeroCajaCopy", $numeroCajaCopy);
+        $stament->bindParam(":nombreCajaCopy", $nombreCajaCopy);
     
+        $stament->execute();
+
+        $stament = $this->PDO->prepare(
+            "UPDATE listado SET 
+                idEstacion = :idEstacion,
+                idLateralidad = :idLateralidad,
+                numeroCaja = :numeroCaja,
+                idCaja = :idCaja,
+                idGrupo = :idGrupo,
+                componentCode = :componentCode,
+                cantidad = :cantidad,
+
+                updateAt = CURRENT_TIMESTAMP
+                WHERE idListado = :idListado"
+        );
+        $stament->bindParam(":idListado", $idListado);
+        $stament->bindParam(":idEstacion", $idEstacion);
+        $stament->bindParam(":idLateralidad", $idLateralidad);
+        $stament->bindParam(":numeroCaja", $numeroCaja);
+        $stament->bindParam(":idCaja", $idCaja);
+        $stament->bindParam(":idGrupo", $idGrupo);
+        $stament->bindParam(":componentCode", $componentCode);
+        $stament->bindParam(":cantidad", $cantidad);
+
+
         return ($stament->execute()) ? $idListado : false;
     }
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function delete($idListado)
     {
         $stament = $this->PDO->prepare("UPDATE listado SET idEstado = '2' , updateAt = CURRENT_TIMESTAMP WHERE idListado = :idListado");
@@ -367,6 +402,7 @@ class listadoModel
         updateAt
 
         FROM listadolog
+        ORDER BY updateAt DESC
         ");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }

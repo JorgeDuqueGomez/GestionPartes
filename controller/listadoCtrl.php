@@ -23,13 +23,14 @@ class listadoController
          header("Location:index.php") :
          header("Location:creat.php");
    }
-   public function update( $idListado, 
-   $idEstacion, 
-   $idLateralidad, 
-   $numeroCaja, 
-   $idCaja, 
-   $idGrupo, 
-   $componentCode, 
+   public function update(
+   $idListado,
+   $idEstacion,
+   $idLateralidad,
+   $numeroCaja,
+   $idCaja,
+   $idGrupo,
+   $componentCode,
    $cantidad,
    $nombreModeloCopy,
    $nombreSufixCopy,
@@ -45,13 +46,14 @@ class listadoController
    $numeroCajaCopy,
    $nombreCajaCopy)
    {
-      return ($this->model->update(        $idListado, 
-      $idEstacion, 
-      $idLateralidad, 
-      $numeroCaja, 
-      $idCaja, 
-      $idGrupo, 
-      $componentCode, 
+      return ($this->model->update(
+      $idListado,
+      $idEstacion,
+      $idLateralidad,
+      $numeroCaja,
+      $idCaja,
+      $idGrupo,
+      $componentCode,
       $cantidad,
       $nombreModeloCopy,
       $nombreSufixCopy,
