@@ -386,6 +386,7 @@ class listadoModel
     {
         $stament = $this->PDO->prepare("SELECT 
 
+        idCambios,
         nombreModelo, 
         nombreSufix, 
         lote,
@@ -402,7 +403,7 @@ class listadoModel
         updateAt
 
         FROM listadolog
-        ORDER BY updateAt DESC
+        ORDER BY idCambios DESC
         ");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }

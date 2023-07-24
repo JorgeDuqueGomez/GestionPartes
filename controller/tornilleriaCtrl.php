@@ -5,20 +5,47 @@ class tornilleriaController
    private $model;
    public function __construct()
    {
-      require_once(__DIR__ ."/../model/tornilleriaMdl.php");
+      require_once(__DIR__ . "/../model/tornilleriaMdl.php");
       $this->model = new tornilleriaModel();
    }
    public function index($idSufix, $idLinea)
    {
       return ($this->model->index($idSufix, $idLinea)) ? $this->model->index($idSufix, $idLinea) : false;
    }
-   public function save($nombreSerie)
-   {
-      $idSerie = $this->model->insertar($nombreSerie);
-      return ($idSerie != false) ?
-         header("Location:index.php") :
-         header("Location:creat.php");
+
+
+
+
+
+   public function save(
+
+      $nombreSufix,
+      $lote,
+      $estacion,
+      $lateralidad,
+      $ubicacion,
+      $numeroParte,
+      $nombreParte,
+      $cantidad,
+      $numeroCaja
+
+   ) {
+      $this->model->insertar(
+         $nombreSufix,
+         $lote,
+         $estacion,
+         $lateralidad,
+         $ubicacion,
+         $numeroParte,
+         $nombreParte,
+         $cantidad,
+         $numeroCaja
+
+      );
    }
+
+
+
    public function show($idSerie)
    {
       return ($this->model->show($idSerie) != false) ? $this->model->show($idSerie) :

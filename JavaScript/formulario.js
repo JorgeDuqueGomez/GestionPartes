@@ -378,7 +378,9 @@ $(document).ready(function() {
             var searchLabel = $(table.table().container()).find('.dataTables_filter label');
             searchLabel.contents().filter(function() {
               return this.nodeType === 3; // Filtrar nodos de texto
-            }).remove(); // Eliminar el nodo de texto
+            }).remove(); 
+            
+            // Eliminar el nodo de texto
             // Centrar el campo de búsqueda
             searchInput.css('text-align', 'center');
             searchInput.css('margin', '0 auto');
@@ -538,7 +540,7 @@ function setRestoreId(id) {
   document.getElementById('restore-id').value = id;
 }
 
-// ------------------ ALISTAMIENTO
+//ALISTAMIENTO____________________________________
 
 function alertselectAlistamientoPc(){ 
   let sufix = document.getElementById('idSufix').value;
@@ -566,7 +568,49 @@ function alertaEstanteria(){
    let boton = document.getElementById('agregar');
    boton.removeAttribute('disabled');
   }
-} 
+}
+
+// Función para manejar el envío del formulario para filas dinámicas
+function handleSubmit(event) {
+  event.preventDefault(); // Prevenir el envío predeterminado del formulario
+
+  // Obtener el botón clickeado
+  const boton = $(event.target);
+
+  // Si el botón ya está desactivado, no hagas nada
+  if (boton.prop('disabled')) {
+    return;
+  }
+
+  // Obtener los datos del formulario de la fila que contiene el botón clickeado
+  const fila = boton.closest('tr');
+  const datosFormulario = fila.find('input').serialize();
+
+  // Enviar los datos del formulario a través de AJAX
+  $.ajax({
+    type: 'POST',
+    url: 'store.php',
+    data: datosFormulario,
+    success: function (respuesta) {
+      // Manejar la respuesta si es necesario
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar parte de la página
+      console.log('¡Formulario enviado con éxito!', respuesta);
+
+      // Desactivar el botón después de un envío exitoso
+      boton.prop('disabled', true);
+    },
+    error: function (error) {
+      // Manejar errores si los hay
+      console.error('Error al enviar el formulario:', error);
+    },
+  });
+}
+
+// Agregar un escuchador de eventos de clic al formulario para los botones añadidos dinámicamente
+$(document).on('click', '.submit-button', handleSubmit);
+
+// ... Resto de tu código para agregar nuevas filas dinámicamente ...
+
 
 // TPM____________________________________________
 
@@ -647,3 +691,53 @@ $(document).ready(function() {
     }
   });
 });
+
+
+// LISTADOLOG__________________________________
+
+$(document).ready(function() {
+  var table = $('#historialCambios').DataTable({
+    responsive: true,
+    paging: true,
+    ordering: true,
+    pageLength: 10,
+    initComplete: function() {
+      var table = this.api();
+      // Obtener el campo de búsqueda
+      var searchInput = $(table.table().container()).find('.dataTables_filter input');
+      // Establecer el marcador de posición
+      searchInput.attr('placeholder', 'BUSCAR GLOBAL');
+            // Ocultar la etiqueta de búsqueda
+            var searchLabel = $(table.table().container()).find('.dataTables_filter label');
+            searchLabel.contents().filter(function() {
+              return this.nodeType === 3; // Filtrar nodos de texto
+            }).remove(); // Eliminar el nodo de texto
+            // Centrar el campo de búsqueda
+            searchInput.css('text-align', 'center');
+            searchInput.css('margin', '0 auto');
+            searchInput.parent().css('text-align', 'center');
+    }
+  });
+
+  // Agregar filtros y placeholders a cada columna
+  $('#historialCambios thead th').each(function() {
+    var title = $(this).text();
+    $(this).html('<div class="filter-container"><input type="text" class="form-control form-control-sm filter-input" placeholder="' +  title  + '" /><span class="sort-arrow"></span></div>');
+  });
+
+  // Aplicar los filtros al escribir en los inputs
+  $('#historialCambios thead .filter-input').on('click', function(e) {
+    e.stopPropagation();
+  }).on('keyup change', function() {
+    var columnIndex = $(this).closest('th').index();
+    table.column(columnIndex).search(this.value).draw();
+  });
+
+  // Ordenar la tabla al hacer clic en la flecha
+  $('#historialCambios thead .sort-arrow').on('click', function() {
+    var columnIndex = $(this).closest('th').index();
+    var column = table.column(columnIndex);
+    var currentOrder = column.order()[0];
+  });
+});
+

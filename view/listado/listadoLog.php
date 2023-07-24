@@ -17,9 +17,10 @@ $rows = $obj->listadoLog();
         </svg> &nbsp;Atras</a>
       <br>
     </div>
-    <table class="table table-bordered table-hover" id="gestionListadoTable">
+    <table class="table table-bordered table-hover" id="historialCambios">
       <thead class="table-light">
         <tr>
+          <th class="text-center align-middle" style="width: 5%;" scope="col">ID</th>
           <th class="text-center align-middle" style="width: 10%;" scope="col">Modelo</th>
           <th class="text-center align-middle" style="width: 5%;" scope="col">Lote</th>
           <th class="text-center align-middle" style="width: 10%;" scope="col">Estación</th>
@@ -32,7 +33,7 @@ $rows = $obj->listadoLog();
           <th class="text-center align-middle" style="width: 10%;" scope="col">Caja</th>
           <th class="text-center align-middle" style="width: 5%;" scope="col">User</th>
           <th class="text-center align-middle" style="width: 10%;" scope="col">Fecha de modificación</th>
-          
+
         </tr>
       </thead>
 
@@ -40,6 +41,7 @@ $rows = $obj->listadoLog();
         <?php if ($rows) : ?>
           <?php foreach ($rows as $row) : ?>
             <tr>
+              <th class="text-center align-middle"><?= $row['idCambios'] ?></th>
               <th class="text-center align-middle"><?= $row['nombreModelo'] ?>-<?= $row['nombreSufix'] ?></th>
               <th class="text-center align-middle"><?= $row['lote'] ?></th>
               <th class="text-center align-middle"><?= $row['nombreEstacion'] ?><br><?= $row['nombreLateralidad'] ?></th>

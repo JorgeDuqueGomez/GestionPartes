@@ -6,14 +6,14 @@ class tornilleriaModel
     public function __construct()
     {
 
-        require_once(__DIR__ ."/../config/conexion.php");
+        require_once(__DIR__ . "/../config/conexion.php");
         $con = new db();
         $this->PDO = $con->conexion();
     }
     public function index($idSufix, $idLinea)
     {
-        $query = 
-        "SELECT 
+        $query =
+            "SELECT 
         a.cantidad, 
         a.numeroCaja, 
         b.nombreParte, 
@@ -28,7 +28,10 @@ class tornilleriaModel
         f.idLinea,
         f.nombreLinea, 
         g.idSufix,
-        h.nombreCorto
+        g.nombreSufix,
+        h.nombreCorto,
+        h.nombreLateralidad,
+        i.lote
 
         FROM listado AS a
         JOIN parte AS b
@@ -45,6 +48,8 @@ class tornilleriaModel
         ON a.idSufix = g.idSufix
         JOIN lateralidad AS h
         ON a.idLateralidad = h.idLateralidad
+        JOIN lote AS i
+        ON g.idSufix = i.idSufix
 
         WHERE b.idMaterial = '1'";
 
@@ -55,14 +60,11 @@ class tornilleriaModel
         if ($idLinea) {
             $query .= " AND f.idLinea = :idLinea";
         }
-        if ($idLinea) {
-            $query .= " AND c.idLinea = :idLinea";
-        }
-        
+
         $query .= " ORDER BY c.orden ASC";
-    
+
         $statement = $this->PDO->prepare($query);
-    
+
         // Asignar los valores a los parámetros de la consulta
         if ($idSufix) {
             $statement->bindValue(':idSufix', $idSufix);
@@ -70,20 +72,51 @@ class tornilleriaModel
         if ($idLinea) {
             $statement->bindValue(':idLinea', $idLinea);
         }
-    
+
         return ($statement->execute()) ? $statement->fetchAll() : false;
     }
-    
-    public function insertar($nombreSerie)
-    {
-        $stament = $this->PDO->prepare("INSERT INTO serie VALUES( NULL, :nombreSerie, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
-        $stament->bindParam(":nombreSerie", $nombreSerie);
-        return ($stament->execute()) ? $this->PDO->lastInsertId() : false;
+
+    public function insertar(
+        $nombreSufix,
+        $lote,
+        $estacion,
+        $lateralidad,
+        $ubicacion,
+        $numeroParte,
+        $nombreParte,
+        $cantidad,
+        $numeroCaja
+        ) {
+        try {
+            $stament = $this->PDO->prepare(
+                "INSERT INTO tornillerialog 
+                VALUES(NULL, :nombreSufix, :lote, :estacion, :lateralidad, :ubicacion, :numeroParte, :nombreParte, :cantidad, :numeroCaja, CURRENT_TIMESTAMP)"
+            );
+            $stament->bindParam(":nombreSufix", $nombreSufix);
+            $stament->bindParam(":lote", $lote);
+            $stament->bindParam(":estacion", $estacion);
+            $stament->bindParam(":lateralidad", $lateralidad);
+            $stament->bindParam(":ubicacion", $ubicacion);
+            $stament->bindParam(":numeroParte", $numeroParte);
+            $stament->bindParam(":nombreParte", $nombreParte);
+            $stament->bindParam(":cantidad", $cantidad);
+            $stament->bindParam(":numeroCaja", $numeroCaja);
+
+            $stament->execute();
+
+            return true; // Retorna true si la inserción fue exitosa
+        } catch (Exception $e) {
+            // Si ocurre algún error, puedes manejarlo de la manera que desees
+            // Por ejemplo, puedes mostrar un mensaje de error o guardar el error en un archivo de registro.
+            die($e->getMessage());
+            return false;
+        }
     }
+
     public function show($idSerie)
     {
         $stament = $this->PDO->prepare(
-        "SELECT *
+            "SELECT *
         FROM serie
         WHERE idSerie = :idSerie"
         );
@@ -93,7 +126,7 @@ class tornilleriaModel
     public function update($idSerie, $nombreSerie)
     {
         $stament = $this->PDO->prepare(
-        "UPDATE serie SET 
+            "UPDATE serie SET 
         idSerie = :idSerie , 
         nombreSerie = :nombreSerie , 
         updateAt = CURRENT_TIMESTAMP 
