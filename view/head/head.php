@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="es">
 
@@ -42,7 +43,7 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Gestión</a>
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Módulo de Gestión</a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" href="/HINO/view/grupo/index.php">Grupos</a></li>
                                     <li>
@@ -62,7 +63,7 @@
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Listados</a>
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Módulo de Listados</a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" href="/HINO/view/listado/index.php">Gestión de listados</a></li>
                                     <li><a class="dropdown-item" href="/HINO/view/tpm/index.php">Gestión de TPM's</a></li>
@@ -74,7 +75,7 @@
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Tornilleria</a>
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Módulo de Estanteria</a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" href="/HINO/view/estanteria/index.php">Gestión de estanteria</a></li>
                                     <li><a class="dropdown-item" href="/HINO/view/parte/index.php">Gestión de partes</a></li>
@@ -82,7 +83,7 @@
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Consulta</a>
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Módulo de Consulta</a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" href="/HINO/view/listado/show.php" target="_blank">Listados</a></li>
                                     <li>
@@ -101,13 +102,21 @@
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Modulo de Alistamiento</a>
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Módulo de Alistamiento</a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" href="/HINO/view/tornilleria/index.php">Alistamiento PC</a></li>
                                     <li><a class="dropdown-item" href="/HINO/view/sufix/show.php">Alistamiento CKD</a></li>
                                     <li><a class="dropdown-item" href="/HINO/view/sufix/show.php">Alistamiento LOCAL</a></li>
                                 </ul>
                             </li>
+
+                            <!-- <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Módulo de Novedades</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="/HINO/view/novedades/index.php">Gestión de novedades</a></li>
+                                    <li><a class="dropdown-item" href="/HINO/view/estanteria/index.php">Actualización de novedades</a></li>
+                                </ul>
+                            </li> -->
 
                         </ul>
                     </div>

@@ -10,6 +10,136 @@ class tornilleriaModel
         $con = new db();
         $this->PDO = $con->conexion();
     }
+
+    public function created($nombreSufix, $lote, $nombreLinea)
+    {
+        $stament = $this->PDO->prepare(
+
+        "INSERT INTO tornillerialog
+        SELECT 		
+                         null,
+                        g.nombreSufix,
+                        :lote,
+                        f.nombreLinea, 
+                        e.nombreEstacion, 
+                        h.nombreCorto,
+                        c.orden,
+                        c.modulo,
+                        c.posicion,
+                        b.numeroParte, 
+                        b.nombreParte, 
+                        a.cantidad, 
+                        a.numeroCaja,
+                        d.nombreCaja,
+                        'usercreate',
+                        CURRENT_TIMESTAMP,
+                        'user_update',
+                        CURRENT_TIMESTAMP,
+                        'noCheck'
+        
+                FROM listado AS a
+                JOIN parte AS b
+                ON a.idParte = b.idParte
+                JOIN estanteria AS c
+                ON b.idParte = c.idParte
+                LEFT JOIN caja AS d
+                ON a.idCaja = d.idCaja
+                JOIN estacion AS e
+                ON a.idEstacion = e.idEstacion
+                JOIN linea AS f
+                ON e.idLinea = f.idLinea
+                JOIN sufix AS g
+                ON a.idSufix = g.idSufix
+                JOIN lateralidad AS h
+                ON a.idLateralidad = h.idLateralidad
+                JOIN lote AS i
+                ON g.idSufix = i.idSufix
+        
+                WHERE g.nombreSufix = :nombreSufix
+                AND   f.nombreLinea = :nombreLinea
+                AND b.idMaterial = '1'
+
+                ");
+                $stament->bindParam(":nombreSufix", $nombreSufix);
+                $stament->bindParam(":nombreLinea", $nombreLinea);
+                $stament->bindParam(":lote", $lote);
+                return ($stament->execute()) ? $stament->fetchAll() : false;
+    }
+
+    public function iniciarAlistamiento($nombreSufix, $lote, $nombreLinea)
+    {
+        $stament = $this->PDO->prepare(
+            "SELECT *
+        FROM tornillerialog
+        WHERE nombreSufix = :nombreSufix
+        AND lote = :lote
+        AND nombreLinea = :nombreLinea
+        "
+        );
+        $stament->bindParam(":nombreSufix", $nombreSufix);
+        $stament->bindParam(":lote", $lote);
+        $stament->bindParam(":nombreLinea", $nombreLinea);
+        return ($stament->execute()) ? $stament->fetchAll() : false;
+    }
+
+    public function consultarAlistamiento($nombreSufix, $lote, $nombreLinea)
+    {
+        $stament = $this->PDO->prepare(
+            "SELECT *
+        FROM tornillerialog
+        WHERE nombreSufix = :nombreSufix
+        AND lote = :lote
+        AND nombreLinea = :nombreLinea
+        "
+        );
+        $stament->bindParam(":nombreSufix", $nombreSufix);
+        $stament->bindParam(":lote", $lote);
+        $stament->bindParam(":nombreLinea", $nombreLinea);
+        return ($stament->execute()) ? $stament->fetchAll() : false;
+    }
+
+    public function getLinea()
+    {
+        $stament = $this->PDO->query("SELECT * FROM linea");
+        return $stament->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getModelo()
+    {
+        $stament = $this->PDO->query("SELECT * FROM modelo");
+        return $stament->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getSufix()
+    {
+        $stament = $this->PDO->query("SELECT * FROM sufix");
+        return $stament->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getLote()
+    {
+        $stament = $this->PDO->query("SELECT * FROM tornillerialog");
+        return $stament->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getEstacion()
+    {
+        $stament = $this->PDO->query("SELECT * FROM estacion");
+        return $stament->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function index($idSufix, $idLinea)
     {
         $query =
@@ -75,10 +205,10 @@ class tornilleriaModel
 
         return ($statement->execute()) ? $statement->fetchAll() : false;
     }
-
     public function insertar(
         $nombreSufix,
         $lote,
+        $linea,
         $estacion,
         $lateralidad,
         $ubicacion,
@@ -86,14 +216,15 @@ class tornilleriaModel
         $nombreParte,
         $cantidad,
         $numeroCaja
-        ) {
+    ) {
         try {
             $stament = $this->PDO->prepare(
                 "INSERT INTO tornillerialog 
-                VALUES(NULL, :nombreSufix, :lote, :estacion, :lateralidad, :ubicacion, :numeroParte, :nombreParte, :cantidad, :numeroCaja, CURRENT_TIMESTAMP)"
+                VALUES(NULL, :nombreSufix, :lote, :linea, :estacion, :lateralidad, :ubicacion, :numeroParte, :nombreParte, :cantidad, :numeroCaja, CURRENT_TIMESTAMP)"
             );
             $stament->bindParam(":nombreSufix", $nombreSufix);
             $stament->bindParam(":lote", $lote);
+            $stament->bindParam(":linea", $linea);
             $stament->bindParam(":estacion", $estacion);
             $stament->bindParam(":lateralidad", $lateralidad);
             $stament->bindParam(":ubicacion", $ubicacion);
@@ -101,7 +232,6 @@ class tornilleriaModel
             $stament->bindParam(":nombreParte", $nombreParte);
             $stament->bindParam(":cantidad", $cantidad);
             $stament->bindParam(":numeroCaja", $numeroCaja);
-
             $stament->execute();
 
             return true; // Retorna true si la inserción fue exitosa
@@ -112,7 +242,7 @@ class tornilleriaModel
             return false;
         }
     }
-
+        
     public function show($idSerie)
     {
         $stament = $this->PDO->prepare(
@@ -141,30 +271,5 @@ class tornilleriaModel
         $stament = $this->PDO->prepare("DELETE FROM serie WHERE idSerie = :idSerie");
         $stament->bindParam(":idSerie", $idSerie);
         return ($stament->execute()) ? true : false;
-    }
-    public function getLinea()
-    {
-        $stament = $this->PDO->query("SELECT * FROM linea");
-        return $stament->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function getModelo()
-    {
-        $stament = $this->PDO->query("SELECT * FROM modelo");
-        return $stament->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function getSufix()
-    {
-        $stament = $this->PDO->query("SELECT * FROM sufix");
-        return $stament->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function getLote()
-    {
-        $stament = $this->PDO->query("SELECT * FROM lote");
-        return $stament->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function getEstacion()
-    {
-        $stament = $this->PDO->query("SELECT * FROM estacion");
-        return $stament->fetchAll(PDO::FETCH_ASSOC);
     }
 }

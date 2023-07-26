@@ -3,7 +3,7 @@ require_once("../head/head.php");
 require_once("../../controller/tornilleriaCtrl.php");
 $obj =  new tornilleriaController();
 
-$rows = $obj->index($_POST['idSufix'], $_POST['idLinea']);
+$rows = $obj->iniciarAlistamiento($_POST['nombreSufix'],$_POST['lote'], $_POST['nombreLinea']);
 
 ?>
 <br>
@@ -25,7 +25,7 @@ $rows = $obj->index($_POST['idSufix'], $_POST['idLinea']);
         });
         ?>
         <?php foreach ($rows as $row) : ?>
-          <?php $station = $row['nombreEstacion'] . "-" . $row['nombreCorto']; ?>
+          <?php $station = $row['nombreEstacion'] . "-" . $row['nombreLateralidad']; ?>
           <?php if (!in_array($station, $uniqueStations)) : ?>
             <?php $uniqueStations[] = $station; ?>
             <tr>
@@ -51,11 +51,11 @@ $rows = $obj->index($_POST['idSufix'], $_POST['idLinea']);
                         $maxCaja = 0; // Variable para almacenar el número mayor en la columna "caja"
 
                         usort($rows, function ($a, $b) {
-                          return $a['orden'] - $b['orden'];
+                          return $a['ordenAlistamiento'] - $b['ordenAlistamiento'];
                         });
 
                         foreach ($rows as $innerRow) :
-                          $innerStation = $innerRow['nombreEstacion'] . "-" . $innerRow['nombreCorto'];
+                          $innerStation = $innerRow['nombreEstacion'] . "-" . $innerRow['nombreLateralidad'];
                           if ($innerStation == $station) {
                             $key = $innerRow['numeroParte'] . "-" . $innerRow['numeroCaja'] . "-" . $innerRow['nombreCaja'];
                             if (isset($unifiedRows[$key])) {
@@ -90,6 +90,7 @@ $rows = $obj->index($_POST['idSufix'], $_POST['idLinea']);
                             <tr>
                               <td style="display: none;"><input name="nombreSufix[]" value="<?= $unifiedRow['nombreSufix'] ?>"></td>
                               <td style="display: none;"><input name="lote[]" value="<?= $unifiedRow['lote'] ?>"></td>
+                              <td style="display: none;"><input name="nombreLinea[]" value="<?= $unifiedRow['nombreLinea'] ?>"></td>
                               <td style="display: none;"><input name="nombreEstacion[]" value="<?= $unifiedRow['nombreEstacion'] ?>"></td>
                               <td style="display: none;"><input name="nombreLateralidad[]" value="<?= $unifiedRow['nombreLateralidad'] ?>"></td>
 
@@ -98,7 +99,9 @@ $rows = $obj->index($_POST['idSufix'], $_POST['idLinea']);
                               <td><input style="display: none;" name="nombreParte[]" value="<?= $unifiedRow['nombreParte'] ?>"><?= $unifiedRow['nombreParte'] ?></td>
                               <td><input style="display: none;" name="cantidad[]" value="<?= $unifiedRow['cantidad'] ?>"><?= $unifiedRow['cantidad'] ?></td>
                               <td><input style="display: none;" name="numeroCaja[]" value="<?= $unifiedRow['numeroCaja'] ?>- <?= $unifiedRow['nombreCaja'] ?>"><?= $unifiedRow['numeroCaja'] ?>- <?= $unifiedRow['nombreCaja'] ?></td>
-                              <td><button type="button" class="btn btn-success submit-button">Ok</button></td>
+                              <!-- <td><button type="button" class="btn btn-danger submit-button">Pendiente</button></td> -->
+                              <td><input style="display: none;" name="cantidad[]" value="<?= $unifiedRow['checkList'] ?>"><?= $unifiedRow['checkList'] ?></td>
+                              <!--<td><p class="btn btn-success">Ok</p></td>-->
                             </tr>
                           </form>
                         <?php endforeach; ?>

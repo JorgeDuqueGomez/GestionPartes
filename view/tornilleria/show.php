@@ -1,63 +1,68 @@
 <?php
 require_once("../head/head.php");
-require_once("../../controller/lateralidadCtrl.php");
-
-$obj = new lateralidadController();
-$date = $obj->show($_GET['id']);
-
+require_once("../../controller/tornilleriaCtrl.php");
+$obj =  new tornilleriaController();
+$rows = $obj->consultarAlistamiento($_POST['nombreSufix'], $_POST['lote'],$_POST['nombreLinea']);
 ?>
-
-<h2 class="text-center">Lateralidad Ingresada</h2>
-
+<br>
+<h1 class="text-center"><strong>Consulta alistamiento</strong></h1>
+<br>
 <div class="container">
-    <table class="table container-fluid">
+    <div class="d-flex justify-content-center">
+        <div class="row">
+            <div class="col-md-3 d-flex justify-content-center">
+                <a href="index.php" class="btn btn-danger d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                    </svg>
+                    &nbsp;&nbsp;Atras
+                </a>
+            </div>
+            <div class="col-md-3 d-flex justify-content-center">
+                <input class="form-control" type="text" disabled value="Sufix - <?= $_POST['nombreSufix'] ?>">
+            </div>
+            <div class="col-md-3 d-flex justify-content-center">
+                <input class="form-control" type="text" disabled value="Lote - <?= $_POST['lote'] ?>">
+            </div>
+        </div>
+    </div>
+    <br>
+    <table class="table">
         <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nombre</th>
+                <th class="text-center align-middle">Estacion</th>
+                <th class="text-center align-middle">Lateralidad</th>
+                <th class="text-center align-middle">Ubicación</th>
+                <th class="text-center align-middle">Numero de parte</th>
+                <th class="text-center align-middle">Nombre de parte</th>
+                <th class="text-center align-middle">Cantidad</th>
+                <th class="text-center align-middle">Caja</th>
+                <th class="text-center align-middle">Usuario</th>
+                <th class="text-center align-middle">Check</th>
+                <th class="text-center align-middle">Fecha</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td scope="col"><?= $date["idLateralidad"] ?></td>
-                <td scope="col"><?= $date["nombreLateralidad"] ?></td>
-            </tr>
+            <?php if ($rows) : ?>
+                <?php foreach ($rows as $row) : ?>
+                    <tr>
+                        <td class="text-center align-middle"><?= $row["nombreEstacion"] ?></td>
+                        <td class="text-center align-middle"><?= $row["nombreLateralidad"] ?></td>
+                        <td class="text-center align-middle"><?= $row["modulo"] ?>-<?= $row["posicion"] ?></td>
+                        <td class="text-center align-middle"><?= $row["numeroParte"] ?></td>
+                        <td class="align-middle"><?= $row["nombreParte"] ?></td>
+                        <td class="text-center align-middle"><?= $row["cantidad"] ?></td>
+                        <td class="text-center align-middle"><?= $row["numeroCaja"] ?>- <?= $row["nombreCaja"] ?></td>
+                        <td class="text-center align-middle">Usuario</td>
+                        <td class="text-center align-middle"><?= $row["checkList"] ?></td>
+                        <td class="text-center align-middle"><?= $row["createdAt"] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else : ?>
         </tbody>
     </table>
-    <div>
-        <a href="./index.php" class="btn btn-primary">Regresar</a>
-        <a href="./edit.php?id=<?= $date[0] ?>" class="btn btn-success">Modificar</a>
-        
-        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</a>
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                        <h5 class="modal-title fs-5" id="exampleModalLabel">¿Desea eliminar el registro?</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Una vez eliminado no podra recuperar el registro.
-                    </div>
-                    <div class="modal-footer">
-                    <a href="delete.php?id=<?= $date[0]?>" class="btn btn-danger">Eliminar</a>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
+<?php endif; ?>
 </div>
-
-
-
-
-
-
 
 <?php
 require_once("../head/footer.php");

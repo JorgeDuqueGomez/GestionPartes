@@ -540,12 +540,43 @@ function setRestoreId(id) {
   document.getElementById('restore-id').value = id;
 }
 
-//ALISTAMIENTO____________________________________
+//GENERAR ALISTAMIENTO____________________________________
 
-function alertselectAlistamientoPc(){ 
-  let sufix = document.getElementById('idSufix').value;
-  let lote = document.getElementById('idLote').value;
-  let linea = document.getElementById('idLinea').value;
+function generarAlistamiento(){ 
+  let sufix = document.getElementById('nombreSufix1').value;
+  let lote = document.getElementById('lote1').value;
+  let linea = document.getElementById('nombreLinea1').value;
+  if(
+    sufix !='Sufix' && 
+    lote !='Lote' && 
+    linea !='Linea'
+    ){
+   let boton = document.getElementById('alistamiento');
+   boton.removeAttribute('disabled');
+  }
+} 
+
+//INICIAR ALISTAMIENTO____________________________________
+
+function iniciarAlistamiento(){ 
+  let sufix = document.getElementById('nombreSufixConsulta2').value;
+  let lote = document.getElementById('loteConsulta2').value;
+  let linea = document.getElementById('lineaConsulta2').value;
+  if(
+    sufix !='Sufix' && 
+    lote !='Lote' && 
+    linea !='Linea'
+    ){
+   let boton = document.getElementById('iniciar');
+   boton.removeAttribute('disabled');
+  }
+}
+//CONSULTAR ALISTAMIENTO____________________________________
+
+function consultarAlistamientoJS(){ 
+  let sufix = document.getElementById('nombreSufixConsulta3').value;
+  let lote = document.getElementById('loteConsulta3').value;
+  let linea = document.getElementById('lineaConsulta3').value;
   if(
     sufix !='Sufix' && 
     lote !='Lote' && 
@@ -554,7 +585,9 @@ function alertselectAlistamientoPc(){
    let boton = document.getElementById('consulta');
    boton.removeAttribute('disabled');
   }
-} 
+}
+
+// ESTANTERIA_______________________________________________
 
 function alertaEstanteria(){
   let modulo = document.getElementById('modulo').value;  
@@ -741,3 +774,87 @@ $(document).ready(function() {
   });
 });
 
+// NOVEDADES________________________________
+
+$(document).ready(function() {
+  // Function to add a new row to the table
+  function addNewRow() {
+    var newRow = `
+    <tr>
+        <td class="text-center align-middle">
+          <select name="idMaterial" id="idMaterial" class="form-select text-center align-middle">
+            <option selected="true" disabled="disabled">Matrl</option>
+            <?php foreach ($material as $materiales) : ?>
+              <option value="<?= $materiales['idMaterial'] ?>"><?= $materiales['nombreMaterial'] ?></option>
+            <?php endforeach; ?>
+          </select>
+        </td>
+        <td class="text-center align-middle">
+          <input type="text" name="" class="form-control" placeholder="Numero de parte">
+        </td>
+        <td class="text-center align-middle">
+          <div style="margin-bottom: 5px;">
+            <select name="idGrupo" id="idGrupo" class="form-select text-center align-middle">
+              <option selected="true" disabled="disabled">Grupo</option>
+              <?php foreach ($grupo as $grupos) : ?>
+                <option value="<?= $grupos['idGrupo'] ?>"><?= $grupos['codigo'] ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div>
+            <input type="text" name="" class="form-control" placeholder="Component">
+          </div>
+        </td>
+        <td class="text-center align-middle">
+          <div style="margin-bottom: 5px;">
+            <select name="idEstacion" id="idEstacion" class="form-select text-center align-middle">
+              <option selected="true" disabled="disabled">Estacion</option>
+              <?php foreach ($estacion as $estaciones) : ?>
+                <option value="<?= $estaciones['idEstacion'] ?>"><?= $estaciones['nombreEstacion'] ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div>
+            <select name="idLateralidad" id="idLateralidad" class="form-select text-center align-middle">
+              <option selected="true" disabled="disabled">Lateralidad</option>
+              <?php foreach ($lateralidad as $lateralidades) : ?>
+                <option value="<?= $lateralidades['idLateralidad'] ?>"><?= $lateralidades['nombreLateralidad'] ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </td>
+        <td class="text-center align-middle">
+          <div style="margin-bottom: 5px;">
+            <select name="idEstacion" id="idEstacion" class="form-select text-center align-middle">
+              <option selected="true" disabled="disabled">Estacion</option>
+              <?php foreach ($estacion as $estaciones) : ?>
+                <option value="<?= $estaciones['idEstacion'] ?>"><?= $estaciones['nombreEstacion'] ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div>
+            <select name="idLateralidad" id="idLateralidad" class="form-select text-center align-middle">
+              <option selected="true" disabled="disabled">Lateralidad</option>
+              <?php foreach ($lateralidad as $lateralidades) : ?>
+                <option value="<?= $lateralidades['idLateralidad'] ?>"><?= $lateralidades['nombreLateralidad'] ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </td>
+        <td class="text-center align-middle">
+          <input type="number" name="" class="form-control" placeholder="Cant. por vehiculo">
+        </td>
+        <td class="text-center align-middle">
+          <input type="text" name="" class="form-control" placeholder="Descripcion">
+        </td>
+      </tr>
+
+
+    `;
+    $("#novedadesTable tbody").append(newRow);
+  }
+  // Event handler for the button click
+  $("#nuevaNovedad").on("click", function() {
+    addNewRow();
+  });
+});
