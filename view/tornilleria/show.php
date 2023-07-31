@@ -27,7 +27,7 @@ $rows = $obj->consultarAlistamiento($_POST['nombreSufix'], $_POST['lote'],$_POST
         </div>
     </div>
     <br>
-    <table class="table">
+    <table class="table" id="consultaAlistamiento">
         <thead>
             <tr>
                 <th class="text-center align-middle">Estacion</th>

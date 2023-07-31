@@ -12,7 +12,7 @@ class loteModel
     }
     public function index()
     {
-        $stament = $this->PDO->prepare("SELECT b.idLote, b.lote, a.nombreSufix, c.nombreModelo, a.proyecto
+        $stament = $this->PDO->prepare("SELECT b.idLote, b.lote, a.nombreSufix, c.nombreModelo, a.proyecto, b.updateAt
         
             FROM sufix AS a
             JOIN lote AS b

@@ -540,6 +540,34 @@ function setRestoreId(id) {
   document.getElementById('restore-id').value = id;
 }
 
+// MODULO ALISTAMIENTO___________________________________________________________
+
+ $(document).ready(function() {
+    // Manejar el evento de envío del formulario
+    $(".update-form").submit(function(e) {
+      e.preventDefault(); // Evitar el envío del formulario por defecto
+
+      var form = $(this);
+      var formData = form.serialize(); // Obtener los datos del formulario
+
+      // Enviar la petición AJAX al servidor
+      $.ajax({
+        type: "POST",
+        url: "store.php",
+        data: formData,
+        success: function(response) {
+          // Aquí puedes manejar la respuesta del servidor si es necesario
+          // Por ejemplo, mostrar un mensaje de éxito o actualizar algún elemento en la página
+          console.log("Actualización exitosa");
+        },
+        error: function(xhr, status, error) {
+          // Manejar cualquier error que pueda ocurrir durante la petición AJAX
+          console.error("Error en la petición AJAX: " + status + " - " + error);
+        }
+      });
+    });
+  });
+
 //GENERAR ALISTAMIENTO____________________________________
 
 function generarAlistamiento(){ 
@@ -602,48 +630,6 @@ function alertaEstanteria(){
    boton.removeAttribute('disabled');
   }
 }
-
-// Función para manejar el envío del formulario para filas dinámicas
-function handleSubmit(event) {
-  event.preventDefault(); // Prevenir el envío predeterminado del formulario
-
-  // Obtener el botón clickeado
-  const boton = $(event.target);
-
-  // Si el botón ya está desactivado, no hagas nada
-  if (boton.prop('disabled')) {
-    return;
-  }
-
-  // Obtener los datos del formulario de la fila que contiene el botón clickeado
-  const fila = boton.closest('tr');
-  const datosFormulario = fila.find('input').serialize();
-
-  // Enviar los datos del formulario a través de AJAX
-  $.ajax({
-    type: 'POST',
-    url: 'store.php',
-    data: datosFormulario,
-    success: function (respuesta) {
-      // Manejar la respuesta si es necesario
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar parte de la página
-      console.log('¡Formulario enviado con éxito!', respuesta);
-
-      // Desactivar el botón después de un envío exitoso
-      boton.prop('disabled', true);
-    },
-    error: function (error) {
-      // Manejar errores si los hay
-      console.error('Error al enviar el formulario:', error);
-    },
-  });
-}
-
-// Agregar un escuchador de eventos de clic al formulario para los botones añadidos dinámicamente
-$(document).on('click', '.submit-button', handleSubmit);
-
-// ... Resto de tu código para agregar nuevas filas dinámicamente ...
-
 
 // TPM____________________________________________
 
@@ -774,6 +760,84 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  var table = $('#consultaAlistamiento').DataTable({
+    responsive: true,
+    paging: true,
+    ordering: true,
+    pageLength: 10,
+    initComplete: function() {
+      var table = this.api();
+      // Obtener el campo de búsqueda
+      var searchInput = $(table.table().container()).find('.dataTables_filter input');
+      // Establecer el marcador de posición
+      searchInput.attr('placeholder', 'BUSCAR');
+            // Ocultar la etiqueta de búsqueda
+            var searchLabel = $(table.table().container()).find('.dataTables_filter label');
+            searchLabel.contents().filter(function() {
+              return this.nodeType === 3; // Filtrar nodos de texto
+            }).remove(); // Eliminar el nodo de texto
+            // Centrar el campo de búsqueda
+            searchInput.css('text-align', 'center');
+            searchInput.css('margin', '0 auto');
+            searchInput.parent().css('text-align', 'center');
+    },
+    footerCallback: function(row, data, start, end, display) {
+      var api = this.api();
+
+      // Obtener los nodos HTML de la columna 7 visibles después de aplicar los filtros
+      var columnNodes = api.column(7, { search: 'applied' }).nodes().flatten().toArray();
+
+      // Extraer los valores de los nodos HTML
+      var columnData = columnNodes.map(function(node) {
+        return $(node).html();
+      });
+
+      // Calcular la suma solo de los valores visibles
+      var total = columnData.reduce(function(a, b) {
+        var numA = parseFloat(a);
+        var numB = parseFloat(b);
+
+        if (!isNaN(numA)) {
+          return numA + numB;
+        } else {
+          return numB;
+        }
+      }, 0);
+
+      // Mostrar el resultado en la última fila
+      $(api.column(7).footer()).html(total);
+    }
+  });
+
+  // Agregar filtros y placeholders a cada columna
+  $('#consultaAlistamiento thead th').each(function() {
+    var title = $(this).text();
+    $(this).html('<div class="filter-container"><input type="text" class="form-control form-control-sm filter-input" placeholder="' +  title  + '" /><span class="sort-arrow"></span></div>');
+  });
+
+  // Aplicar los filtros al escribir en los inputs
+  $('#consultaAlistamiento thead .filter-input').on('click', function(e) {
+    e.stopPropagation();
+  }).on('keyup change', function() {
+    var columnIndex = $(this).closest('th').index();
+    table.column(columnIndex).search(this.value).draw();
+  });
+
+  // Ordenar la tabla al hacer clic en la flecha
+  $('#consultaAlistamiento thead .sort-arrow').on('click', function() {
+    var columnIndex = $(this).closest('th').index();
+    var column = table.column(columnIndex);
+    var currentOrder = column.order()[0];
+
+    // Cambiar la dirección del ordenamiento solo si se hizo clic en la flecha
+    if ($(this).hasClass('asc') || $(this).hasClass('desc')) {
+      var newDirection = currentOrder === 'asc' ? 'desc' : 'asc';
+      column.order(newDirection).draw();
+    }
+  });
+});
+
 // NOVEDADES________________________________
 
 $(document).ready(function() {
@@ -858,3 +922,6 @@ $(document).ready(function() {
     addNewRow();
   });
 });
+
+
+

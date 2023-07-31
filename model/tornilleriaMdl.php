@@ -15,27 +15,29 @@ class tornilleriaModel
     {
         $stament = $this->PDO->prepare(
 
-        "INSERT INTO tornillerialog
+            "INSERT INTO tornillerialog
         SELECT 		
                          null,
+                        g.idSufix,
                         g.nombreSufix,
                         :lote,
                         f.nombreLinea, 
                         e.nombreEstacion, 
+                        e.ordenEstacion,
                         h.nombreCorto,
                         c.orden,
                         c.modulo,
                         c.posicion,
                         b.numeroParte, 
                         b.nombreParte, 
-                        a.cantidad, 
+                        SUM(a.cantidad), 
                         a.numeroCaja,
                         d.nombreCaja,
                         'usercreate',
                         CURRENT_TIMESTAMP,
                         'user_update',
                         CURRENT_TIMESTAMP,
-                        'noCheck'
+                        'PENDIENTE'
         
                 FROM listado AS a
                 JOIN parte AS b
@@ -58,18 +60,41 @@ class tornilleriaModel
                 WHERE g.nombreSufix = :nombreSufix
                 AND   f.nombreLinea = :nombreLinea
                 AND b.idMaterial = '1'
-
-                ");
-                $stament->bindParam(":nombreSufix", $nombreSufix);
-                $stament->bindParam(":nombreLinea", $nombreLinea);
-                $stament->bindParam(":lote", $lote);
-                return ($stament->execute()) ? $stament->fetchAll() : false;
+                GROUP BY b.numeroParte, a.numeroCaja, d.nombreCaja, e.nombreEstacion, h.nombreCorto
+                "
+        );
+        $stament->bindParam(":nombreSufix", $nombreSufix);
+        $stament->bindParam(":nombreLinea", $nombreLinea);
+        $stament->bindParam(":lote", $lote);
+        return ($stament->execute()) ? $stament->fetchAll() : false;
     }
 
     public function iniciarAlistamiento($nombreSufix, $lote, $nombreLinea)
     {
         $stament = $this->PDO->prepare(
-            "SELECT *
+            "SELECT 
+            idAlistamientoPC,
+            idSufix,
+            nombreSufix ,
+            lote ,
+            nombreLinea ,
+            nombreEstacion ,
+            ordenEstacion ,
+            nombreLateralidad ,
+            ordenAlistamiento ,
+            modulo ,
+            posicion ,
+            numeroParte ,
+            nombreParte , 
+            cantidad ,
+            numeroCaja ,
+            nombreCaja ,
+            userCreated ,
+            createdAt ,
+            userUpdate ,
+            updateAt,
+            checkList
+            
         FROM tornillerialog
         WHERE nombreSufix = :nombreSufix
         AND lote = :lote
@@ -98,6 +123,52 @@ class tornilleriaModel
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
 
+
+
+    public function update($idAlistamientoPC, $idSufix, $nombreSufix, $lote)
+    {
+        $stament = $this->PDO->prepare(
+            "UPDATE tornillerialog
+            SET checkList = 'ALISTADO', 
+                updateAt = CURRENT_TIMESTAMP
+            WHERE idAlistamientoPC = :idAlistamientoPC"
+        );
+        $stament->bindParam(":idAlistamientoPC", $idAlistamientoPC);
+    
+        if ($stament->execute()) {
+            $statement2 = $this->PDO->prepare(
+                "SELECT nombreSufix, lote, nombreLinea, checkList
+                FROM tornillerialog 
+                WHERE nombreSufix = :nombreSufix
+                AND lote = :lote 
+                AND checkList = 'PENDIENTE'"
+            );
+            $statement2->bindParam(":nombreSufix", $nombreSufix);
+            $statement2->bindParam(":lote", $lote);
+            $statement2->execute();
+
+            if ($statement2->rowCount() == 0) {
+                $updateStatement = $this->PDO->prepare(
+                    "UPDATE lote
+                    SET lote = :lote, 
+                        updateAt = CURRENT_TIMESTAMP
+                    WHERE idSufix = :idSufix"
+                );
+                $updateStatement->bindParam(":lote", $lote);
+                $updateStatement->bindParam(":idSufix", $idSufix);
+                $updateStatement->execute();
+            }
+        } else {
+            return false;
+        }
+    }
+    
+
+
+
+
+
+
     public function getLinea()
     {
         $stament = $this->PDO->query("SELECT * FROM linea");
@@ -115,7 +186,12 @@ class tornilleriaModel
     }
     public function getLote()
     {
-        $stament = $this->PDO->query("SELECT * FROM tornillerialog");
+        $stament = $this->PDO->query("SELECT DISTINCT lote, nombreSufix FROM tornillerialog");
+        return $stament->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getLote2()
+    {
+        $stament = $this->PDO->query("SELECT DISTINCT lote, nombreSufix, nombreLinea FROM tornillerialog");
         return $stament->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getEstacion()
@@ -124,7 +200,7 @@ class tornilleriaModel
         return $stament->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    
+
 
 
 
@@ -242,7 +318,7 @@ class tornilleriaModel
             return false;
         }
     }
-        
+
     public function show($idSerie)
     {
         $stament = $this->PDO->prepare(
@@ -253,19 +329,7 @@ class tornilleriaModel
         $stament->bindParam(":idSerie", $idSerie);
         return ($stament->execute()) ? $stament->fetch() : false;
     }
-    public function update($idSerie, $nombreSerie)
-    {
-        $stament = $this->PDO->prepare(
-            "UPDATE serie SET 
-        idSerie = :idSerie , 
-        nombreSerie = :nombreSerie , 
-        updateAt = CURRENT_TIMESTAMP 
-        WHERE idSerie =:idSerie"
-        );
-        $stament->bindParam(":idSerie", $idSerie);
-        $stament->bindParam(":nombreSerie", $nombreSerie);
-        return ($stament->execute()) ? $idSerie : false;
-    }
+
     public function delete($idSerie)
     {
         $stament = $this->PDO->prepare("DELETE FROM serie WHERE idSerie = :idSerie");

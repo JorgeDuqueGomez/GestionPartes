@@ -18,6 +18,12 @@ class tornilleriaController
          header("Location:index.php");
       }
    }
+   public function update($idAlistamientoPC,$idSufix ,$nombreSufix,$lote)
+   {
+      return ($this->model->update($idAlistamientoPC,$idSufix ,$nombreSufix,$lote) != false) ?
+         header("Location:store.php") :
+         header("Location:index.php");
+   }
    public function iniciarAlistamiento($nombreSufix, $lote, $nombreLinea)
    {
       return ($this->model->iniciarAlistamiento($nombreSufix, $lote, $nombreLinea)) ? $this->model->iniciarAlistamiento($nombreSufix, $lote, $nombreLinea) : false;
@@ -41,6 +47,10 @@ class tornilleriaController
    public function getLote()
    {
       return ($this->model->getLote()) ? $this->model->getLote() : false;
+   }
+   public function getLote2()
+   {
+      return ($this->model->getLote2()) ? $this->model->getLote2() : false;
    }
    public function getEstacion()
    {
@@ -68,6 +78,7 @@ class tornilleriaController
    {
       return ($this->model->index($idSufix, $idLinea)) ? $this->model->index($idSufix, $idLinea) : false;
    }
+   
    public function save(
       $nombreSufix,
       $lote,
@@ -94,17 +105,29 @@ class tornilleriaController
 
       );
    }
+
+
+
+
+
+
+
+
+
+
+
+
+
    public function show($idSerie)
    {
       return ($this->model->show($idSerie) != false) ? $this->model->show($idSerie) :
          header("Location:index.php");
    }
-   public function update($idSerie, $nombreSerie)
-   {
-      return ($this->model->update($idSerie, $nombreSerie) != false) ?
-         header("Location:index.php") :
-         header("Location:index.php");
-   }
+
+
+
+
+
    public function delete($idSerie)
    {
       return ($this->model->delete($idSerie)) ?

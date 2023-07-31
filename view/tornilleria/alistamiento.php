@@ -3,7 +3,7 @@ require_once("../head/head.php");
 require_once("../../controller/tornilleriaCtrl.php");
 $obj =  new tornilleriaController();
 
-$rows = $obj->iniciarAlistamiento($_POST['nombreSufix'],$_POST['lote'], $_POST['nombreLinea']);
+$rows = $obj->iniciarAlistamiento($_POST['nombreSufix'], $_POST['lote'], $_POST['nombreLinea']);
 
 ?>
 <br>
@@ -21,7 +21,7 @@ $rows = $obj->iniciarAlistamiento($_POST['nombreSufix'],$_POST['lote'], $_POST['
       <tbody>
         <?php $uniqueStations = []; // Array para almacenar las estaciones unicas 
         usort($rows, function ($a, $b) {
-          return $a['ordenAlistamiento'] - $b['ordenAlistamiento'];
+          return $a['ordenEstacion'] - $b['ordenEstacion'];
         });
         ?>
         <?php foreach ($rows as $row) : ?>
@@ -51,7 +51,7 @@ $rows = $obj->iniciarAlistamiento($_POST['nombreSufix'],$_POST['lote'], $_POST['
                         $maxCaja = 0; // Variable para almacenar el número mayor en la columna "caja"
 
                         usort($rows, function ($a, $b) {
-                          return $a['ordenAlistamiento'] - $b['ordenAlistamiento'];
+                          return $a['ordenEstacion'] - $b['ordenEstacion'];
                         });
 
                         foreach ($rows as $innerRow) :
@@ -65,7 +65,6 @@ $rows = $obj->iniciarAlistamiento($_POST['nombreSufix'],$_POST['lote'], $_POST['
                               // Si no existe una fila unificada, se agrega una nueva fila al array
                               $unifiedRows[$key] = $innerRow;
                             }
-
                             // Verificar y actualizar el número mayor en la columna "caja"
                             $caja = (int) $innerRow['numeroCaja'];
                             if ($caja > $maxCaja) {
@@ -76,7 +75,7 @@ $rows = $obj->iniciarAlistamiento($_POST['nombreSufix'],$_POST['lote'], $_POST['
                         ?>
                         <div style="text-align: end;">
                           <div class="gap-1" style="display: inline-flex;">
-                            <label>Referencias totales </label>
+                            <label>Alistamientos totales </label>
                             <input class="form-control" type="text" value="<?= count($unifiedRows) ?>" style="width: 45px; height: 20px;" disabled readonly>
                           </div>
                           &nbsp;&nbsp;
@@ -86,22 +85,23 @@ $rows = $obj->iniciarAlistamiento($_POST['nombreSufix'],$_POST['lote'], $_POST['
                           </div>
                         </div>
                         <?php foreach ($unifiedRows as $unifiedRow) : ?>
-                          <form id="myForm" method="POST">
+                          
+                          <form class="update-form" data-id="<?= $unifiedRow['idAlistamientoPC'] ?>">
                             <tr>
+                              <td style="display: none;"><input name="idAlistamientoPC[]" value="<?= $unifiedRow['idAlistamientoPC'] ?>"></td>
+                              <td style="display: none;"><input name="idSufix[]" value="<?= $unifiedRow['idSufix'] ?>"></td>
                               <td style="display: none;"><input name="nombreSufix[]" value="<?= $unifiedRow['nombreSufix'] ?>"></td>
                               <td style="display: none;"><input name="lote[]" value="<?= $unifiedRow['lote'] ?>"></td>
-                              <td style="display: none;"><input name="nombreLinea[]" value="<?= $unifiedRow['nombreLinea'] ?>"></td>
-                              <td style="display: none;"><input name="nombreEstacion[]" value="<?= $unifiedRow['nombreEstacion'] ?>"></td>
-                              <td style="display: none;"><input name="nombreLateralidad[]" value="<?= $unifiedRow['nombreLateralidad'] ?>"></td>
 
-                              <td><input style="display: none;" name="ubicacion[]" value="<?= $unifiedRow['modulo'] ?> - <?= $unifiedRow['posicion'] ?>"><?= $unifiedRow['modulo'] ?> - <?= $unifiedRow['posicion'] ?></td>
-                              <td><input style="display: none;" name="numeroParte[]" value="<?= $unifiedRow['numeroParte'] ?>"><?= $unifiedRow['numeroParte'] ?></td>
-                              <td><input style="display: none;" name="nombreParte[]" value="<?= $unifiedRow['nombreParte'] ?>"><?= $unifiedRow['nombreParte'] ?></td>
-                              <td><input style="display: none;" name="cantidad[]" value="<?= $unifiedRow['cantidad'] ?>"><?= $unifiedRow['cantidad'] ?></td>
-                              <td><input style="display: none;" name="numeroCaja[]" value="<?= $unifiedRow['numeroCaja'] ?>- <?= $unifiedRow['nombreCaja'] ?>"><?= $unifiedRow['numeroCaja'] ?>- <?= $unifiedRow['nombreCaja'] ?></td>
-                              <!-- <td><button type="button" class="btn btn-danger submit-button">Pendiente</button></td> -->
-                              <td><input style="display: none;" name="cantidad[]" value="<?= $unifiedRow['checkList'] ?>"><?= $unifiedRow['checkList'] ?></td>
-                              <!--<td><p class="btn btn-success">Ok</p></td>-->
+                              <td class="align-middle"><input style="display: none;" value="<?= $unifiedRow['modulo'] ?> - <?= $unifiedRow['posicion'] ?>"><?= $unifiedRow['modulo'] ?> - <?= $unifiedRow['posicion'] ?></td>
+                              <td class="align-middle"><input style="display: none;" value="<?= $unifiedRow['numeroParte'] ?>"><?= $unifiedRow['numeroParte'] ?></td>
+                              <td class="align-middle"><input style="display: none;" value="<?= $unifiedRow['nombreParte'] ?>"><?= $unifiedRow['nombreParte'] ?></td>
+                              <td class="align-middle"><input style="display: none;" value="<?= $unifiedRow['cantidad'] ?>"><?= $unifiedRow['cantidad'] ?></td>
+                              <td class="align-middle"><input style="display: none;" value="<?= $unifiedRow['numeroCaja'] ?>- <?= $unifiedRow['nombreCaja'] ?>"><?= $unifiedRow['numeroCaja'] ?>- <?= $unifiedRow['nombreCaja'] ?></td>
+
+                              <td>
+                                <input class="btn <?= $unifiedRow['checkList'] === 'PENDIENTE' ? 'btn-danger' : 'btn-success' ?>" name="enviar" type="submit" value="<?= $unifiedRow['checkList'] === 'PENDIENTE' ? 'Pendiente' : 'Alistado' ?>" <?= $unifiedRow['checkList'] === 'PENDIENTE' ? '' : 'disabled' ?>>
+                              </td>
                             </tr>
                           </form>
                         <?php endforeach; ?>
