@@ -1,11 +1,8 @@
 <?php
 
-require_once ("../../controller/estanteriaCtrl.php");
+require_once ("../../controller/estacionCtrl.php");
 
-$obj = new estanteriaController();
-$obj->save(
-    $_POST['modulo'],
-    $_POST['posicion'],
-);
+$obj = new estacionController();
+$obj->save($_POST['idLinea'],$_POST['nombreEstacion']);
 
 ?>          

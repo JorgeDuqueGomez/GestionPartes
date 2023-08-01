@@ -60,8 +60,8 @@ $materia = $obj->showMaterial();
           <a href="../../formatos/Insertar partes.xlsx" class="btn btn-outline-warning" type="submit">Descargar formato</a>
         </div>
       </div>
-
     </div>
+    
   </div>
 </div>
 

@@ -5,109 +5,86 @@ $obj =  new tpmController();
 $rows = $obj->index();
 ?>
 <br>
-<h1 class="text-center"><strong>GESTION DE TPM's</strong></h1>
+<h1 class="text-center"><strong>GESTIÓN DE TPM's</strong></h1>
+<br>
 <div class="container">
-  <br>
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center gap-3">
+    <a href="./creatParte.php">
+      <button type="button" class="btn btn-primary d-flex align-items-center" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+        </svg>&nbsp;Agregar un TPM</button>
+    </a>
   </div>
-  <form action="edit.php" method="POST">
-    <div class="d-flex justify-content-center">
-      <a href="trash.php" class="btn btn-outline-danger">
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-        </svg>
-      </a>
-      &nbsp;&nbsp;
-      <a href="trash.php" class="btn btn-outline-success">Historial de cambios
-      </a>
-      &nbsp;&nbsp;
-      <button type="submit" class="btn btn-primary" id="realizarCambios" disabled>
-        Realizar cambios</button>
-      &nbsp;
-    </div>
-    <table class="table table-bordered table-hover" id="gestionTpmTable">
+  <br>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover" id="estacionTable">
       <thead class="table-light">
         <tr>
-          <th class="text-center align-middle" scope="col">Modelo</th>
-          <th class="text-center align-middle" scope="col">Estaciones</th>
-          <th class="text-center align-middle" scope="col">Mtrl</th>
-          <th class="text-center align-middle" scope="col">Nombre de parte</th>
-          <th class="text-center align-middle" scope="col">Numero de parte</th>
-          <th class="text-center align-middle" scope="col">Grupo</th>
-          <th class="text-center align-middle" scope="col">Comp</th>
-          <th class="text-center align-middle" scope="col">Cant</th>
-          <th class="text-center align-middle" scope="col">Caja</th>
-          <th class="text-center align-middle" scope="col">Acciones</th>
+          <th class="text-center align-middle" scope="col">Numero parte antiguo</th>
+          <th class="text-center align-middle" scope="col">Numero parte nuevo</th>
+          <th class="text-center align-middle" scope="col">Sufix</th>
+          <th class="text-center align-middle" scope="col">Lote de efectividad</th>
+          <th class="text-center align-middle" scope="col">Usuario</th>
+          <th class="text-center align-middle" scope="col">Creación</th>
+          <th class="text-center align-middle" scope="col">Acciones</th>          
         </tr>
       </thead>
 
-      <tbody style="line-height: 0.9;">
+      <tbody>
         <?php if ($rows) : ?>
           <?php foreach ($rows as $row) : ?>
             <tr>
-              <th class="text-center align-middle"><?= $row['nombreModelo'] ?> - <?= $row['nombreSufix'] ?></th>
-              <th class="text-center align-middle"><?= $row['nombreEstacion'] ?><br><?= $row['nombreCorto'] ?></th>
-              <th class="text-center align-middle"><?= $row['nombreMaterial'] ?></th>
-              <th class="align-middle"><?= $row['nombreParte'] ?></th>
-              <th class="text-center align-middle"><?= $row['numeroParte'] ?></th>
-              <th class="text-center align-middle"><?= $row['codigo'] ?></th>
-              <th class="text-center align-middle"><?= $row['componentCode'] ?></th>
-              <th class="text-center align-middle"><?= $row['cantidad'] ?></th>
-              <th class="text-center align-middle"><?= $row['numeroCaja'] ?>- <?= $row['nombreCaja'] ?></th>
+              <th class="text-center align-middle"><?= $row['parteNueva'] ?></th>
+              <th class="text-center align-middle"><?= $row['parteAntigua'] ?></th>
+              <th class="text-center align-middle"><?= $row['nombreSufix'] ?></th>
+              <th class="text-center align-middle"><?= $row['loteEfectividad'] ?></th>
+              <th class="text-center align-middle"><?= $row['usuario'] ?></th>
+              <th class="text-center align-middle"><?= $row['createdAt'] ?></th>
+              <th class="text-center">
+                <a href="edit.php?id=<?= $row['idTpm'] ?>" class="btn btn-outline-success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                  </svg></a>
 
-              <th class="text-center align-middle">
-
-                <input type="checkbox" class="checkbox" name="selectedRows[]" value="<?= $row['idListado'] ?>">
-                &nbsp;
-
-                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setDeleteId('<?= $row['idListado'] ?>')"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                  </svg></button>
-
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setDeleteId('<?= $row['idTpm'] ?>')">
+                  <div class="contenedor-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                      <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                    </svg>
+                  </div>
+                </button>
               </th>
             </tr>
           <?php endforeach; ?>
         <?php else : ?>
           <tr>
-            <td colspan="10" class="text-center">No hay registros</td>
+            <td colspan="4" class="text-center">No hay registros</td>
           </tr>
         <?php endif; ?>
 
       </tbody>
-
-      <tfoot>
-        <tr>
-          <th colspan="7" style="text-align:right">Total:</th>
-          <th class="text-center"></th>
-          <th colspan="2"></th>
-        </tr>
-      </tfoot>
-
     </table>
-  </form>
-
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">¿Desea eliminar el registro?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          El registro no estara disponible en el listado oficial.
-        </div>
-
-        <div class="modal-footer">
-          <form id="delete-form" method="POST" action="delete.php">
-            <input type="hidden" name="id" id="delete-id">
-            <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">¿Desea eliminar el registro?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Una vez eliminado no podrá recuperar el registro.
+          </div>
+          <div class="modal-footer">
+            <form id="delete-form" method="POST" action="delete.php">
+              <input type="hidden" name="id" id="delete-id">
+              <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+            </form>
             <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cancelar</button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
 </div>
 <?php
 require_once("../head/footer.php");

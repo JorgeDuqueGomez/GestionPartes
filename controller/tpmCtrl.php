@@ -5,74 +5,58 @@ class tpmController
    private $model;
    public function __construct()
    {
-      require_once(__DIR__ ."/../model/tpmMdl.php");
+      require_once(__DIR__ . "/../model/tpmMdl.php");
       $this->model = new tpmModel();
    }
    public function index()
    {
       return ($this->model->index()) ? $this->model->index() : false;
    }
-   public function trash()
+   public function save($idLinea, $nombreEstacion)
    {
-      return ($this->model->trash()) ? $this->model->trash() : false;
-   }
-   public function save($modulo, $posicion)
-   {
-      $idEstanteria = $this->model->insertar($modulo, $posicion);
-      return ($idEstanteria != false) ?
+      $idEstacion = $this->model->insertar($idLinea, $nombreEstacion);
+      return ($idEstacion != false) ?
          header("Location:index.php") :
          header("Location:creat.php");
    }
-   public function update($idListado, $idEstacion, $idLateralidad, $numeroCaja, $idCaja, $idGrupo, $componentCode, $cantidad)
+   public function update($idEstacion, $idLinea, $nombreEstacion, $idEstado)
    {
-      return ($this->model->update($idListado, $idEstacion, $idLateralidad, $numeroCaja, $idCaja, $idGrupo, $componentCode, $cantidad) != false) ?
+      return ($this->model->update($idEstacion, $idLinea, $nombreEstacion, $idEstado) != false) ?
          header("Location:index.php") :
          header("Location:index.php");
    }
-   public function getSelectedRows($selectedIds)
+   public function delete($idEstacion)
    {
-      return ($this->model->getSelectedRows($selectedIds) != false) ? $this->model->getSelectedRows($selectedIds) :
-         header("Location:index.php");
-   }
-   public function show($idListado)
-   {
-      return ($this->model->show($idListado) != false) ? $this->model->show($idListado) :
-         header("Location:index.php");
-   }
-   public function delete($idListado)
-   {
-      return ($this->model->delete($idListado)) ?
+      return ($this->model->delete($idEstacion)) ?
          header("Location:index.php") :
-         header("Location:show.php?id=" . $idListado);
+         header("Location:index.php");
    }
-   public function restore($idListado)
+   public function show($idEstacion)
    {
-      return ($this->model->restore($idListado)) ?
-         header("Location:trash.php") :
-         header("Location:show.php?id=" . $idListado);
+      return ($this->model->show($idEstacion) != false) ? $this->model->show($idEstacion) :
+         header("Location:index.php");
    }
-   public function showParte()
+   public function showEstado()
    {
-      return ($this->model->showParte()) ? $this->model->showParte() : false;
+      return ($this->model->showEstado()) ? $this->model->showEstado() : false;
    }
-   public function getLateralidad()
+   public function getEstado()
    {
-      return ($this->model->getLateralidad()) ? $this->model->getLateralidad() : false;
+      return ($this->model->getEstado()) ? $this->model->getEstado() : false;
    }
    public function getLinea()
    {
       return ($this->model->getLinea()) ? $this->model->getLinea() : false;
    }
-   public function getEstacion()
+   public function getLateralidad()
    {
-      return ($this->model->getEstacion()) ? $this->model->getEstacion() : false;
+      return ($this->model->getLateralidad()) ? $this->model->getLateralidad() : false;
    }
-   public function getGrupo()
+   public function getSufix()
    {
-      return ($this->model->getGrupo()) ? $this->model->getGrupo() : false;
+      return ($this->model->getSufix()) ? $this->model->getSufix() : false;
    }
-   public function getCaja()
-   {
-      return ($this->model->getCaja()) ? $this->model->getCaja() : false;
+   public function showParte(){
+      return ($this->model->showParte()) ? $this->model->showParte() : false;
    }
 }

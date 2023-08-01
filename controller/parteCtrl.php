@@ -19,6 +19,13 @@ class parteController
             header("Location:index.php") :
             header("Location:creat.php");
     }
+    public function saveTpm($nombreParte, $numeroParte, $idMaterial)
+    {
+        $idParte = $this->model->insertarTpm($nombreParte, $numeroParte, $idMaterial);
+        return ($idParte != false) ?
+            header("Location:../tpm/creatParte.php") :
+            header("Location:../tpm/creatParte.php");
+    }
     public function update($idParte, $nombreParte, $numeroParte, $idMaterial)
     {
         return ($this->model->update($idParte, $nombreParte, $numeroParte, $idMaterial) != false) ?

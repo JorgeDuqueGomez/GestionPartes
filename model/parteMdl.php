@@ -27,6 +27,14 @@ class parteModel
         $stament->bindParam(":idMaterial", $idMaterial);
         return ($stament->execute()) ? $this->PDO->lastInsertId() : false;
     }
+    public function insertarTpm($nombreParte, $numeroParte, $idMaterial)
+    {
+        $stament = $this->PDO->prepare("INSERT INTO parte VALUES(NULL, :nombreParte, :numeroParte, :idMaterial, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
+        $stament->bindParam(":nombreParte", $nombreParte);
+        $stament->bindParam(":numeroParte", $numeroParte);
+        $stament->bindParam(":idMaterial", $idMaterial);
+        return ($stament->execute()) ? $this->PDO->lastInsertId() : false;
+    }
     public function update($idParte, $nombreParte, $numeroParte, $idMaterial)
     {
         $stament = $this->PDO->prepare(

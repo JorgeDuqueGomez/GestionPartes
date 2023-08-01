@@ -5,7 +5,7 @@ $obj =  new listadoController();
 $rows = $obj->trash();
 ?>
 <br>
-<h1 class="text-center"><strong>HISTORIAL DE LISTADOS</strong></h1>
+<h1 class="text-center"><strong>REGISTROS ELIMINADOS DEL LISTADO</strong></h1>
 <div class="container">
   <br>
   <div class="d-flex justify-content-center">

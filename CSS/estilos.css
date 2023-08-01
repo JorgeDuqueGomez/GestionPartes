@@ -47,4 +47,11 @@ body {
   color: rgb(70, 75, 70); /* Cambia el color del tercer renglón según tus preferencias */
 }
 
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px; /* Espacio entre los elementos */
+}
+
+
 

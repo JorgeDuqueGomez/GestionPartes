@@ -22,7 +22,7 @@ $rows = $obj->index();
         <tr>
           <th class="text-center align-middle" scope="col">Modelo</th>
           <th class="text-center align-middle" scope="col">Sufix</th>
-          <th class="text-center align-middle" scope="col">Lote de <br> Efectividad</th>
+          <th class="text-center align-middle" scope="col">Lote Actual</th>
           <th class="text-center align-middle" scope="col">Ultimo lote procesado</th>
           <th class="text-center align-middle" scope="col">Acciones</th>
         </tr>
