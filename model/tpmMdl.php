@@ -209,7 +209,7 @@ class tpmModel
         $nombreCajaNueva= empty($nombreCajaNueva) ? null : $nombreCajaNueva;
 
         $stament = $this->PDO->prepare(
-            "INSERT INTO tpm VALUES(
+            "INSERT INTO tpmlog VALUES(
             NULL, 
             :idListado,
             :idSufix, 
@@ -259,17 +259,6 @@ class tpmModel
         $stament->bindParam(":nombreCajaNueva", $nombreCajaNueva);
         return $stament->execute();
     }
-
-
-
-
-
-
-
-
-
-
-
 
     public function show($idListado)
     {
@@ -500,4 +489,52 @@ class tpmModel
         ");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }
+
+    public function tpmLog()
+    {
+        $stament = $this->PDO->prepare("SELECT
+            a.idTpm,
+            a.idListado,
+            a.idSufix, 
+            a.nombreSufix, 
+            a.loteAnterior, 
+            a.loteEfectividad, 
+            a.nombreEstacionAnterior, 
+            a.nombreEstacionNueva, 
+            a.nombreLateralidadAnterior, 
+            a.nombreLateralidadNueva, 
+            a.idParteAnterior,
+            b.nombreParte,
+            b.numeroParte,
+            b.idMaterial,
+            d.nombreMaterial,
+            a.idPartenueva,
+            c.nombreParte,
+            c.numeroParte,
+            c.idMaterial,
+            d.nombreMaterial,
+            a.grupoAnterior,
+            a.grupoNuevo,
+            a.componentAnterior,
+            a.componentNuevo,
+            a.cantidadAnterior,
+            a.cantidadNueva,
+            a.numeroCajaAnterior,
+            a.numeroCajaNueva,
+            a.nombreCajaAnterior,
+            a.nombreCajaNueva,
+            a.usuario,
+            a.createdAt
+        
+        FROM tpmlog AS a
+        JOIN parte AS b
+        ON a.idParteAnterior = b.idParte
+        JOIN parte AS c
+        ON a.idParteNueva = c.idParte
+        JOIN material AS d
+        ON b.idMaterial = d.idMaterial
+        ");
+        return ($stament->execute()) ? $stament->fetchAll() : false;
+    }
+    
 }

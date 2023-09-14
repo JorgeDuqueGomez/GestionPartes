@@ -135,6 +135,11 @@ class tpmController
          header("Location:trash.php") :
          header("Location:show.php?id=" . $idListado);
    }
+   public function tpmLog()
+   {
+      return ($this->model->tpmLog() != false) ? $this->model->tpmLog() :
+         header("Location:index.php");
+   }
    public function showParte()
    {
       return ($this->model->showParte()) ? $this->model->showParte() : false;

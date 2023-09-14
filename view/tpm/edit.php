@@ -39,13 +39,13 @@ $valEstacion = $obj->validationEstacion();
         <table class="table table-bordered table-hover">
             <thead class="table-light">
                 <tr>
-                    <th class="text-center align-middle" style="width: 14%;" scope="col">Modelo</th>
-                    <th class="text-center align-middle" style="width: 12%;" scope="col">Estacion</th>
-                    <th class="text-center align-middle" style="width: 30%;" scope="col">Descripción de la Parte</th>
-                    <th class="text-center align-middle" style="width: 9%;" scope="col">Codigo grupo</th>
-                    <th class="text-center align-middle" style="width: 9%;" scope="col">Comp.<br>Code</th>
-                    <th class="text-center align-middle" style="width: 9%;" scope="col">Cantidad</th>
-                    <th class="text-center align-middle" style="width: 8%;" scope="col">Caja</th>
+                    <th class="text-center align-middle" style="width: 10%;" scope="col">Modelo</th>
+                    <th class="text-center align-middle" style="width: 8%;" scope="col">Estacion</th>
+                    <th class="text-center align-middle" style="width: 18%;" scope="col">Descripción de la Parte</th>
+                    <th class="text-center align-middle" style="width: 5%;" scope="col">Codigo grupo</th>
+                    <th class="text-center align-middle" style="width: 5%;" scope="col">Comp.<br>Code</th>
+                    <th class="text-center align-middle" style="width: 4%;" scope="col">Cantidad</th>
+                    <th class="text-center align-middle" style="width: 11%;" scope="col">Caja/Posición</th>
                 </tr>
             </thead>
 
@@ -96,6 +96,9 @@ $valEstacion = $obj->validationEstacion();
                                 <div class="mb-1">
                                     <select name="nombreEstacionNueva[]" id="nombreEstacion" class="form-select nombreEstacion">
                                         <option selected="true" value="<?= $row['nombreEstacion'] ?>"><?= $row['nombreEstacion'] ?></option>
+                                        <?php foreach ($estacion as $estaciones) : ?>
+                                            <option value="<?= $estaciones['nombreEstacion'] ?>"><?= $estaciones['nombreEstacion'] ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
 
@@ -147,7 +150,7 @@ $valEstacion = $obj->validationEstacion();
 
                                 <div class="form-floating">
                                     <select name="grupoNuevo[]" class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                        <option selected="true" value="<?= $row['codigo'] ?>"></option>
+                                        <option selected="true"></option>
                                         <?php foreach ($grupo as $grupos) : ?>
                                             <option value="<?= $grupos['codigo'] ?>"><?= $grupos['codigo'] ?></option>
                                         <?php endforeach; ?>
@@ -177,7 +180,6 @@ $valEstacion = $obj->validationEstacion();
 
                             </th>
                             <th class="text-center align-middle">
-
                                 <div class="mb-2">
                                     <div class="form-floating">
 
@@ -196,27 +198,39 @@ $valEstacion = $obj->validationEstacion();
                                 </div>
 
                             </th>
+
+                            <input name="numeroCajaAnterior[]" type="hidden" value="<?= $row['numeroCaja'] ?>">
+                            <input name="nombreCajaAnterior[]" type="hidden" value="<?= $row['nombreCaja'] ?>">
+
                             <th class="text-center align-middle">
-
-                                <input name="numeroCajaAnterior[]" type="hidden" value="<?= $row['numeroCaja'] ?>">
-
-                                <label>Numero</label>
-                                <div class="col-md-12">
-                                    <input type="text" name="numeroCajaNueva[]" class="form-control text-center" value="<?= $row['numeroCaja'] ?>">
-                                </div>
-                                <label>Posición</label>
-                                <div>
-
-                                    <input name="nombreCajaAnterior[]" type="hidden" value="<?= $row['nombreCaja'] ?>">
-
-                                    <select name="nombreCajaNueva[]" class="form-select text-center">
-                                        <option selected="true" value="<?= $row['nombreCaja'] ?>"><?= $row['nombreCaja'] ?></option>
-                                        <?php foreach ($caja as $cajas) : ?>
-                                            <option value="<?= $cajas['nombreCaja'] ?>"><?= $cajas['nombreCaja'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                <div class="mb-2">
+                                    <div class="form-floating">
+                                        <input class="form-control text-center align-middle" id="floatingInput" type="text" disabled value="<?= $row['numeroCaja'] ?> - <?= $row['nombreCaja'] ?>">
+                                        <label for="floatingSelect" style="color: red;">Actual</label>
+                                    </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <div class="form-floating">
+                                            <input type="text" name="numeroCajaNueva[]" class="form-control text-center" value="<?= $row['numeroCaja'] ?>">
+                                            <label for="floatingSelect" style="color: green;">Caja</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-7">
+                                        <div class="form-floating">
+                                            <input name="nombreCajaAnterior[]" type="hidden" value="<?= $row['nombreCaja'] ?>">
+                                            <select name="nombreCajaNueva[]" class="form-select text-center">
+                                                <option selected="true" value="<?= $row['nombreCaja'] ?>"><?= $row['nombreCaja'] ?></option>
+                                                <?php foreach ($caja as $cajas) : ?>
+                                                    <option value="<?= $cajas['nombreCaja'] ?>"><?= $cajas['nombreCaja'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <label for="floatingSelect" style="color: green;">Posición</label>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </th>
                         </tr>
@@ -244,7 +258,7 @@ require_once("../head/footer.php");
         <?php foreach ($valEstacion as $valEstaciones) : ?>
             if ("<?= $valEstaciones['nombreLinea'] ?>" === selectLinea) {
                 const option = document.createElement("option");
-                option.value = "<?= $valEstaciones['idEstacion'] ?>";
+                option.value = "<?= $valEstaciones['nombreEstacion'] ?>";
                 option.text = "<?= $valEstaciones['nombreEstacion'] ?>";
                 idLoteDropdown.appendChild(option);
             }

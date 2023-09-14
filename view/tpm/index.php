@@ -13,7 +13,7 @@ $rows = $obj->index();
   <form action="edit.php" method="POST">
     <div class="d-flex justify-content-center">
       &nbsp;&nbsp;
-      <a href="listadolog.php" class="btn btn-outline-success">Historial de TPM
+      <a href="tpmLog.php" class="btn btn-outline-success">Historial de TPM
       </a>
       &nbsp;&nbsp;
       <button type="submit" class="btn btn-primary" id="realizarCambios" disabled>
