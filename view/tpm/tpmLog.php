@@ -33,12 +33,13 @@ $valEstacion = $obj->validationEstacion();
         <table class="table table-bordered table-hover">
             <thead class="table-light">
                 <tr>
-                    <th class="text-center align-middle" style="width: 15%;" scope="col">Modelo</th>
-                    <th class="text-center align-middle" style="width: 12%;" scope="col">Estacion</th>
+                    <th class="text-center align-middle" style="width: 12%;" scope="col">Modelo</th>
+                    <!-- <th class="text-center align-middle" style="width: 12%;" scope="col">Estacion</th> -->
                     <th class="text-center align-middle" style="width: 30%;" scope="col">Descripción de la Parte</th>
                     <th class="text-center align-middle" style="width: 9%;" scope="col">Grupo/Comp</th>
                     <th class="text-center align-middle" style="width: 9%;" scope="col">Cantidad</th>
-                    <th class="text-center align-middle" style="width: 8%;" scope="col">Caja</th>
+                    <th class="text-center align-middle" style="width: 8%;" scope="col">Caja/Ubicación</th>
+                    <th class="text-center align-middle" style="width: 15%;" scope="col">Responsable</th>
                 </tr>
             </thead>
 
@@ -50,8 +51,8 @@ $valEstacion = $obj->validationEstacion();
                             <div class="form-group col-md-13 mb-2">
                                 <div class="form-floating">
 
-                                    <input class="form-control text-center align-middle" id="floatingInput" type="text" disabled value="Lote Actual - <?= $row['loteAnterior'] ?>">
-                                    <label class="text-center align-middle" for="floatingInput" style="color: red;"><?= $row['nombreSufix'] ?></label>
+                                    <input class="form-control text-center align-middle" id="floatingInput" type="text" disabled value="Lote - <?= $row['loteAnterior'] ?>">
+                                    <label class="text-center align-middle" for="floatingInput" style="color: green;"><?= $row['nombreModelo'] ?> - <?= $row['nombreSufix'] ?></label>
 
                                 </div>
                             </div>
@@ -60,13 +61,13 @@ $valEstacion = $obj->validationEstacion();
                                 <div class="form-floating">
 
                                     <input name="loteEfectividad[]" type="number" min="0" class="form-control text-center align-middle" id="floatingInput" disabled value="<?= $row['loteEfectividad'] ?>">
-                                    <label for="floatingInput" style="color: green;">Lote Efectividad</label>
+                                    <label class="text-center align-middle" for="floatingInput" style="color: green;">Lote Efectividad</label>
 
                                 </div>
                             </div>
                         </th>
 
-                        <th>
+                        <!-- <th>
 
                             <div class="mb-1">
                                 <select name="nombreEstacionNueva[]" id="nombreEstacion" class="form-select nombreEstacion">
@@ -80,25 +81,22 @@ $valEstacion = $obj->validationEstacion();
                                     <option selected="true"><?= $row['nombreLateralidadNueva'] ?></option>
                                 </select>
                             </div>
-                        </th>
+                        </th> -->
 
                         <th class="text-center align-middle ">
                             <div class="form-group col-md-13 mb-2">
                                 <div class="form-floating">
 
-                                    <input class="form-control" id="floatingInput" type="text" disabled value="<?= $row['numeroParte'] ?> - <?= $row['nombreParte'] ?> - <?= $row['nombreMaterial'] ?>">
-                                    <label for="floatingInput" style="color: red;">Parte actual</label>
+                                <input class="form-control" id="floatingInput" type="text" disabled value="<?= $row['numeroParteA'].' - '. $row['nombreMaterialA'].' - '. $row['nombreParteA'] ?>">
+                                    <label for="floatingInput" style="color: red;">Parte Anterior</label>
                                 </div>
                             </div>
+                            <div class="form-group col-md-13 mb-2">
+                                <div class="form-floating">
 
-                            <div class="form-floating">
-                                <select class="form-select" name="idParteNueva[]" id="floatingSelect" aria-label="Floating label select example">
-                                    <option selected="true"></option>
-                                    <?php foreach ($parte as $partes) : ?>
-                                        <option><?= $partes['numeroParte'] ?> - <?= $partes['nombreParte'] ?> - <?= $partes['nombreMaterial'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <label for="floatingSelect" style="color: green;">Parte nueva</label>
+                                    <input class="form-control" id="floatingInput" type="text" disabled value="<?= $row['numeroParteN'].' - '. $row['nombreMaterialN'].' - '. $row['nombreParteN'] ?>">
+                                    <label for="floatingInput" style="color: green;">Parte Nueva</label>
+                                </div>
                             </div>
                         </th>
 
@@ -106,13 +104,13 @@ $valEstacion = $obj->validationEstacion();
                             <div class="mb-2">
                                 <div class="form-floating">
                                     <input class="form-control" id="floatingInput" type="text" disabled value="<?= $row['grupoAnterior'] ?> - <?= $row['componentAnterior'] ?>">
-                                    <label for="floatingSelect" style="color: red;">Actual</label>
+                                    <label for="floatingSelect" style="color: red;">Anterior</label>
                                 </div>
                             </div>
                             <div class="mb-2">
                                 <div class="form-floating">
                                     <input class="form-control" id="floatingInput" type="text" disabled value="<?= $row['grupoNuevo'] ?> - <?= $row['componentNuevo'] ?>">
-                                    <label for="floatingSelect" style="color: red;">Nuevo</label>
+                                    <label for="floatingSelect" style="color: green;">Nuevo</label>
                                 </div>
                             </div>
 
@@ -122,13 +120,13 @@ $valEstacion = $obj->validationEstacion();
                             <div class="mb-2">
                                 <div class="form-floating">
                                     <input class="form-control text-center align-middle" id="floatingInput" type="text" disabled value="<?= $row['cantidadAnterior'] ?>">
-                                    <label for="floatingSelect" style="color: red;">Actual</label>
+                                    <label for="floatingSelect" style="color: red;">Anterior</label>
                                 </div>
                             </div>
                             <div class="mb-2">
                                 <div class="form-floating">
                                     <input class="form-control text-center align-middle" id="floatingInput" type="text" disabled value="<?= $row['cantidadNueva'] ?>">
-                                    <label for="floatingSelect" style="color: red;">Nueva</label>
+                                    <label for="floatingSelect" style="color: green;">Nueva</label>
                                 </div>
                             </div>
                         </th>
@@ -137,14 +135,36 @@ $valEstacion = $obj->validationEstacion();
                             <div class="mb-2">
                                 <div class="form-floating">
                                     <input class="form-control text-center align-middle" id="floatingInput" type="text" disabled value="<?= $row['numeroCajaAnterior'] ?> - <?= $row['nombreCajaAnterior'] ?>">
-                                    <label for="floatingSelect" style="color: red;">Actual</label>
+                                    <label for="floatingSelect" style="color: red;">Anterior</label>
                                 </div>
                             </div>
 
                             <div class="mb-2">
                                 <div class="form-floating">
                                     <input class="form-control text-center align-middle" id="floatingInput" type="text" disabled value="<?= $row['numeroCajaNueva'] ?> - <?= $row['nombreCajaNueva'] ?>">
-                                    <label for="floatingSelect" style="color: red;">Nueva</label>
+                                    <label for="floatingSelect" style="color: green;">Nueva</label>
+                                </div>
+                            </div>
+
+                        </th>
+
+                        <th class="text-center align-middle">
+
+                            <div class="mb-2">
+                                <div class="form-floating">
+                                    <input class="form-control text-center align-middle" id="floatingInput" type="text" disabled value="<?= $row['usuario'] ?>">
+                                    <label class="text-center align-middle" for="floatingSelect" style="color: green;">Usuario</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-2">
+                                <div class="form-floating">
+                                    <?php
+                                    $fecha = $row['createdAt'];
+                                    $fechaFormateada = date('d - M - Y', strtotime($fecha));
+                                    ?>
+                                    <input class="form-control text-center align-middle" id="floatingInput" type="text" disabled value="<?= $fechaFormateada ?>">
+                                    <label class="text-center align-middle" for="floatingSelect" style="color: green;">Fecha de realización</label>
                                 </div>
                             </div>
 

@@ -504,15 +504,17 @@ class tpmModel
             a.nombreLateralidadAnterior, 
             a.nombreLateralidadNueva, 
             a.idParteAnterior,
-            b.nombreParte,
-            b.numeroParte,
+            b.nombreParte AS nombreParteA,
+            b.numeroParte AS numeroParteA,
             b.idMaterial,
-            d.nombreMaterial,
+            MtlNuevo.nombreMaterial AS nombreMaterialA,
+
             a.idPartenueva,
-            c.nombreParte,
-            c.numeroParte,
+            c.nombreParte AS nombreParteN,
+            c.numeroParte AS numeroParteN,
             c.idMaterial,
-            d.nombreMaterial,
+            MtlAntiguo.nombreMaterial AS nombreMaterialN,
+
             a.grupoAnterior,
             a.grupoNuevo,
             a.componentAnterior,
@@ -524,15 +526,27 @@ class tpmModel
             a.nombreCajaAnterior,
             a.nombreCajaNueva,
             a.usuario,
-            a.createdAt
+            a.createdAt,
+            f.nombreModelo
         
         FROM tpmlog AS a
         JOIN parte AS b
         ON a.idParteAnterior = b.idParte
         JOIN parte AS c
         ON a.idParteNueva = c.idParte
-        JOIN material AS d
-        ON b.idMaterial = d.idMaterial
+
+        JOIN material AS MtlNuevo
+        ON MtlNuevo.idMaterial = b.idMaterial
+
+        JOIN material AS MtlAntiguo
+        ON MtlAntiguo.idMaterial = c.idMaterial
+
+        JOIN sufix AS e
+        ON a.idSufix = e.idSufix
+        JOIN modelo AS f
+        ON e.idModelo = f.idModelo
+        
+        ORDER BY a.createdAt DESC
         ");
         return ($stament->execute()) ? $stament->fetchAll() : false;
     }

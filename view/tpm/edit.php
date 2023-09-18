@@ -41,7 +41,7 @@ $valEstacion = $obj->validationEstacion();
                 <tr>
                     <th class="text-center align-middle" style="width: 10%;" scope="col">Modelo</th>
                     <th class="text-center align-middle" style="width: 8%;" scope="col">Estacion</th>
-                    <th class="text-center align-middle" style="width: 18%;" scope="col">Descripción de la Parte</th>
+                    <th class="text-center align-middle" style="width: 15%;" scope="col">Descripción de la Parte</th>
                     <th class="text-center align-middle" style="width: 5%;" scope="col">Codigo grupo</th>
                     <th class="text-center align-middle" style="width: 5%;" scope="col">Comp.<br>Code</th>
                     <th class="text-center align-middle" style="width: 4%;" scope="col">Cantidad</th>
@@ -94,7 +94,7 @@ $valEstacion = $obj->validationEstacion();
                                 </div>
 
                                 <div class="mb-1">
-                                    <select name="nombreEstacionNueva[]" id="nombreEstacion" class="form-select nombreEstacion">
+                                    <select name="nombreEstacionNueva[]" id="nombreEstacion" class="form-select nombreEstacion" required>
                                         <option selected="true" value="<?= $row['nombreEstacion'] ?>"><?= $row['nombreEstacion'] ?></option>
                                         <?php foreach ($estacion as $estaciones) : ?>
                                             <option value="<?= $estaciones['nombreEstacion'] ?>"><?= $estaciones['nombreEstacion'] ?></option>
@@ -121,7 +121,7 @@ $valEstacion = $obj->validationEstacion();
 
                                         <input name="idParteAnterior[]" type="hidden" value="<?= $row['idParte'] ?>">
 
-                                        <input class="form-control" id="floatingInput" type="text" disabled value="<?= $row['numeroParte'] ?> - <?= $row['nombreParte'] ?> - <?= $row['nombreMaterial'] ?>">
+                                        <input class="form-control" id="floatingInput" type="text" disabled value="<?= $row['numeroParte'].' - '.$row['nombreMaterial'].' - '.$row['nombreParte']?>">
                                         <label for="floatingInput" style="color: red;">Parte actual</label>
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@ $valEstacion = $obj->validationEstacion();
                                     <select class="form-select" name="idParteNueva[]" id="floatingSelect" aria-label="Floating label select example">
                                         <option selected="true" value="<?= $row['idParte'] ?>"></option>
                                         <?php foreach ($parte as $partes) : ?>
-                                            <option value="<?= $partes['idParte'] ?>"><?= $partes['numeroParte'] ?> - <?= $partes['nombreParte'] ?> - <?= $partes['nombreMaterial'] ?></option>
+                                            <option value="<?= $partes['idParte'] ?>"><?= $partes['numeroParte'].' - '.$partes['nombreMaterial'].' - '.$partes['nombreParte'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                     <label for="floatingSelect" style="color: green;">Parte nueva</label>
@@ -150,7 +150,7 @@ $valEstacion = $obj->validationEstacion();
 
                                 <div class="form-floating">
                                     <select name="grupoNuevo[]" class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                        <option selected="true"></option>
+                                        <option selected="true" value="<?= $row['codigo'] ?>"><?= $row['codigo'] ?></option>
                                         <?php foreach ($grupo as $grupos) : ?>
                                             <option value="<?= $grupos['codigo'] ?>"><?= $grupos['codigo'] ?></option>
                                         <?php endforeach; ?>
@@ -173,7 +173,7 @@ $valEstacion = $obj->validationEstacion();
 
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input name="componentNuevo[]" class="form-control text-center align-middle" type="text" id="floatingInput" type="text" oninput="restrictInput(this)" maxlength="2">
+                                        <input name="componentNuevo[]" class="form-control text-center align-middle" type="text" id="floatingInput" type="text"  value="<?= $row['componentCode'] ?>" oninput="restrictInput(this)" maxlength="2">
                                         <label for="floatingSelect" style="color: green;">Nuevo</label>
                                     </div>
                                 </div>
@@ -185,14 +185,14 @@ $valEstacion = $obj->validationEstacion();
 
                                         <input name="cantidadAnterior[]" type="hidden" value="<?= $row['cantidad'] ?>">
 
-                                        <input class="form-control text-center align-middle" id="floatingInput" type="text" disabled value="<?= $row['cantidad'] ?>">
+                                        <input class="form-control text-center align-middle" id="floatingInput" type="number" disabled value="<?= $row['cantidad'] ?>">
                                         <label for="floatingSelect" style="color: red;">Actual</label>
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input name="cantidadNueva[]" class="form-control text-center align-middle" type="text" id="floatingInput" type="text" oninput="restrictInput(this)" maxlength="2">
+                                        <input name="cantidadNueva[]" class="form-control text-center align-middle" type="text" id="floatingInput" type="number" value="<?= $row['cantidad'] ?>"oninput="restrictInputNumber(this)" maxlength="3">
                                         <label for="floatingSelect" style="color: green;">Nuevo</label>
                                     </div>
                                 </div>
@@ -205,7 +205,7 @@ $valEstacion = $obj->validationEstacion();
                             <th class="text-center align-middle">
                                 <div class="mb-2">
                                     <div class="form-floating">
-                                        <input class="form-control text-center align-middle" id="floatingInput" type="text" disabled value="<?= $row['numeroCaja'] ?> - <?= $row['nombreCaja'] ?>">
+                                        <input class="form-control text-center align-middle" id="floatingInput" type="text" disabled value="<?= $row['numeroCaja'] ?> - <?= $row['nombreCaja'] ?>" >
                                         <label for="floatingSelect" style="color: red;">Actual</label>
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@ $valEstacion = $obj->validationEstacion();
                                 <div class="row">
                                     <div class="col-sm-5">
                                         <div class="form-floating">
-                                            <input type="text" name="numeroCajaNueva[]" class="form-control text-center" value="<?= $row['numeroCaja'] ?>">
+                                            <input type="text" name="numeroCajaNueva[]" class="form-control text-center" value="<?= $row['numeroCaja'] ?>" oninput="restrictInputNumber(this)" maxlength="2">
                                             <label for="floatingSelect" style="color: green;">Caja</label>
                                         </div>
                                     </div>
@@ -253,7 +253,7 @@ require_once("../head/footer.php");
     function validarEstacion(selectLineaDropdown) {
         const selectLinea = selectLineaDropdown.value;
         const idLoteDropdown = selectLineaDropdown.parentNode.nextElementSibling.querySelector(".nombreEstacion");
-        idLoteDropdown.innerHTML = '<option selected="true" disabled="disabled">Estacion</option>';
+        idLoteDropdown.innerHTML = '<option selected="true" disabled="disabled"></option>';
 
         <?php foreach ($valEstacion as $valEstaciones) : ?>
             if ("<?= $valEstaciones['nombreLinea'] ?>" === selectLinea) {

@@ -534,6 +534,11 @@ window.addEventListener('DOMContentLoaded', function() {
 function restrictInput(input) {
   input.value = input.value.toUpperCase(); // Convertir el valor ingresado a mayúsculas
   input.value = input.value.substring(0, 2); // Limitar la longitud a dos dígitos
+  input.value = input.value.replace(/[^a-zA-Z]/g, ''); // Reemplazar cualquier caracter que no sea una letra con una cadena vacía
+}
+
+function restrictInputNumber(input) {
+  input.value = input.value.replace(/[^0-9]/g, ''); // Reemplazar cualquier caracter que no sea una numero con una cadena vacía
 }
 
 function setRestoreId(id) {
